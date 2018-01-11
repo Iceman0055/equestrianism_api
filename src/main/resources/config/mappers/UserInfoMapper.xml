@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.UserInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.UserInfoEntity">
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="job_number" property="jobNumber" jdbcType="VARCHAR"/>
+        <result column="realname" property="realname" jdbcType="VARCHAR"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="login_password" property="loginPassword" jdbcType="VARCHAR"/>
+        <result column="department_id" property="departmentId" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="e_mail" property="email" jdbcType="VARCHAR"/>
+        <result column="contact_way" property="contactWay" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        user_id, job_number, realname, login_name, login_password, department_id, role_id, e_mail,
+        contact_way, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+    <!-- 基本的sql查询条件公共引用 -->
+    <sql id="searchBy">
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="userId != null and userId != ''">
+                AND
+                    user_id = #{userId, jdbcType=VARCHAR}
+            </if>
+            <if test="jobNumber != null and jobNumber != ''">
+                AND
+                    job_number LIKE CONCAT('%',#{jobNumber, jdbcType=VARCHAR},'%')
+            </if>
+            <if test="realname != null and realname != ''">
+                AND
+                    realname LIKE CONCAT('%',#{realname, jdbcType=VARCHAR},'%')
+            </if>
+            <if test="loginName !=null and loginName != ''">
+                AND
+                    login_name = #{loginName, jdbcType=VARCHAR}
+            </if>
+            <if test="loginPassword !=null and loginPassword != ''">
+                AND
+                    login_password = #{loginPassword, jdbcType=VARCHAR}
+            </if>
+            <if test="departmentId != null and departmentId != ''">
+                AND
+                    department_id = #{departmentId, jdbcType=VARCHAR}
+            </if>
+            <if test="roleId != null and roleId != ''">
+                AND
+                    role_id = #{roleId, jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                AND
+                    status = #{status, jdbcType=INTEGER}
+            </if>
+            <if test="deleteFlag != null">
+                AND
+                    delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.UserInfoEntity">
+        INSERT INTO
+            user_info (
+                user_id,
+                job_number,
+                realname,
+                login_name,
+                login_password,
+                department_id,
+                role_id,
+                e_mail,
+                contact_way,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{userId, jdbcType=VARCHAR},
+                #{jobNumber, jdbcType=VARCHAR},
+                #{realname, jdbcType=VARCHAR},
+                #{loginName, jdbcType=VARCHAR},
+                #{loginPassword, jdbcType=VARCHAR},
+                #{departmentId, jdbcType=VARCHAR},
+                #{roleId, jdbcType=VARCHAR},
+                #{email, jdbcType=VARCHAR},
+                #{contactWay, jdbcType=VARCHAR},
+                1,
+                0,
+                0,
+                now()
+            )
+    </insert>
+
+</mapper>
