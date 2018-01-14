@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="GBK"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -10,73 +10,77 @@
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <!-- è‡ªåŠ¨æ‰«æ -->
+    <!-- ×Ô¶¯É¨Ãè -->
     <context:component-scan base-package="com.equestrianism.api.service"/>
-    <!-- å¼•å…¥é…ç½®æ–‡ä»¶ -->
+    <!-- springÓëmybatisÕûºÏÅäÖÃ£¬É¨ÃèËùÓÐdao£¬ÔÚµ¥Êý¾ÝÔ´µÄÇé¿öÏÂ¿ÉÒÔ²»Ð´sqlSessionFactoryBeanName -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="com.equestrianism.api.dao"/>-->
+    <!--</bean>-->
+    <!-- ÒýÈëÅäÖÃÎÄ¼þ -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:config/server.properties"/>
     </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!--<property name="url" value="${jdbc.url}"/>-->
-        <!--<property name="username" value="${jdbc.username}"/>-->
-        <!--<property name="password" value="${jdbc.password}"/>-->
-        <property name="url" value="jdbc:mysql://192.168.100.124:3306/equestrianism_db"/>
-        <property name="username" value="root"/>
-        <property name="password" value="123456"/>
-        <!-- åˆå§‹åŒ–è¿žæŽ¥å¤§å° -->
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--<property name="url" value="jdbc:mysql://192.168.100.124:3306/equestrianism_db"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="123456"/>-->
+        <!-- ³õÊ¼»¯Á¬½Ó´óÐ¡ -->
         <property name="initialSize" value="0"/>
-        <!-- è¿žæŽ¥æ± æœ€å¤§ä½¿ç”¨è¿žæŽ¥æ•°é‡ -->
+        <!-- Á¬½Ó³Ø×î´óÊ¹ÓÃÁ¬½ÓÊýÁ¿ -->
         <property name="maxActive" value="400"/>
-        <!-- è¿žæŽ¥æ± æœ€å¤§ç©ºé—² -->
+        <!-- Á¬½Ó³Ø×î´ó¿ÕÏÐ -->
         <property name="maxIdle" value="20"/>
-        <!-- è¿žæŽ¥æ± æœ€å°ç©ºé—² -->
+        <!-- Á¬½Ó³Ø×îÐ¡¿ÕÏÐ -->
         <property name="minIdle" value="5"/>
-        <!-- èŽ·å–è¿žæŽ¥æœ€å¤§ç­‰å¾…æ—¶é—´ -->
+        <!-- »ñÈ¡Á¬½Ó×î´óµÈ´ýÊ±¼ä -->
         <property name="maxWait" value="600000"/>
         <property name="validationQuery" value="select 1 from dual"/>
         <property name="testWhileIdle" value="true"/>
         <property name="testOnBorrow" value="false"/>
         <property name="testOnReturn" value="false"/>
-        <!-- é…ç½®é—´éš”å¤šä¹…æ‰è¿›è¡Œä¸€æ¬¡æ£€æµ‹ï¼Œæ£€æµ‹éœ€è¦å…³é—­çš„ç©ºé—²è¿žæŽ¥ï¼Œå•ä½æ˜¯æ¯«ç§’ -->
+        <!-- ÅäÖÃ¼ä¸ô¶à¾Ã²Å½øÐÐÒ»´Î¼ì²â£¬¼ì²âÐèÒª¹Ø±ÕµÄ¿ÕÏÐÁ¬½Ó£¬µ¥Î»ÊÇºÁÃë -->
         <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-        <!-- é…ç½®ä¸€ä¸ªè¿žæŽ¥åœ¨æ± ä¸­æœ€å°ç”Ÿå­˜çš„æ—¶é—´ï¼Œå•ä½æ˜¯æ¯«ç§’ -->
+        <!-- ÅäÖÃÒ»¸öÁ¬½ÓÔÚ³ØÖÐ×îÐ¡Éú´æµÄÊ±¼ä£¬µ¥Î»ÊÇºÁÃë -->
         <property name="minEvictableIdleTimeMillis" value="25200000"/>
-        <!-- æ‰“å¼€removeAbandonedåŠŸèƒ½ -->
+        <!-- ´ò¿ªremoveAbandoned¹¦ÄÜ -->
         <property name="removeAbandoned" value="true"/>
-        <!-- 1800ç§’ï¼Œä¹Ÿå°±æ˜¯30åˆ†é’Ÿ -->
+        <!-- 1800Ãë£¬Ò²¾ÍÊÇ30·ÖÖÓ -->
         <property name="removeAbandonedTimeout" value="1800"/>
-        <!-- å…³é—­abandedè¿žæŽ¥æ—¶è¾“å‡ºé”™è¯¯æ—¥å¿— -->
+        <!-- ¹Ø±ÕabandedÁ¬½ÓÊ±Êä³ö´íÎóÈÕÖ¾ -->
         <property name="logAbandoned" value="true"/>
         <!--
-                  æ‰“å¼€PSCacheï¼Œå¹¶ä¸”æŒ‡å®šæ¯ä¸ªè¿žæŽ¥ä¸ŠPSCacheçš„å¤§å°
-                  å¦‚æžœç”¨Oracleï¼Œåˆ™æŠŠpoolPreparedStatementsé…ç½®ä¸ºtrueï¼Œmysqlå¯ä»¥é…ç½®ä¸ºfalse
+                  ´ò¿ªPSCache£¬²¢ÇÒÖ¸¶¨Ã¿¸öÁ¬½ÓÉÏPSCacheµÄ´óÐ¡
+                  Èç¹ûÓÃOracle£¬Ôò°ÑpoolPreparedStatementsÅäÖÃÎªtrue£¬mysql¿ÉÒÔÅäÖÃÎªfalse
               -->
         <property name="poolPreparedStatements" value="false"/>
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
-        <!-- å¼€å¯Druidçš„ç›‘æŽ§ç»Ÿè®¡åŠŸèƒ½ -->
+        <!-- ¿ªÆôDruidµÄ¼à¿ØÍ³¼Æ¹¦ÄÜ -->
         <property name="filters" value="stat,wall,log4j"/>
         <!--<property name="filters" value="mergeStat" /> -->
     </bean>
 
-    <!-- springå’ŒMyBatiså®Œç¾Žæ•´åˆï¼Œä¸éœ€è¦mybatisçš„é…ç½®æ˜ å°„æ–‡ä»¶ -->
+    <!-- springºÍMyBatisÍêÃÀÕûºÏ£¬²»ÐèÒªmybatisµÄÅäÖÃÓ³ÉäÎÄ¼þ -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <!-- è‡ªåŠ¨æ‰«æmapping.xmlæ–‡ä»¶ -->
-        <property name="mapperLocations" value="classpath:config/mappers/*.xml"/>
+        <!-- ×Ô¶¯É¨Ãèmapping.xmlÎÄ¼þ -->
+        <property name="mapperLocations" value="classpath*:config/mappers/*.xml"/>
     </bean>
 
-    <!-- DAOæŽ¥å£æ‰€åœ¨åŒ…åï¼ŒSpringä¼šè‡ªåŠ¨æŸ¥æ‰¾å…¶ä¸‹çš„ç±» -->
+    <!-- DAO½Ó¿ÚËùÔÚ°üÃû£¬Spring»á×Ô¶¯²éÕÒÆäÏÂµÄÀà -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.equestrianism.api.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-    <!-- (äº‹åŠ¡ç®¡ç†)transaction manager, use JtaTransactionManager for global tx -->
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!-- (ÊÂÎñ¹ÜÀí)transaction manager, use JtaTransactionManager for global tx -->
+    <!--<bean id="transactionManager"-->
+          <!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
 </beans>

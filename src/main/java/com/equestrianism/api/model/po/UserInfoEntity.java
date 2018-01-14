@@ -2,13 +2,15 @@ package com.equestrianism.api.model.po;
 
 import com.equestrianism.api.core.model.BasePO;
 
+import java.util.UUID;
+
 /**
  * Iceman
  * 2018/1/10
  */
 public class UserInfoEntity extends BasePO {
 
-    private String userId;
+    private String userId = UUID.randomUUID().toString().replace( "-", "" );
     private String jobNumber;
     private String realname;
     private String loginName;
@@ -17,6 +19,21 @@ public class UserInfoEntity extends BasePO {
     private String roleId;
     private String email;
     private String contactWay;
+
+    public UserInfoEntity() {
+    }
+
+    public UserInfoEntity( String jobNumber, String realname, String loginName, String loginPassword,
+                           String departmentId, String roleId, String email, String contactWay ) {
+        this.jobNumber = jobNumber;
+        this.realname = realname;
+        this.loginName = loginName;
+        this.loginPassword = loginPassword;
+        this.departmentId = departmentId;
+        this.roleId = roleId;
+        this.email = email;
+        this.contactWay = contactWay;
+    }
 
     public String getUserId() {
         return userId;

@@ -1,19 +1,19 @@
 
 CREATE TABLE `user_info` (
-  `user_id` varchar(32) NOT NULL COMMENT 'ÓÃ»§Ö÷¼ü',
-  `job_number` varchar(16) NOT NULL COMMENT '¹¤ºÅ',
-  `realname` varchar(8) NOT NULL COMMENT 'ĞÕÃû',
-  `login_name` varchar(16) NOT NULL COMMENT 'µÇÂ¼Ãû',
-  `login_password` varchar(32) NOT NULL COMMENT 'µÇÂ¼ÃÜÂë',
-  `department_id` varchar(32) NOT NULL COMMENT '²¿ÃÅÖ÷¼ü',
-  `role_id` varchar(32) NOT NULL COMMENT '½ÇÉ«Ö÷¼ü',
-  `e_mail` varchar(32) NOT NULL COMMENT 'ÓÊÏäµØÖ·',
-  `contact_way` varchar(16) NOT NULL COMMENT 'ÁªÏµ·½Ê½',
-  `status` int(1) NOT NULL DEFAULT '1' COMMENT 'ÆôÓÃ±êÖ¾Î»£º1-ÆôÓÃ 0-Í£ÓÃ',
-  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT 'É¾³ı±êÖ¾Î»£º0-Î´É¾³ı 1-ÒÑÉ¾³ı',
-  `data_version` int(8) NOT NULL DEFAULT '0' COMMENT 'Êı¾İ°æ±¾',
-  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '´´½¨Ê±¼ä',
-  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '¸üĞÂÊ±¼ä',
+  `user_id` varchar(32) NOT NULL COMMENT 'ç”¨æˆ·ä¸»é”®',
+  `job_number` varchar(16) NOT NULL COMMENT 'å·¥å·',
+  `realname` varchar(8) NOT NULL COMMENT 'å§“å',
+  `login_name` varchar(16) NOT NULL COMMENT 'ç™»å½•å',
+  `login_password` varchar(32) NOT NULL COMMENT 'ç™»å½•å¯†ç ',
+  `department_id` varchar(32) NOT NULL COMMENT 'éƒ¨é—¨ä¸»é”®',
+  `role_id` varchar(32) NOT NULL COMMENT 'è§’è‰²ä¸»é”®',
+  `e_mail` varchar(32) NOT NULL COMMENT 'é‚®ç®±Ö·',
+  `contact_way` varchar(16) NOT NULL COMMENT 'è”ç³»æ–¹å¼',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT 'å¯ç”¨æ ‡å¿—ä½ï¼š1-å¯ç”¨ 0-åœç”¨',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT 'åˆ é™¤æ ‡å¿—ä½ï¼š1-å·²åˆ é™¤ 0-æœªåˆ é™¤',
+  `data_version` int(8) NOT NULL DEFAULT '0' COMMENT 'æ•°æ®ç‰ˆæœ¬',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'åˆ›å»ºæ—¶é—´',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'æ›´æ–°æ—¶é—´',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ÓÃ»§ĞÅÏ¢±í';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ç”¨æˆ·ä¿¡æ¯è¡¨';
 
