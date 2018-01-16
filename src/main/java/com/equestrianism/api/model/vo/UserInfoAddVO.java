@@ -20,7 +20,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return jobNumber;
     }
 
-    public void setJobNumber(String jobNumber) {
+    public void setJobNumber( String jobNumber ) {
         this.jobNumber = jobNumber;
     }
 
@@ -28,7 +28,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return realname;
     }
 
-    public void setRealname(String realname) {
+    public void setRealname( String realname ) {
         this.realname = realname;
     }
 
@@ -36,7 +36,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return loginName;
     }
 
-    public void setLoginName(String loginName) {
+    public void setLoginName( String loginName ) {
         this.loginName = loginName;
     }
 
@@ -44,7 +44,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return loginPassword;
     }
 
-    public void setLoginPassword(String loginPassword) {
+    public void setLoginPassword( String loginPassword ) {
         this.loginPassword = loginPassword;
     }
 
@@ -52,7 +52,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return departmentId;
     }
 
-    public void setDepartmentId(String departmentId) {
+    public void setDepartmentId( String departmentId ) {
         this.departmentId = departmentId;
     }
 
@@ -60,7 +60,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId( String roleId ) {
         this.roleId = roleId;
     }
 
@@ -68,7 +68,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail( String email ) {
         this.email = email;
     }
 
@@ -76,7 +76,7 @@ public class UserInfoAddVO extends BaseViewModel {
         return contactWay;
     }
 
-    public void setContactWay(String contactWay) {
+    public void setContactWay( String contactWay ) {
         this.contactWay = contactWay;
     }
 }

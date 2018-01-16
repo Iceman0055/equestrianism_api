@@ -12,12 +12,10 @@ public class BaseController {
 
     @ModelAttribute
     public BaseViewModel buildRequest( HttpServletRequest request ) {
-
         BaseViewModel viewModel = new BaseViewModel();
         String sessionId = request.getHeader( "sessionId" );
-
+        viewModel.setSessionId( sessionId );
         return viewModel;
-
     }
 
 }

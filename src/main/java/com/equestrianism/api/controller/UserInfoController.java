@@ -1,14 +1,16 @@
 package com.equestrianism.api.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.vo.UserInfoAddVO;
 import com.equestrianism.api.service.UserInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -19,12 +21,18 @@ import java.util.Map;
 @RequestMapping( "/userInfo" )
 public class UserInfoController extends BaseController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger( UserInfoController.class );
+
     @Autowired
     private UserInfoService userInfoServices;
 
-    @RequestMapping( value = "/add", method = RequestMethod.POST )
+    @RequestMapping( value = "/add", method = RequestMethod.POST, produces = "application/json" )
     @ResponseBody
-    public Map<String, Object> add( UserInfoAddVO userInfoAddVo ) {
+    public Map<String, Object> add( @RequestBody String request ) {
+        LOGGER.info( "【UserInfoController】【add】inputs : " + request );
+//        JSONObject requestJson = JSONObject.parseObject( request );
+        JSON requestJson = JSON.parseObject( request );
+        UserInfoAddVO userInfoAddVo = JSONObject.toJavaObject( requestJson, UserInfoAddVO.class );
         if ( userInfoServices.addUserInfo( userInfoAddVo ) ) {
             return ContainerUtils.buildResSuccessMap();
         }

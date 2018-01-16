@@ -6,9 +6,9 @@ import java.io.Serializable;
 /**
  * Created by Chenzq on 2018/1/15.
  */
-public class BaseViewModel implements Serializable {
+public class BaseViewModel extends BaseObject implements Serializable {
 
-    private static final long serialVersionUID = -488465188259319809L;
+    private static final long serialVersionUID = - 488465188259319809L;
 
     private String sessionId;
     private String userId;
@@ -18,7 +18,7 @@ public class BaseViewModel implements Serializable {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId( String sessionId ) {
         this.sessionId = sessionId;
     }
 
@@ -26,7 +26,7 @@ public class BaseViewModel implements Serializable {
         return request;
     }
 
-    public void setRequest(HttpServletRequest request) {
+    public void setRequest( HttpServletRequest request ) {
         this.request = request;
     }
 
@@ -34,7 +34,7 @@ public class BaseViewModel implements Serializable {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId( String userId ) {
         this.userId = userId;
     }
 }
