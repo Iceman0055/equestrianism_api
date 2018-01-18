@@ -1,10 +1,13 @@
 package com.equestrianism.api.model.vo;
 
+import com.equestrianism.api.core.model.BaseObject;
 import com.equestrianism.api.core.model.BaseViewModel;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
  * Created by Chenzq on 2018/1/15.
  */
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class UserInfoAddVO extends BaseViewModel {
 
     private String jobNumber;
