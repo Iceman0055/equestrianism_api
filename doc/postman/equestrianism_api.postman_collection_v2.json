@@ -1,0 +1,133 @@
+{
+	"info": {
+		"name": "equestrianism_api",
+		"_postman_id": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "userInfo",
+			"description": "系统管理-用户管理",
+			"item": [
+				{
+					"name": "/userInfo/add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "sessionId",
+								"value": "123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jobNumber\":\"111\",\n\t\"realname\":\"realname\",\n\t\"loginName\":\"jjjj\",\n\t\"loginPassword\":\"123\",\n\t\"departmentId\":\"q12\",\n\t\"roleId\":\"23\",\n\t\"email\":\"123\",\n\t\"contactWay\":\"123\"\n}"
+						},
+						"url": "http://localhost:8080/userInfo/add",
+						"description": "新增用户"
+					},
+					"response": []
+				},
+				{
+					"name": "/userInfo/update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "sessionId",
+								"value": "123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\":\"0adf8673b7a7429a832981aee7b7a4d4\",\n\t\"jobNumber\":\"112\",\n\t\"realname\":\"欧阳郑华\",\n\t\"loginName\":\"iceman112\",\n\t\"loginPassword\":\"123456\",\n\t\"departmentId\":\"q12\",\n\t\"roleId\":\"23\",\n\t\"email\":\"112@iceman.com\",\n\t\"contactWay\":\"13611920055\"\n}"
+						},
+						"url": "http://localhost:8080/userInfo/update",
+						"description": "用户更新"
+					},
+					"response": []
+				},
+				{
+					"name": "/userInfo/delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "sessionId",
+								"value": "123"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\":\"82cf6e8c38c64faca3339204af8fa2e0\",\n\t\"deleteFlag\":0,\n\t\"status\":0\n}"
+						},
+						"url": "http://localhost:8080/userInfo/delete",
+						"description": "用户删除、停用"
+					},
+					"response": []
+				},
+				{
+					"name": "/userInfo/list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "sessionId",
+								"value": "123"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:8080/userInfo/list?pageIndex=1&pageRecorders=10&realname=iceman",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userInfo",
+								"list"
+							],
+							"query": [
+								{
+									"key": "pageIndex",
+									"value": "1",
+									"equals": true
+								},
+								{
+									"key": "pageRecorders",
+									"value": "10",
+									"equals": true
+								},
+								{
+									"key": "realname",
+									"value": "iceman",
+									"equals": true
+								}
+							]
+						},
+						"description": "用户信息列表"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
