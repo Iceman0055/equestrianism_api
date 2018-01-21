@@ -1,6 +1,6 @@
 package com.equestrianism.api.service.impl;
 
-import com.equestrianism.api.constants.DeleteFlagEnum;
+import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.UserInfoMapper;
 import com.equestrianism.api.model.bo.UserInfoListBO;
 import com.equestrianism.api.model.model.UserInfoListModel;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Chenzq on 2018/1/15.
@@ -68,6 +67,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         Integer totalRecorders = userInfoMapper.countUserListByPage( userInfoListVo );
         UserInfoListBO responseBo = new UserInfoListBO( userInfoList );
         responseBo.setTotalRecorders( totalRecorders );
+        responseBo.setTotalPages( PageUtils.calculateTotalPages( totalRecorders, userInfoListVo.getPageRecorders() ) );
         return responseBo;
     }
 
