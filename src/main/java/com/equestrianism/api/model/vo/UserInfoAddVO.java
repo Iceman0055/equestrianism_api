@@ -1,6 +1,5 @@
 package com.equestrianism.api.model.vo;
 
-import com.equestrianism.api.core.model.BaseObject;
 import com.equestrianism.api.core.model.BaseViewModel;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
