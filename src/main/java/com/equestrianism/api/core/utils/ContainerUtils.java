@@ -1,5 +1,8 @@
 package com.equestrianism.api.core.utils;
 
+import com.equestrianism.api.constants.CodeEnum;
+import com.equestrianism.api.constants.SystemParamsConstants;
+
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -28,6 +31,7 @@ public class ContainerUtils {
         res.put( "data", data );
         res.put( "flag", flag );
         res.put( "msg", msg );
+        res.put( "code", SystemParamsConstants.SUCCESS_CODE );
         return res;
     }
 
@@ -35,7 +39,8 @@ public class ContainerUtils {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put( "data", data );
         res.put( "flag", -1 );
-        res.put( "msg", "登录超时" );
+        res.put( "msg", CodeEnum.PROCESS_TIME_OUT.note );
+        res.put( "code", CodeEnum.PROCESS_TIME_OUT.code );
         return res;
     }
 
@@ -43,7 +48,8 @@ public class ContainerUtils {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put( "data", null );
         res.put( "flag", 1 );
-        res.put( "msg", "操作成功" );
+        res.put( "msg", CodeEnum.PROCESS_SUCCESS.note );
+        res.put( "code", CodeEnum.PROCESS_SUCCESS.code );
         return res;
     }
 
@@ -54,7 +60,8 @@ public class ContainerUtils {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put( "data", data );
         res.put( "flag", 1 );
-        res.put( "msg", "操作成功" );
+        res.put( "msg", CodeEnum.PROCESS_SUCCESS.note );
+        res.put( "code", CodeEnum.PROCESS_SUCCESS.code );
         return res;
     }
 
@@ -62,7 +69,8 @@ public class ContainerUtils {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put( "data", data );
         res.put( "flag", 1 );
-        res.put( "msg", "操作成功" );
+        res.put( "msg", CodeEnum.PROCESS_SUCCESS.note );
+        res.put( "code", CodeEnum.PROCESS_SUCCESS.code );
         return res;
     }
 
@@ -70,6 +78,15 @@ public class ContainerUtils {
         Map<String, Object> res = new HashMap<String, Object>();
         res.put( "flag", 0 );
         res.put( "msg", msg );
+        res.put( "code", SystemParamsConstants.ERROR_CODE );
+        return res;
+    }
+
+    public static Map<String, Object> buildResFailMap() {
+        Map<String, Object> res = new HashMap<String, Object>();
+        res.put( "flag", 0 );
+        res.put( "msg", CodeEnum.PROCESS_FAIL.note );
+        res.put( "code", CodeEnum.PROCESS_FAIL.code );
         return res;
     }
 

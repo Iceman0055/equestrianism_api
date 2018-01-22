@@ -72,4 +72,13 @@ public class UserInfoController extends BaseController {
         return ContainerUtils.buildResSuccessMap( response );
     }
 
+    @RequestMapping( value = "/detail", method = RequestMethod.GET )
+    @ResponseBody
+    public Map< String, Object > detail( UserInfoDetailVO userInfoDetailVo ) {
+        LOGGER.info( "【UserInfoController】【detail】inputs : " + userInfoDetailVo.toJsonString() );
+        UserInfoListBO response = userInfoService.userDetail( userInfoDetailVo );
+        LOGGER.info( "【UserInfoController】【detail】result : " + response.toJsonString() );
+        return ContainerUtils.buildResSuccessMap( response );
+    }
+
 }

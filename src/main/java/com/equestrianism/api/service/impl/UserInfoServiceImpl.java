@@ -5,10 +5,7 @@ import com.equestrianism.api.dao.UserInfoMapper;
 import com.equestrianism.api.model.bo.UserInfoListBO;
 import com.equestrianism.api.model.model.UserInfoListModel;
 import com.equestrianism.api.model.po.UserInfoEntity;
-import com.equestrianism.api.model.vo.UserInfoAddVO;
-import com.equestrianism.api.model.vo.UserInfoDeleteVO;
-import com.equestrianism.api.model.vo.UserInfoListVO;
-import com.equestrianism.api.model.vo.UserInfoUpdateVO;
+import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +66,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         responseBo.setTotalRecorders( totalRecorders );
         responseBo.setTotalPages( PageUtils.calculateTotalPages( totalRecorders, userInfoListVo.getPageRecorders() ) );
         return responseBo;
+    }
+
+    @Override
+    public UserInfoListBO userDetail( UserInfoDetailVO userInfoDetailVo ) {
+        return null;
     }
 
 }
