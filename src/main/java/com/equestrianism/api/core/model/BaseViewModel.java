@@ -14,7 +14,7 @@ public class BaseViewModel extends BaseObject implements Serializable {
     private static final long serialVersionUID = - 488465188259319809L;
 
     private String sessionId;
-    private String userId;
+    private String accessId;
     private HttpServletRequest request;
 
     public String getSessionId() {
@@ -33,11 +33,12 @@ public class BaseViewModel extends BaseObject implements Serializable {
         this.request = request;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getAccessId() {
+        return accessId;
     }
 
-    public void setUserId( String userId ) {
-        this.userId = userId;
+    public void setAccessId( String accessId ) {
+        this.accessId = accessId;
     }
+
 }

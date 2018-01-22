@@ -19,12 +19,23 @@ public class UserInfoEntity extends BasePO {
     private String roleId;
     private String email;
     private String contactWay;
+    private String createUser;
 
     public UserInfoEntity() {
     }
 
+    public UserInfoEntity( String userId ) {
+        this.userId = userId;
+    }
+
     public UserInfoEntity( String jobNumber, String realname, String loginName, String loginPassword,
-                           String departmentId, String roleId, String email, String contactWay ) {
+                           String departmentId, String roleId, String email, String contactWay, String createUser ) {
+        this( UUID.randomUUID().toString().replace( "-", "" ), jobNumber, realname, loginName, loginPassword,
+                departmentId, roleId, email, contactWay, createUser );
+    }
+
+    public UserInfoEntity( String userId, String jobNumber, String realname, String loginName, String loginPassword,
+                           String departmentId, String roleId, String email, String contactWay, String createUser ) {
         this.jobNumber = jobNumber;
         this.realname = realname;
         this.loginName = loginName;
@@ -33,6 +44,8 @@ public class UserInfoEntity extends BasePO {
         this.roleId = roleId;
         this.email = email;
         this.contactWay = contactWay;
+        this.createUser = createUser;
+        this.userId = userId;
     }
 
     public String getUserId() {
@@ -105,5 +118,13 @@ public class UserInfoEntity extends BasePO {
 
     public void setContactWay( String contactWay ) {
         this.contactWay = contactWay;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
 }

@@ -10,10 +10,31 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BaseController {
 
+    private static String SESSION_ID = "";
+    private static String ACCESS_ID = "";
+
+    public static String getSessionId() {
+        return SESSION_ID;
+    }
+
+    public static void setSessionId( String sessionId ) {
+        SESSION_ID = sessionId;
+    }
+
+    public static String getAccessId() {
+        return ACCESS_ID;
+    }
+
+    public static void setAccessId( String userId ) {
+        ACCESS_ID = userId;
+    }
+
     @ModelAttribute
     public BaseViewModel buildRequest( HttpServletRequest request ) {
         BaseViewModel viewModel = new BaseViewModel();
         String sessionId = request.getHeader( "sessionId" );
+        ACCESS_ID = sessionId;
+        SESSION_ID = sessionId;
         viewModel.setSessionId( sessionId );
         return viewModel;
     }

@@ -19,13 +19,14 @@
         <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
         <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
         user_id, job_number, realname, login_name, login_password, department_id, role_id, e_mail,
-        contact_way, status, delete_flag, data_version, create_date, update_date
+        contact_way, status, delete_flag, data_version, create_date, create_user, update_date
     </sql>
 
     <!-- 基本的sql查询条件公共引用 -->
@@ -85,7 +86,8 @@
                 status,
                 delete_flag,
                 data_version,
-                create_date
+                create_date,
+                create_user
             ) VALUES (
                 #{userId, jdbcType=VARCHAR},
                 #{jobNumber, jdbcType=VARCHAR},
@@ -98,9 +100,128 @@
                 #{contactWay, jdbcType=VARCHAR},
                 1,
                 0,
-                0,
-                now()
+                1,
+                now(),
+                #{createUser, jdbcType=VARCHAR}
             )
     </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.UserInfoEntity">
+        UPDATE
+            user_info
+        <set>
+            <if test="jobNumber != null and jobNumber != ''">
+                job_number = #{jobNumber, jdbcType=VARCHAR},
+            </if>
+            <if test="realname != null and realname != ''">
+                realname = #{realname, jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null and loginName != ''">
+                login_name = #{loginName, jdbcType=VARCHAR},
+            </if>
+            <if test="loginPassword != null and loginPassword != ''">
+                login_password = #{loginPassword, jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null and departmentId != ''">
+                department_id = #{departmentId, jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId, jdbcType=VARCHAR},
+            </if>
+            <if test="email != null and email != ''">
+                e_mail = #{email, jdbcType=VARCHAR},
+            </if>
+            <if test="contactWay != null and contactWay != ''">
+                contact_way = #{contactWay, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            user_id = #{userId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectUserListByPage" parameterType="com.equestrianism.api.model.vo.UserInfoListVO" resultType="com.equestrianism.api.model.model.UserInfoListModel">
+        SELECT
+            a.user_id           userId,
+            a.job_number        jobNumber,
+            a.realname          realname,
+            a.login_name        loginName,
+            a.contact_way       contactWay,
+            a.e_mail            email,
+            a.status            status,
+            b.role_name         roleName,
+            c.department_name   departmentName
+        FROM
+            user_info a,
+            role_info b,
+            department_info c
+        WHERE
+            a.role_id = b.role_id
+        AND
+            a.department_id = c.department_id
+        AND
+            a.delete_flag = 0
+        <if test="jobNumber != null and jobNumber != ''">
+            AND
+                a.job_number = #{jobNumber, jdbcType=VARCHAR}
+        </if>
+        <if test="realname != null and realname != ''">
+            AND
+                a.realname LIKE CONCAT('%',#{realname, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="status != null">
+            AND
+                a.status = #{status, jdbcType=INTEGER}
+        </if>
+        <if test="departmentId != null and departmentId != ''">
+            AND
+                a.department_id = #{departmentId, jdbcType=VARCHAR}
+        </if>
+        <if test="roleId != null and roleId != ''">
+            AND
+                a.role_id = #{roleId, jdbcType=VARCHAR}
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countUserListByPage" parameterType="com.equestrianism.api.model.vo.UserInfoListVO" resultType="java.lang.Integer">
+        SELECT
+            IFNULL( count(1), 0 )
+        FROM
+            user_info a,
+            role_info b,
+            department_info c
+        WHERE
+            a.role_id = b.role_id
+        AND
+            a.department_id = c.department_id
+        AND
+            a.delete_flag = 0
+        <if test="jobNumber != null and jobNumber != ''">
+            AND
+                a.job_number = #{jobNumber, jdbcType=VARCHAR}
+        </if>
+        <if test="realname != null and realname != ''">
+            AND
+                a.realname LIKE CONCAT('%',#{realname, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="status != null">
+            AND
+                a.status = #{status, jdbcType=INTEGER}
+        </if>
+        <if test="departmentId != null and departmentId != ''">
+            AND
+                a.department_id = #{departmentId, jdbcType=VARCHAR}
+        </if>
+        <if test="roleId != null and roleId != ''">
+            AND
+                a.role_id = #{roleId, jdbcType=VARCHAR}
+        </if>
+    </select>
 
 </mapper>
