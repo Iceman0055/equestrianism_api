@@ -94,4 +94,18 @@
             delete_flag = 0
     </select>
 
+    <select id="selectRoleListByComboBox" resultType="com.equestrianism.api.model.model.RoleInfoComboBoxModel">
+        SELECT
+            role_id   roleId,
+            role_name roleName
+        FROM
+            role_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        ORDER BY
+            create_date
+    </select>
+
 </mapper>

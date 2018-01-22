@@ -24,6 +24,12 @@ public class BasePageViewModel extends BaseViewModel {
         this.beginIndex = calculateBeginIndex( pageIndex, pageRecorders );
     }
 
+    public BasePageViewModel( Integer pageIndex, Integer pageRecorders, Integer beginIndex ) {
+        this.pageIndex = pageIndex;
+        this.pageRecorders = pageRecorders;
+        this.beginIndex = calculateBeginIndex( pageIndex, pageRecorders );
+    }
+
     public Integer getPageRecorders() {
         return pageRecorders;
     }
@@ -56,6 +62,16 @@ public class BasePageViewModel extends BaseViewModel {
             pageRecorders = 10;
         }
         return ( pageIndex - 1 ) * 10;
+    }
+
+    public void calculateBeginIndex() {
+        if ( pageIndex == null || pageIndex == 0 ) {
+            pageIndex = 1;
+        }
+        if ( pageRecorders == null || pageRecorders == 0 ) {
+            pageRecorders = 10;
+        }
+        this.beginIndex = ( pageIndex - 1 ) * pageRecorders;
     }
 
 }

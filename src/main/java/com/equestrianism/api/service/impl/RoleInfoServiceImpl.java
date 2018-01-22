@@ -2,10 +2,10 @@ package com.equestrianism.api.service.impl;
 
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.RoleInfoMapper;
+import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
-import com.equestrianism.api.model.bo.UserInfoListBO;
+import com.equestrianism.api.model.model.RoleInfoComboBoxModel;
 import com.equestrianism.api.model.model.RoleInfoListModel;
-import com.equestrianism.api.model.model.UserInfoListModel;
 import com.equestrianism.api.model.po.RoleInfoEntity;
 import com.equestrianism.api.model.vo.RoleInfoAddVO;
 import com.equestrianism.api.model.vo.RoleInfoDeleteVO;
@@ -49,8 +49,10 @@ public class RoleInfoServiceImpl implements RoleInfoService {
     }
 
     @Override
-    public Boolean removeUserInfo( RoleInfoDeleteVO roleInfoDeleteVo ) {
+    public Boolean removeRoleInfo( RoleInfoDeleteVO roleInfoDeleteVo ) {
         RoleInfoEntity roleInfoEntity = new RoleInfoEntity( roleInfoDeleteVo.getRoleId() );
+        roleInfoEntity.setDeleteFlag( roleInfoDeleteVo.getDeleteFlag() );
+        roleInfoEntity.setStatus( roleInfoDeleteVo.getStatus() );
         Integer updateCount = roleInfoMapper.updateBySelective( roleInfoEntity );
         if ( updateCount > 0 ) {
             return true;
@@ -60,12 +62,19 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 
     @Override
     public RoleInfoListBO roleInfoList( RoleInfoListVO roleInfoListVo ) {
+        roleInfoListVo.calculateBeginIndex();
         List<RoleInfoListModel> roleInfoList = roleInfoMapper.selectRoleListByPage( roleInfoListVo );
         Integer totalRecorders = roleInfoMapper.countRoleListByPage( roleInfoListVo );
         RoleInfoListBO responseBo = new RoleInfoListBO( roleInfoList );
         responseBo.setTotalRecorders( totalRecorders );
         responseBo.setTotalPages( PageUtils.calculateTotalPages( totalRecorders, roleInfoListVo.getPageRecorders() ) );
         return responseBo;
+    }
+
+    @Override
+    public RoleInfoComboBoxBO comboBox() {
+        List<RoleInfoComboBoxModel> roleList = roleInfoMapper.selectRoleListByComboBox();
+        return new RoleInfoComboBoxBO( roleList );
     }
 
 }

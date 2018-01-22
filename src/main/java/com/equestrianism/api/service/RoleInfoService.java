@@ -1,7 +1,7 @@
 package com.equestrianism.api.service;
 
+import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
-import com.equestrianism.api.model.bo.UserInfoListBO;
 import com.equestrianism.api.model.vo.RoleInfoAddVO;
 import com.equestrianism.api.model.vo.RoleInfoDeleteVO;
 import com.equestrianism.api.model.vo.RoleInfoListVO;
@@ -16,8 +16,10 @@ public interface RoleInfoService {
 
     Boolean updateRoleInfo( RoleInfoUpdateVO roleInfoUpdateVo );
 
-    Boolean removeUserInfo( RoleInfoDeleteVO roleInfoDeleteVo );
+    Boolean removeRoleInfo( RoleInfoDeleteVO roleInfoDeleteVo );
 
     RoleInfoListBO roleInfoList( RoleInfoListVO roleInfoListVo );
+
+    RoleInfoComboBoxBO comboBox();
 
 }

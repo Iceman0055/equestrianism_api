@@ -60,6 +60,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfoListBO userInfoList( UserInfoListVO userInfoListVo ) {
+        userInfoListVo.calculateBeginIndex();
         List<UserInfoListModel> userInfoList = userInfoMapper.selectUserListByPage(userInfoListVo);
         Integer totalRecorders = userInfoMapper.countUserListByPage( userInfoListVo );
         UserInfoListBO responseBo = new UserInfoListBO( userInfoList );

@@ -2,6 +2,7 @@ package com.equestrianism.api.controller;
 
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.utils.ContainerUtils;
+import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
 import com.equestrianism.api.model.vo.*;
@@ -48,7 +49,7 @@ public class RoleInfoController extends BaseController {
     public Map<String, Object> update( @RequestBody RoleInfoUpdateVO roleInfoUpdateVo ) {
         roleInfoUpdateVo.setAccessId( getAccessId() );
         LOGGER.info( "【RoleInfoController】【update】inputs : " + roleInfoUpdateVo.toJsonString() );
-        if ( roleInfoService.updateRoleInfo( roleInfoUpdateVo ) ) {
+        if ( roleInfoService.updateRoleInfo(roleInfoUpdateVo) ) {
             LOGGER.info( "【RoleInfoController】【update】result : success" );
             return ContainerUtils.buildResSuccessMap();
         }
@@ -60,7 +61,7 @@ public class RoleInfoController extends BaseController {
     @ResponseBody
     public Map<String, Object> delete( @RequestBody RoleInfoDeleteVO roleInfoDeleteVo ) {
         LOGGER.info( "【RoleInfoController】【delete】inputs : " + roleInfoDeleteVo.toJsonString() );
-        if ( roleInfoService.removeUserInfo( roleInfoDeleteVo ) ) {
+        if ( roleInfoService.removeRoleInfo( roleInfoDeleteVo ) ) {
             LOGGER.info( "【RoleInfoController】【delete】result : success" );
             return ContainerUtils.buildResSuccessMap();
         }
@@ -72,8 +73,17 @@ public class RoleInfoController extends BaseController {
     @ResponseBody
     public Map<String, Object> list( RoleInfoListVO roleInfoListVo ) {
         LOGGER.info( "【RoleInfoController】【list】inputs : " + roleInfoListVo.toJsonString() );
-        RoleInfoListBO response = roleInfoService.roleInfoList( roleInfoListVo );
+        RoleInfoListBO response = roleInfoService.roleInfoList(roleInfoListVo);
         LOGGER.info( "【RoleInfoController】【list】result : " + response.toJsonString() );
+        return ContainerUtils.buildResSuccessMap( response );
+    }
+
+    @RequestMapping( value = "/comboBox", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> comboBox() {
+        LOGGER.info( "【RoleInfoController】【comboBox】begin" );
+        RoleInfoComboBoxBO response = roleInfoService.comboBox();
+        LOGGER.info( "【RoleInfoController】【comboBox】result : " + response.toJsonString() );
         return ContainerUtils.buildResSuccessMap( response );
     }
 
