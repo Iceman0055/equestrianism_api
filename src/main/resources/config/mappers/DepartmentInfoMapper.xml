@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.DepartmentInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.DepartmentInfoEntity">
+        <id column="department_id" property="departmentId" jdbcType="VARCHAR"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        department_id, department_name, short_name, remark, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.UserInfoEntity">
+        INSERT INTO
+            department_info (
+                department_id,
+                department_name,
+                short_name,
+                remark,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{departmentId, jdbcType=VARCHAR},
+                #{departmentName, jdbcType=VARCHAR},
+                #{shortName, jdbcType=VARCHAR},
+                #{remark, jdbcType=VARCHAR},
+                1,
+                0,
+                1,
+                now()
+            )
+
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.RoleInfoEntity">
+        UPDATE
+            department_info
+        <set>
+            <if test="departmentName != null and departmentName != ''">
+                department_name = #{departmentName, jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null and shortName != ''">
+                short_name = #{shortName, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            department_id = #{departmentId, jdbcType=VARCHAR}
+    </update>
+    <select id="selectDepartmentListByPage" parameterType="com.equestrianism.api.model.vo.DepartmentInfoListVO" resultType="com.equestrianism.api.model.model.DepartmentInfoListModel">
+        SELECT
+            department_id     departmentId,
+            department_name   departmentName,
+            short_name        shortName,
+            remark            remark,
+            status            status
+        FROM
+            department_info
+        WHERE
+            delete_flag = 0
+        <if test="status != null">
+            AND
+                status = #{status, jdbcType=INTEGER}
+        </if>
+        <if test="departmentName != null and departmentName != ''">
+            AND
+                department_name like CONCAT('%',#{departmentName, jdbcType=VARCHAR},'%')
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countDepartmentListByPage" parameterType="com.equestrianism.api.model.vo.RoleInfoListVO" resultType="java.lang.Integer">
+        SELECT
+            IFNULL( count(1), 0 )
+        FROM
+            department_info
+        WHERE
+            delete_flag = 0
+        <if test="status != null">
+            AND
+            status = #{status, jdbcType=INTEGER}
+        </if>
+        <if test="departmentName != null and departmentName != ''">
+            AND
+            department_name like CONCAT('%',#{departmentName, jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+    <select id="selectDepartmentListByComboBox" resultType="com.equestrianism.api.model.model.DepartmentInfoComboBoxModel">
+        SELECT
+            department_id     departmentId,
+            department_name   departmentName
+        FROM
+            department_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        ORDER BY
+            create_date
+    </select>
+
+    <select id="selectDepartmentByDepartmentId" parameterType="java.lang.String" resultType="com.equestrianism.api.model.bo.DepartmentInfoDetailBO">
+        SELECT
+            department_id       departmentId,
+            department_name     departmentName,
+            short_name          shortName,
+            status              status,
+            remark              remark
+        FROM
+            department_info
+        WHERE
+            department_id = #{departmentId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

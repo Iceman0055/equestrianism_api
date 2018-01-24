@@ -224,4 +224,21 @@
         </if>
     </select>
 
+    <select id="selectUserInfoByUserId" parameterType="java.lang.String" resultType="com.equestrianism.api.model.bo.UserInfoDetailBO">
+        SELECT
+            user_id           userId,
+            job_number        jobNumber,
+            login_name        loginName,
+            realname          realname,
+            department_id     departmentId,
+            role_id           roleId,
+            contact_way       contactWay,
+            e_mail            email,
+            status            status
+        FROM
+            user_info
+        WHERE
+            user_id = #{userId, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

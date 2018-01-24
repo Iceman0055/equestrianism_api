@@ -108,4 +108,16 @@
             create_date
     </select>
 
+    <select id="selectRoleInfoByRoleId" parameterType="java.lang.String" resultType="com.equestrianism.api.model.bo.RoleInfoDetailBO">
+        SELECT
+            role_id       roleId,
+            role_name     roleName,
+            short_name    shortName,
+            remark        remark
+        FROM
+            role_info
+        WHERE
+            role_id = #{roleId, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

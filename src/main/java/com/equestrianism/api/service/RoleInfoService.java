@@ -1,11 +1,9 @@
 package com.equestrianism.api.service;
 
 import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
+import com.equestrianism.api.model.bo.RoleInfoDetailBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
-import com.equestrianism.api.model.vo.RoleInfoAddVO;
-import com.equestrianism.api.model.vo.RoleInfoDeleteVO;
-import com.equestrianism.api.model.vo.RoleInfoListVO;
-import com.equestrianism.api.model.vo.RoleInfoUpdateVO;
+import com.equestrianism.api.model.vo.*;
 
 /**
  * Created by Chenzq on 2018/1/22.
@@ -21,5 +19,7 @@ public interface RoleInfoService {
     RoleInfoListBO roleInfoList( RoleInfoListVO roleInfoListVo );
 
     RoleInfoComboBoxBO comboBox();
+
+    RoleInfoDetailBO roleDetail( RoleInfoDetailVO roleInfoDetailVo );
 
 }

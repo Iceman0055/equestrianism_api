@@ -2,6 +2,7 @@ package com.equestrianism.api.controller;
 
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.utils.ContainerUtils;
+import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
 import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.UserInfoService;
@@ -65,7 +66,7 @@ public class UserInfoController extends BaseController {
 
     @RequestMapping( value = "/list", method = RequestMethod.GET )
     @ResponseBody
-    public Map< String, Object > list( UserInfoListVO userInfoListVo ) {
+    public Map<String, Object> list( UserInfoListVO userInfoListVo ) {
         LOGGER.info( "【UserInfoController】【list】inputs : " + userInfoListVo.toJsonString() );
         UserInfoListBO response = userInfoService.userInfoList( userInfoListVo );
         LOGGER.info( "【UserInfoController】【list】result : " + response.toJsonString() );
@@ -74,9 +75,9 @@ public class UserInfoController extends BaseController {
 
     @RequestMapping( value = "/detail", method = RequestMethod.GET )
     @ResponseBody
-    public Map< String, Object > detail( UserInfoDetailVO userInfoDetailVo ) {
+    public Map<String, Object> detail( UserInfoDetailVO userInfoDetailVo ) {
         LOGGER.info( "【UserInfoController】【detail】inputs : " + userInfoDetailVo.toJsonString() );
-        UserInfoListBO response = userInfoService.userDetail( userInfoDetailVo );
+        UserInfoDetailBO response = userInfoService.userDetail( userInfoDetailVo );
         LOGGER.info( "【UserInfoController】【detail】result : " + response.toJsonString() );
         return ContainerUtils.buildResSuccessMap( response );
     }

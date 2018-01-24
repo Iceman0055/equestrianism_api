@@ -2,9 +2,7 @@ package com.equestrianism.api.controller;
 
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.utils.ContainerUtils;
-import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
-import com.equestrianism.api.model.bo.RoleInfoListBO;
-import com.equestrianism.api.model.bo.UserInfoListBO;
+import com.equestrianism.api.model.bo.*;
 import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.RoleInfoService;
 import com.equestrianism.api.service.UserInfoService;
@@ -84,6 +82,15 @@ public class RoleInfoController extends BaseController {
         LOGGER.info( "【RoleInfoController】【comboBox】begin" );
         RoleInfoComboBoxBO response = roleInfoService.comboBox();
         LOGGER.info( "【RoleInfoController】【comboBox】result : " + response.toJsonString() );
+        return ContainerUtils.buildResSuccessMap( response );
+    }
+
+    @RequestMapping( value = "/detail", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> detail( RoleInfoDetailVO roleInfoDetailVo ) {
+        LOGGER.info( "【RoleInfoController】【detail】inputs : " + roleInfoDetailVo.toJsonString() );
+        RoleInfoDetailBO response = roleInfoService.roleDetail( roleInfoDetailVo );
+        LOGGER.info( "【RoleInfoController】【detail】result : " + response.toJsonString() );
         return ContainerUtils.buildResSuccessMap( response );
     }
 

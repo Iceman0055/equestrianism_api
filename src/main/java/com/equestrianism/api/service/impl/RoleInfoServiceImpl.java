@@ -3,14 +3,12 @@ package com.equestrianism.api.service.impl;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.RoleInfoMapper;
 import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
+import com.equestrianism.api.model.bo.RoleInfoDetailBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
 import com.equestrianism.api.model.model.RoleInfoComboBoxModel;
 import com.equestrianism.api.model.model.RoleInfoListModel;
 import com.equestrianism.api.model.po.RoleInfoEntity;
-import com.equestrianism.api.model.vo.RoleInfoAddVO;
-import com.equestrianism.api.model.vo.RoleInfoDeleteVO;
-import com.equestrianism.api.model.vo.RoleInfoListVO;
-import com.equestrianism.api.model.vo.RoleInfoUpdateVO;
+import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.RoleInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +73,11 @@ public class RoleInfoServiceImpl implements RoleInfoService {
     public RoleInfoComboBoxBO comboBox() {
         List<RoleInfoComboBoxModel> roleList = roleInfoMapper.selectRoleListByComboBox();
         return new RoleInfoComboBoxBO( roleList );
+    }
+
+    @Override
+    public RoleInfoDetailBO roleDetail( RoleInfoDetailVO roleInfoDetailVo ) {
+        return roleInfoMapper.selectRoleInfoByRoleId( roleInfoDetailVo.getRoleId() );
     }
 
 }

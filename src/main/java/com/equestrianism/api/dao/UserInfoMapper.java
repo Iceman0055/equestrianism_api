@@ -1,5 +1,6 @@
 package com.equestrianism.api.dao;
 
+import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.model.UserInfoListModel;
 import com.equestrianism.api.model.po.UserInfoEntity;
 import com.equestrianism.api.model.vo.UserInfoListVO;
@@ -19,5 +20,7 @@ public interface UserInfoMapper {
     List<UserInfoListModel> selectUserListByPage( UserInfoListVO userInfoListVo );
 
     Integer countUserListByPage(UserInfoListVO userInfoListVo);
+
+    UserInfoDetailBO selectUserInfoByUserId( String userId );
 
 }

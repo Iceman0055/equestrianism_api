@@ -1,5 +1,6 @@
 package com.equestrianism.api.dao;
 
+import com.equestrianism.api.model.bo.RoleInfoDetailBO;
 import com.equestrianism.api.model.model.RoleInfoComboBoxModel;
 import com.equestrianism.api.model.model.RoleInfoListModel;
 import com.equestrianism.api.model.po.RoleInfoEntity;
@@ -22,5 +23,7 @@ public interface RoleInfoMapper {
     Integer countRoleListByPage( RoleInfoListVO roleInfoListVo );
 
     List<RoleInfoComboBoxModel> selectRoleListByComboBox();
+
+    RoleInfoDetailBO selectRoleInfoByRoleId( String roleId );
 
 }

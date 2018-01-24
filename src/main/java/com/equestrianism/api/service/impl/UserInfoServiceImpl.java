@@ -2,6 +2,7 @@ package com.equestrianism.api.service.impl;
 
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.UserInfoMapper;
+import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
 import com.equestrianism.api.model.model.UserInfoListModel;
 import com.equestrianism.api.model.po.UserInfoEntity;
@@ -70,8 +71,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfoListBO userDetail( UserInfoDetailVO userInfoDetailVo ) {
-        return null;
+    public UserInfoDetailBO userDetail( UserInfoDetailVO userInfoDetailVo ) {
+        return userInfoMapper.selectUserInfoByUserId( userInfoDetailVo.getUserId() );
     }
 
 }

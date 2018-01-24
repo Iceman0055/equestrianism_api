@@ -1,5 +1,6 @@
 package com.equestrianism.api.service;
 
+import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
 import com.equestrianism.api.model.vo.*;
 
@@ -16,6 +17,6 @@ public interface UserInfoService {
 
     UserInfoListBO userInfoList( UserInfoListVO userInfoListVo );
 
-    UserInfoListBO userDetail( UserInfoDetailVO userInfoDetailVo );
+    UserInfoDetailBO userDetail( UserInfoDetailVO userInfoDetailVo );
     
 }
