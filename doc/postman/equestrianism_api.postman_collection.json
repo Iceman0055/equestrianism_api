@@ -1,131 +1,62 @@
 {
-	"id": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+	"id": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
 	"name": "equestrianism_api",
 	"description": "",
 	"order": [],
 	"folders": [
 		{
+			"id": "b65c5105-cb38-b3d3-74fe-00ed72bdfe56",
+			"name": "departmentInfo",
+			"description": "",
+			"order": [
+				"1c2bbb10-4844-953f-73e6-66713ad8ee29",
+				"2eb599be-f3c6-db6e-58ad-a538b2243a1b",
+				"c652b3b6-1ed5-e8c8-9c31-707e8f7dc299",
+				"7482b931-63e8-3258-b81e-95365212dad2",
+				"ab2c69de-689c-883b-bd0f-48c6103caf37",
+				"46539732-2ad5-5aed-6bae-6469302d44e1"
+			],
+			"owner": 0
+		},
+		{
 			"name": "roleInfo",
 			"description": "",
 			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
 			"order": [
-				"b33ad0dc-9284-86db-01ba-e3fb4d073b3b",
-				"4f3c7f1a-ba19-0ea0-741c-ab2ef906503e",
-				"9876dc64-210a-8348-78fe-b11a2f7c8aff",
-				"ec816bbb-5bf2-b656-f4ff-2361d03043f6",
-				"353fb55c-9952-dbce-182e-7053b319ad51"
+				"ba12d392-0788-58a7-deec-92f55d63ec25",
+				"429cf51a-a02d-40e7-a786-f3db94da7eec",
+				"c0a4ac89-18c8-ea83-ccd1-8c7586c4e7f5",
+				"3453da37-c139-e9d6-7ee6-c943efde2f15",
+				"50f9e55e-db21-4b0a-98eb-ad792d003894",
+				"a66e42ae-25f5-a784-3951-74098c1ae7b1"
 			],
 			"owner": 0,
 			"folders_order": [],
-			"id": "c63ade58-c9ed-2ad8-e1c6-6d79462e5030"
+			"id": "c691b82b-e83e-e55f-b2a6-52c51930357f"
 		},
 		{
 			"name": "userInfo",
 			"description": "系统管理-用户管理",
 			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
 			"order": [
-				"2c5433e1-c5f9-cf82-7278-39ab5b165f19",
-				"460a87db-3e59-8771-3a40-a9e04cf9a161",
-				"6bbc4245-9d37-cf7a-c603-bebb4f8f55ea",
-				"a1c860b2-ebe7-ae74-0cb2-ba8dea6367a7"
+				"80bfbd91-f3c9-47f3-9572-bda8754ee857",
+				"1413baa3-1d25-510f-874d-96c6806febf4",
+				"19274168-c4cc-dc51-2106-7c81408c77cd",
+				"66634ef4-b494-048f-6a3d-63dfde5f5326",
+				"1d6d1469-dd83-dbce-742c-da5f2169a273"
 			],
 			"owner": 0,
 			"folders_order": [],
 			"auth": null,
-			"id": "0255d2e5-5f51-c087-5a23-153b6508f8f1"
+			"id": "b88066d2-d986-6059-f0fc-d0b408c7ff1e"
 		}
-	],
-	"folders_order": [
-		"0255d2e5-5f51-c087-5a23-153b6508f8f1",
-		"c63ade58-c9ed-2ad8-e1c6-6d79462e5030"
 	],
 	"timestamp": 1516481167087,
 	"owner": 0,
 	"public": false,
-	"events": [],
-	"variables": [],
-	"auth": null,
 	"requests": [
 		{
-			"id": "2c5433e1-c5f9-cf82-7278-39ab5b165f19",
-			"headers": "Content-Type: application/json\nsessionId: 123\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sessionId",
-					"value": "123",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/userInfo/add",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"events": [],
-			"auth": null,
-			"method": "POST",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
-			"data": [],
-			"dataMode": "raw",
-			"name": "/userInfo/add",
-			"description": "新增用户",
-			"descriptionFormat": "html",
-			"time": 1516481173103,
-			"version": 2,
-			"responses": [],
-			"isFromCollection": true,
-			"collectionRequestId": "2c5433e1-c5f9-cf82-7278-39ab5b165f19",
-			"folder": "0255d2e5-5f51-c087-5a23-153b6508f8f1",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"jobNumber\":\"111\",\n\t\"realname\":\"realname\",\n\t\"loginName\":\"jjjj\",\n\t\"loginPassword\":\"123\",\n\t\"departmentId\":\"q12\",\n\t\"roleId\":\"23\",\n\t\"email\":\"123\",\n\t\"contactWay\":\"123\"\n}"
-		},
-		{
-			"id": "353fb55c-9952-dbce-182e-7053b319ad51",
-			"headers": "Content-Type: application/json\nsessionId: 1234\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "sessionId",
-					"value": "1234",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/roleInfo/delete",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"events": [],
-			"auth": null,
-			"method": "POST",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
-			"data": [],
-			"dataMode": "raw",
-			"name": "/roleInfo/delete",
-			"description": "删除角色",
-			"descriptionFormat": "html",
-			"time": 1516637963488,
-			"version": 2,
-			"responses": [],
-			"folder": "c63ade58-c9ed-2ad8-e1c6-6d79462e5030",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"roleId\":\"18dbf827d2a34b07b0eb8dd30f27bfe8\",\n\t\"deleteFlag\":1,\n\t\"status\":0\n\t\n}"
-		},
-		{
-			"id": "460a87db-3e59-8771-3a40-a9e04cf9a161",
+			"id": "1413baa3-1d25-510f-874d-96c6806febf4",
 			"headers": "Content-Type: application/json\nsessionId: 123\n",
 			"headerData": [
 				{
@@ -148,7 +79,7 @@
 			"events": [],
 			"auth": null,
 			"method": "POST",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
 			"data": [],
 			"dataMode": "raw",
 			"name": "/userInfo/update",
@@ -158,46 +89,15 @@
 			"version": 2,
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "460a87db-3e59-8771-3a40-a9e04cf9a161",
-			"folder": "0255d2e5-5f51-c087-5a23-153b6508f8f1",
+			"folder": "b88066d2-d986-6059-f0fc-d0b408c7ff1e",
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n\t\"userId\":\"0adf8673b7a7429a832981aee7b7a4d4\",\n\t\"jobNumber\":\"112\",\n\t\"realname\":\"欧阳郑华\",\n\t\"loginName\":\"iceman112\",\n\t\"loginPassword\":\"123456\",\n\t\"departmentId\":\"q12\",\n\t\"roleId\":\"23\",\n\t\"email\":\"112@iceman.com\",\n\t\"contactWay\":\"13611920055\"\n}"
+			"rawModeData": "{\n\t\"userId\":\"0adf8673b7a7429a832981aee7b7a4d4\",\n\t\"jobNumber\":\"112\",\n\t\"realname\":\"欧阳郑华\",\n\t\"loginName\":\"iceman112\",\n\t\"loginPassword\":\"123456\",\n\t\"departmentId\":\"q12\",\n\t\"roleId\":\"23\",\n\t\"email\":\"112@iceman.com\",\n\t\"contactWay\":\"13611920055\"\n}",
+			"preRequestScript": "",
+			"tests": ""
 		},
 		{
-			"id": "4f3c7f1a-ba19-0ea0-741c-ab2ef906503e",
-			"headers": "Content-Type: application/json\n",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://localhost:8080/roleInfo/update",
-			"queryParams": [],
-			"pathVariables": {},
-			"pathVariableData": [],
-			"events": [],
-			"auth": null,
-			"method": "POST",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
-			"data": [],
-			"dataMode": "raw",
-			"name": "/roleInfo/update",
-			"description": "更新角色",
-			"descriptionFormat": "html",
-			"time": 1516636366152,
-			"version": 2,
-			"responses": [],
-			"folder": "c63ade58-c9ed-2ad8-e1c6-6d79462e5030",
-			"currentHelper": null,
-			"helperAttributes": null,
-			"rawModeData": "{\n\t\"roleId\":\"28425eafc45c4f7495a2d8dbd033201a\",\n\t\"roleName\":\"马术中心系统管理员\",\n\t\"shortName\":\"h_admin\",\n\t\"remark\":\"马术中心系统管理员\"\n}"
-		},
-		{
-			"id": "6bbc4245-9d37-cf7a-c603-bebb4f8f55ea",
+			"id": "19274168-c4cc-dc51-2106-7c81408c77cd",
 			"headers": "Content-Type: application/json\nsessionId: 123\n",
 			"headerData": [
 				{
@@ -214,7 +114,7 @@
 				}
 			],
 			"url": "http://localhost:8080/userInfo/delete",
-			"folder": "0255d2e5-5f51-c087-5a23-153b6508f8f1",
+			"folder": "b88066d2-d986-6059-f0fc-d0b408c7ff1e",
 			"queryParams": [],
 			"events": [],
 			"pathVariables": {},
@@ -227,53 +127,199 @@
 			"time": 1516637736152,
 			"name": "/userInfo/delete",
 			"description": "用户删除、停用",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
 			"responses": [],
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n\t\"userId\":\"0adf8673b7a7429a832981aee7b7a4d4\",\n\t\"deleteFlag\":0,\n\t\"status\":0\n}"
+			"rawModeData": "{\n\t\"userId\":\"0adf8673b7a7429a832981aee7b7a4d4\",\n\t\"deleteFlag\":0,\n\t\"status\":0\n}",
+			"preRequestScript": "",
+			"tests": ""
 		},
 		{
-			"id": "9876dc64-210a-8348-78fe-b11a2f7c8aff",
+			"id": "1c2bbb10-4844-953f-73e6-66713ad8ee29",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8282/equestrianismApi/departmentInfo/add",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1516773712779,
+			"name": "/departmentInfo/add",
+			"description": "新增部门",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"responses": [],
+			"rawModeData": "{\n\t\"departmentName\":\"行政部\",\n\t\"shortName\":\"OD\",\n\t\"remark\":\"行政部\"\n}"
+		},
+		{
+			"id": "1d6d1469-dd83-dbce-742c-da5f2169a273",
+			"headers": "",
+			"url": "http://localhost:8282/equestrianismApi/userInfo/detail?userId=1e8a48d655df488d9e737a3996ca3297",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": null,
+			"dataMode": "params",
+			"name": "/userInfo/detail",
+			"description": "用户详情",
+			"descriptionFormat": "html",
+			"time": 1516774746467,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "b88066d2-d986-6059-f0fc-d0b408c7ff1e"
+		},
+		{
+			"id": "2eb599be-f3c6-db6e-58ad-a538b2243a1b",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8282/equestrianismApi/departmentInfo/update",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": [],
+			"dataMode": "raw",
+			"name": "/departmentInfo/update",
+			"description": "部门修改",
+			"descriptionFormat": "html",
+			"time": 1516773477486,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "b65c5105-cb38-b3d3-74fe-00ed72bdfe56",
+			"rawModeData": "{\n\t\"departmentId\":\"70890d61136c486da1c4109c832f60e2\",\n\t\"departmentName\":\"人事部\",\n\t\"shortName\":\"OD\",\n\t\"remark\":\"人事部\"\n}"
+		},
+		{
+			"id": "3453da37-c139-e9d6-7ee6-c943efde2f15",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:8080/roleInfo/list?pageIndex=1&pageRecorders=1",
-			"queryParams": [
-				{
-					"key": "pageIndex",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "pageRecorders",
-					"value": "1",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
+			"url": "http://localhost:8080/roleInfo/comboBox",
+			"queryParams": [],
 			"pathVariables": {},
 			"pathVariableData": [],
 			"events": [],
 			"auth": null,
 			"method": "GET",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
 			"data": null,
 			"dataMode": "params",
-			"name": "/roleInfo/list",
-			"description": "角色列表",
+			"name": "/roleInfo/comboBox",
+			"description": "角色下拉框",
 			"descriptionFormat": "html",
-			"time": 1516637007963,
+			"time": 1516637541592,
 			"version": 2,
 			"responses": [],
-			"folder": "c63ade58-c9ed-2ad8-e1c6-6d79462e5030",
+			"folder": "c691b82b-e83e-e55f-b2a6-52c51930357f",
 			"currentHelper": null,
-			"helperAttributes": null
+			"helperAttributes": null,
+			"preRequestScript": "",
+			"tests": ""
 		},
 		{
-			"id": "a1c860b2-ebe7-ae74-0cb2-ba8dea6367a7",
+			"id": "429cf51a-a02d-40e7-a786-f3db94da7eec",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/roleInfo/update",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": [],
+			"dataMode": "raw",
+			"name": "/roleInfo/update",
+			"description": "更新角色",
+			"descriptionFormat": "html",
+			"time": 1516636366152,
+			"version": 2,
+			"responses": [],
+			"folder": "c691b82b-e83e-e55f-b2a6-52c51930357f",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"roleId\":\"28425eafc45c4f7495a2d8dbd033201a\",\n\t\"roleName\":\"马术中心系统管理员\",\n\t\"shortName\":\"h_admin\",\n\t\"remark\":\"马术中心系统管理员\"\n}",
+			"preRequestScript": "",
+			"tests": ""
+		},
+		{
+			"id": "46539732-2ad5-5aed-6bae-6469302d44e1",
+			"headers": "",
+			"url": "http://localhost:8282/equestrianismApi/departmentInfo/detail?departmentId=70890d61136c486da1c4109c832f60e2",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": null,
+			"dataMode": "params",
+			"name": "/departmentInfo/detail",
+			"description": "部门详情",
+			"descriptionFormat": "html",
+			"time": 1516775713056,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "b65c5105-cb38-b3d3-74fe-00ed72bdfe56"
+		},
+		{
+			"id": "50f9e55e-db21-4b0a-98eb-ad792d003894",
+			"headers": "Content-Type: application/json\nsessionId: 1234\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sessionId",
+					"value": "1234",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/roleInfo/delete",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": [],
+			"dataMode": "raw",
+			"name": "/roleInfo/delete",
+			"description": "删除角色",
+			"descriptionFormat": "html",
+			"time": 1516637963488,
+			"version": 2,
+			"responses": [],
+			"folder": "c691b82b-e83e-e55f-b2a6-52c51930357f",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"roleId\":\"18dbf827d2a34b07b0eb8dd30f27bfe8\",\n\t\"deleteFlag\":1,\n\t\"status\":0\n\t\n}",
+			"preRequestScript": "",
+			"tests": ""
+		},
+		{
+			"id": "66634ef4-b494-048f-6a3d-63dfde5f5326",
 			"headers": "Content-Type: application/json\nsessionId: 123\n",
 			"headerData": [
 				{
@@ -290,7 +336,7 @@
 				}
 			],
 			"url": "http://localhost:8080/userInfo/list?pageIndex=2&pageRecorders=1",
-			"folder": "0255d2e5-5f51-c087-5a23-153b6508f8f1",
+			"folder": "b88066d2-d986-6059-f0fc-d0b408c7ff1e",
 			"queryParams": [
 				{
 					"key": "pageIndex",
@@ -325,13 +371,119 @@
 			"time": 1516636988320,
 			"name": "/userInfo/list",
 			"description": "用户信息列表",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
 			"responses": [],
 			"currentHelper": null,
-			"helperAttributes": null
+			"helperAttributes": null,
+			"preRequestScript": "",
+			"tests": ""
 		},
 		{
-			"id": "b33ad0dc-9284-86db-01ba-e3fb4d073b3b",
+			"id": "7482b931-63e8-3258-b81e-95365212dad2",
+			"headers": "",
+			"url": "http://localhost:8282/equestrianismApi/departmentInfo/list?pageIndex=2&pageRecorders=1",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": null,
+			"dataMode": "params",
+			"name": "/departmentInfo/list",
+			"description": "部门列表",
+			"descriptionFormat": "html",
+			"time": 1516773780746,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "b65c5105-cb38-b3d3-74fe-00ed72bdfe56"
+		},
+		{
+			"id": "80bfbd91-f3c9-47f3-9572-bda8754ee857",
+			"headers": "Content-Type: application/json\nsessionId: 123\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "sessionId",
+					"value": "123",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/userInfo/add",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": [],
+			"dataMode": "raw",
+			"name": "/userInfo/add",
+			"description": "新增用户",
+			"descriptionFormat": "html",
+			"time": 1516481173103,
+			"version": 2,
+			"responses": [],
+			"isFromCollection": true,
+			"folder": "b88066d2-d986-6059-f0fc-d0b408c7ff1e",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"jobNumber\":\"111\",\n\t\"realname\":\"realname\",\n\t\"loginName\":\"jjjj\",\n\t\"loginPassword\":\"123\",\n\t\"departmentId\":\"q12\",\n\t\"roleId\":\"23\",\n\t\"email\":\"123\",\n\t\"contactWay\":\"123\"\n}",
+			"preRequestScript": "",
+			"tests": ""
+		},
+		{
+			"id": "a66e42ae-25f5-a784-3951-74098c1ae7b1",
+			"headers": "",
+			"url": "http://localhost:8282/equestrianismApi/roleInfo/detail?roleId=ac2a6eee23a648d3b7dde37f6cda7f24",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": null,
+			"dataMode": "params",
+			"name": "/roleInfo/detail",
+			"description": "角色详情",
+			"descriptionFormat": "html",
+			"time": 1516775286232,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "c691b82b-e83e-e55f-b2a6-52c51930357f"
+		},
+		{
+			"id": "ab2c69de-689c-883b-bd0f-48c6103caf37",
+			"headers": "",
+			"url": "http://localhost:8282/equestrianismApi/departmentInfo/comboBox",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": null,
+			"dataMode": "params",
+			"name": "/departmentInfo/comboBox",
+			"description": "部门列表下拉菜单",
+			"descriptionFormat": "html",
+			"time": 1516773819122,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "b65c5105-cb38-b3d3-74fe-00ed72bdfe56"
+		},
+		{
+			"id": "ba12d392-0788-58a7-deec-92f55d63ec25",
 			"headers": "Content-Type: application/json\nsessionId: 123\n",
 			"headerData": [
 				{
@@ -360,35 +512,77 @@
 			"time": 1516636369772,
 			"name": "/roleInfo/add",
 			"description": "新增角色",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
 			"responses": [],
 			"currentHelper": null,
 			"helperAttributes": null,
-			"rawModeData": "{\n\t\"roleName\":\"马医院系统管理员\",\n\t\"shortName\":\"admin_h\",\n\t\"remark\":\"马医院系统管理员\"\n}"
+			"rawModeData": "{\n\t\"roleName\":\"马医院系统管理员\",\n\t\"shortName\":\"admin_h\",\n\t\"remark\":\"马医院系统管理员\"\n}",
+			"preRequestScript": "",
+			"tests": "",
+			"folder": "c691b82b-e83e-e55f-b2a6-52c51930357f"
 		},
 		{
-			"id": "ec816bbb-5bf2-b656-f4ff-2361d03043f6",
+			"id": "c0a4ac89-18c8-ea83-ccd1-8c7586c4e7f5",
 			"headers": "",
 			"headerData": [],
-			"url": "http://localhost:8080/roleInfo/comboBox",
-			"queryParams": [],
+			"url": "http://localhost:8080/roleInfo/list?pageIndex=1&pageRecorders=1",
+			"queryParams": [
+				{
+					"key": "pageIndex",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "pageRecorders",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
 			"pathVariables": {},
 			"pathVariableData": [],
 			"events": [],
 			"auth": null,
 			"method": "GET",
-			"collectionId": "76601139-b415-80e5-a2ea-dddc1a3b72c6",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
 			"data": null,
 			"dataMode": "params",
-			"name": "/roleInfo/comboBox",
-			"description": "角色下拉框",
+			"name": "/roleInfo/list",
+			"description": "角色列表",
 			"descriptionFormat": "html",
-			"time": 1516637541592,
+			"time": 1516637007963,
 			"version": 2,
 			"responses": [],
-			"folder": "c63ade58-c9ed-2ad8-e1c6-6d79462e5030",
+			"folder": "c691b82b-e83e-e55f-b2a6-52c51930357f",
 			"currentHelper": null,
-			"helperAttributes": null
+			"helperAttributes": null,
+			"preRequestScript": "",
+			"tests": ""
+		},
+		{
+			"id": "c652b3b6-1ed5-e8c8-9c31-707e8f7dc299",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8282/equestrianismApi/departmentInfo/delete",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "944dbc3f-9b5d-599a-635a-ec96fa3aeb06",
+			"data": [],
+			"dataMode": "raw",
+			"name": "/departmentInfo/delete",
+			"description": "删除部门",
+			"descriptionFormat": "html",
+			"time": 1516773685074,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "b65c5105-cb38-b3d3-74fe-00ed72bdfe56",
+			"rawModeData": "{\n\t\"departmentId\":\"70890d61136c486da1c4109c832f60e2\",\n\t\"status\":1,\n\t\"deleteFlag\":0\n}"
 		}
 	]
 }
