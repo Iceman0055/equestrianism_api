@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -70,7 +71,7 @@ public class DepartmentInfoController extends BaseController {
 
     @RequestMapping( value = "/list", method = RequestMethod.GET )
     @ResponseBody
-    public Map<String, Object> list( DepartmentInfoListVO departmentInfoListVo ) {
+    public Map<String, Object> list( DepartmentInfoListVO departmentInfoListVo ) throws UnsupportedEncodingException {
         LOGGER.info( "【DepartmentInfoController】【list】inputs : " + departmentInfoListVo.toJsonString() );
         DepartmentInfoListBO response = departmentInfoService.departmentInfoList( departmentInfoListVo );
         LOGGER.info( "【DepartmentInfoController】【list】result : " + response.toJsonString() );

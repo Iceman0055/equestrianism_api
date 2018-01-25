@@ -3,6 +3,8 @@ package com.equestrianism.api.model.vo;
 import com.equestrianism.api.core.model.BasePageViewModel;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Iceman
  * 2018/1/24
@@ -17,8 +19,8 @@ public class DepartmentInfoListVO extends BasePageViewModel {
         return departmentName;
     }
 
-    public void setDepartmentName( String departmentName ) {
-        this.departmentName = departmentName;
+    public void setDepartmentName( String departmentName ) throws UnsupportedEncodingException {
+        this.departmentName = new String( departmentName.getBytes( "iso-8859-1" ), "utf-8" );
     }
 
     public Integer getStatus() {
