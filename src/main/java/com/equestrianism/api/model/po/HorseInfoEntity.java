@@ -3,14 +3,16 @@ package com.equestrianism.api.model.po;
 import com.equestrianism.api.core.model.BasePO;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by Chenzq on 2018/1/26.
  */
 public class HorseInfoEntity extends BasePO {
 
-    private String horseId;
+    private String horseId = UUID.randomUUID().toString().replace( "-", "" );
     private String passportNumber;
     private String horseName;
     private String usedName;
@@ -24,7 +26,7 @@ public class HorseInfoEntity extends BasePO {
 
     private String headDesc;
     private String leftForeDesc;
-    private String rigthForeDesc;
+    private String rightForeDesc;
     private String leftHindDesc;
     private String rightHindDesc;
     private String bodyDesc;
@@ -35,7 +37,68 @@ public class HorseInfoEntity extends BasePO {
     private byte[] foreImage;
     private byte[] hindImage;
     private byte[] neckImage;
-    private byte[] shoulderImage;
+    private byte[] lipImage;
+
+    public HorseInfoEntity() {
+    }
+
+    public HorseInfoEntity( String passportNumber, String horseName, String usedName, String country,
+                            Date changeDate, Date birthday, String height, String sex, String barCode, String coatColour,
+                            String headDesc, String leftForeDesc, String rightForeDesc, String leftHindDesc, String rightHindDesc,
+                            String bodyDesc, MultipartFile rightImage, MultipartFile leftImage, MultipartFile upperEyelinerImage,
+                            MultipartFile foreImage, MultipartFile hindImage, MultipartFile neckImage, MultipartFile lipImage ) throws IOException {
+        this.passportNumber = passportNumber;
+        this.horseName = horseName;
+        this.usedName = usedName;
+        this.country = country;
+        this.changeDate = changeDate;
+        this.birthday = birthday;
+        this.height = height;
+        this.sex = sex;
+        this.barCode = barCode;
+        this.coatColour = coatColour;
+        this.headDesc = headDesc;
+        this.leftForeDesc = leftForeDesc;
+        this.rightForeDesc = rightForeDesc;
+        this.leftHindDesc = leftHindDesc;
+        this.rightHindDesc = rightHindDesc;
+        this.bodyDesc = bodyDesc;
+        if ( rightImage != null ) {
+            this.rightImage = rightImage.getBytes();
+        } else {
+            this.rightImage = new byte[0];
+        }
+        if ( leftImage != null ) {
+            this.leftImage = leftImage.getBytes();
+        } else {
+            this.leftImage = new byte[0];
+        }
+        if ( upperEyelinerImage != null ) {
+            this.upperEyelinerImage = upperEyelinerImage.getBytes();
+        } else {
+            this.upperEyelinerImage = new byte[0];
+        }
+        if ( foreImage != null ) {
+            this.foreImage = foreImage.getBytes();
+        } else {
+            this.foreImage = new byte[0];
+        }
+        if ( hindImage != null ) {
+            this.hindImage = hindImage.getBytes();
+        } else {
+            this.hindImage = new byte[0];
+        }
+        if ( neckImage != null ) {
+            this.neckImage = neckImage.getBytes();
+        } else {
+            this.neckImage = new byte[0];
+        }
+        if ( lipImage != null ) {
+            this.lipImage = lipImage.getBytes();
+        } else {
+            this.lipImage = new byte[0];
+        }
+    }
 
     /** base **/
     public String getHorseId() {
@@ -143,14 +206,6 @@ public class HorseInfoEntity extends BasePO {
         this.leftForeDesc = leftForeDesc;
     }
 
-    public String getRigthForeDesc() {
-        return rigthForeDesc;
-    }
-
-    public void setRigthForeDesc(String rigthForeDesc) {
-        this.rigthForeDesc = rigthForeDesc;
-    }
-
     public String getLeftHindDesc() {
         return leftHindDesc;
     }
@@ -224,12 +279,19 @@ public class HorseInfoEntity extends BasePO {
         this.neckImage = neckImage;
     }
 
-    public byte[] getShoulderImage() {
-        return shoulderImage;
+    public String getRightForeDesc() {
+        return rightForeDesc;
     }
 
-    public void setShoulderImage(byte[] shoulderImage) {
-        this.shoulderImage = shoulderImage;
+    public void setRightForeDesc(String rightForeDesc) {
+        this.rightForeDesc = rightForeDesc;
     }
 
+    public byte[] getLipImage() {
+        return lipImage;
+    }
+
+    public void setLipImage(byte[] lipImage) {
+        this.lipImage = lipImage;
+    }
 }
