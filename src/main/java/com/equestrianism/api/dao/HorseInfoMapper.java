@@ -10,4 +10,6 @@ public interface HorseInfoMapper {
 
     Integer insert( HorseInfoEntity horseInfoEntity );
 
+    Integer updateBySelective( HorseInfoEntity horseInfoEntity );
+
 }

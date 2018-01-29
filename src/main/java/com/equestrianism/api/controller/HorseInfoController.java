@@ -1,8 +1,11 @@
 package com.equestrianism.api.controller;
 
+import com.equestrianism.api.controller.valid.HorseInfoValid;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.utils.ContainerUtils;
+import com.equestrianism.api.model.vo.RoleInfoUpdateVO;
 import com.equestrianism.api.model.vo.horse_info.HorseInfoAddVO;
+import com.equestrianism.api.model.vo.horse_info.HorseInfoUpdateVO;
 import com.equestrianism.api.service.HorseInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +37,7 @@ public class HorseInfoController extends BaseController {
         horseInfoAddVo.setAccessId( getAccessId() );
         LOGGER.info( "【HorseInfoController】【add】inputs : " + horseInfoAddVo.toJsonString() );
         try {
-            if ( horseInfoService.addHorseInfo(horseInfoAddVo) ) {
+            if ( horseInfoService.addHorseInfo( HorseInfoValid.horseInfoAddValid( horseInfoAddVo ) ) ) {
                 LOGGER.info( "【HorseInfoController】【add】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
@@ -42,6 +45,19 @@ public class HorseInfoController extends BaseController {
             LOGGER.error( "【HorseInfoController】【exception】", e );
         }
         LOGGER.info( "【HorseInfoController】【add】result : fail" );
+        return ContainerUtils.buildResFailMap();
+    }
+
+    @RequestMapping( value = "/update", method = RequestMethod.POST, produces = "application/json" )
+    @ResponseBody
+    public Map<String, Object> update( @RequestBody HorseInfoUpdateVO horseInfoUpdateVo ) {
+        horseInfoUpdateVo.setAccessId( getAccessId() );
+        LOGGER.info( "【HorseInfoController】【update】inputs : " + horseInfoUpdateVo.toJsonString() );
+        if ( horseInfoService.updateHorseInfo( HorseInfoValid.horseInfoUpdateValid( horseInfoUpdateVo ) ) ) {
+            LOGGER.info( "【HorseInfoController】【update】result : success" );
+            return ContainerUtils.buildResSuccessMap();
+        }
+        LOGGER.info( "【HorseInfoController】【update】result : fail" );
         return ContainerUtils.buildResFailMap();
     }
 

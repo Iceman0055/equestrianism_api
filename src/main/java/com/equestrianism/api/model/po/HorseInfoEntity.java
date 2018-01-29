@@ -18,7 +18,7 @@ public class HorseInfoEntity extends BasePO {
     private String usedName;
     private String country;
     private Date changeDate;
-    private Date birthday;
+    private String birthday;
     private String height;
     private String sex;
     private String barCode;
@@ -43,10 +43,21 @@ public class HorseInfoEntity extends BasePO {
     }
 
     public HorseInfoEntity( String passportNumber, String horseName, String usedName, String country,
-                            Date changeDate, Date birthday, String height, String sex, String barCode, String coatColour,
+                            Date changeDate, String birthday, String height, String sex, String barCode, String coatColour,
                             String headDesc, String leftForeDesc, String rightForeDesc, String leftHindDesc, String rightHindDesc,
                             String bodyDesc, MultipartFile rightImage, MultipartFile leftImage, MultipartFile upperEyelinerImage,
                             MultipartFile foreImage, MultipartFile hindImage, MultipartFile neckImage, MultipartFile lipImage ) throws IOException {
+        this ( UUID.randomUUID().toString().replace( "-", "" ), passportNumber, horseName, usedName, country, changeDate,
+                birthday, height, sex, barCode, coatColour, headDesc, leftForeDesc, rightForeDesc, leftHindDesc, rightHindDesc,
+                bodyDesc, rightImage, leftImage, upperEyelinerImage, foreImage, hindImage, neckImage, lipImage );
+    }
+
+    public HorseInfoEntity( String horseId, String passportNumber, String horseName, String usedName, String country,
+                            Date changeDate, String birthday, String height, String sex, String barCode, String coatColour,
+                            String headDesc, String leftForeDesc, String rightForeDesc, String leftHindDesc, String rightHindDesc,
+                            String bodyDesc, MultipartFile rightImage, MultipartFile leftImage, MultipartFile upperEyelinerImage,
+                            MultipartFile foreImage, MultipartFile hindImage, MultipartFile neckImage, MultipartFile lipImage ) throws IOException {
+        this.horseId = horseId;
         this.passportNumber = passportNumber;
         this.horseName = horseName;
         this.usedName = usedName;
@@ -149,11 +160,11 @@ public class HorseInfoEntity extends BasePO {
         this.changeDate = changeDate;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

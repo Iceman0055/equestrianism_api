@@ -12,7 +12,7 @@
         <result column="used_name" property="usedName" jdbcType="VARCHAR"/>
         <result column="country" property="country" jdbcType="VARCHAR"/>
         <result column="change_date" property="changeDate" jdbcType="TIMESTAMP"/>
-        <result column="birthday" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="birthday" property="birthday" jdbcType="VARCHAR"/>
         <result column="height" property="height" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="VARCHAR"/>
         <result column="bar_code" property="barCode" jdbcType="VARCHAR"/>
@@ -21,9 +21,15 @@
         <result column="left_fore_desc" property="leftForeDesc" jdbcType="VARCHAR"/>
         <result column="right_fore_desc" property="rightForeDesc" jdbcType="VARCHAR"/>
         <result column="left_hind_desc" property="leftHindDesc" jdbcType="VARCHAR"/>
-
-
-
+        <result column="right_hind_desc" property="rightHindDesc" jdbcType="VARCHAR"/>
+        <result column="body_desc" property="bodyDesc" jdbcType="VARCHAR"/>
+        <result column="right_image" property="rightImage" jdbcType="BLOB"/>
+        <result column="left_image" property="leftImage" jdbcType="BLOB"/>
+        <result column="upper_eyeliner_image" property="upperEyelinerImage" jdbcType="BLOB"/>
+        <result column="fore_image" property="foreImage" jdbcType="BLOB"/>
+        <result column="hind_image" property="hindImage" jdbcType="BLOB"/>
+        <result column="neck_image" property="neckImage" jdbcType="BLOB"/>
+        <result column="lip_image" property="lipImage" jdbcType="BLOB"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
         <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
@@ -33,26 +39,69 @@
 
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        department_id, department_name, short_name, remark, status, delete_flag, data_version, create_date, update_date
+        horse_id, passport_number, horse_name, used_name, country, change_date, birthday, height, sex, bar_code,
+        coat_colour, head_desc, left_fore_desc, right_fore_desc, left_hind_desc, right_fore_desc, body_desc,
+        right_image, left_image, upper_eyeliner_image, fore_image, hind_image, neck_image, lip_image, status,
+        delete_flag, data_version, create_date, update_date
     </sql>
 
 
-    <insert id="insert" parameterType="com.equestrianism.api.model.po.UserInfoEntity">
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.HorseInfoEntity">
         INSERT INTO
-            department_info (
-                department_id,
-                department_name,
-                short_name,
-                remark,
+            horse_info (
+                horse_id,
+                passport_number,
+                horse_name,
+                used_name,
+                country,
+                change_date,
+                birthday,
+                height,
+                sex,
+                bar_code,
+                coat_colour,
+                head_desc,
+                left_fore_desc,
+                right_fore_desc,
+                left_hind_desc,
+                right_hind_desc,
+                body_desc,
+                right_image,
+                left_image,
+                upper_eyeliner_image,
+                fore_image,
+                hind_image,
+                neck_image,
+                lip_image,
                 status,
                 delete_flag,
                 data_version,
                 create_date
             ) VALUES (
-                #{departmentId, jdbcType=VARCHAR},
-                #{departmentName, jdbcType=VARCHAR},
-                #{shortName, jdbcType=VARCHAR},
-                #{remark, jdbcType=VARCHAR},
+                #{horseId, jdbcType=VARCHAR},
+                #{passportNumber, jdbcType=VARCHAR},
+                #{horseName, jdbcType=VARCHAR},
+                #{usedName, jdbcType=VARCHAR},
+                #{country, jdbcType=VARCHAR},
+                #{changeDate, jdbcType=TIMESTAMP},
+                #{birthday, jdbcType=VARCHAR},
+                #{height, jdbcType=VARCHAR},
+                #{sex, jdbcType=VARCHAR},
+                #{barCode, jdbcType=VARCHAR},
+                #{coatColour, jdbcType=VARCHAR},
+                #{headDesc, jdbcType=VARCHAR},
+                #{leftForeDesc, jdbcType=VARCHAR},
+                #{rightForeDesc, jdbcType=VARCHAR},
+                #{leftHindDesc, jdbcType=VARCHAR},
+                #{rightHindDesc, jdbcType=VARCHAR},
+                #{bodyDesc, jdbcType=VARCHAR},
+                #{rightImage, jdbcType=BLOB},
+                #{leftImage, jdbcType=BLOB},
+                #{upperEyelinerImage, jdbcType=BLOB},
+                #{foreImage, jdbcType=BLOB},
+                #{hindImage, jdbcType=BLOB},
+                #{neckImage, jdbcType=BLOB},
+                #{lipImage, jdbcType=BLOB},
                 1,
                 0,
                 1,
@@ -61,29 +110,90 @@
 
     </insert>
 
-    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.RoleInfoEntity">
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.HorseInfoEntity">
         UPDATE
-            department_info
+            horse_info
         <set>
-            <if test="departmentName != null and departmentName != ''">
-                department_name = #{departmentName, jdbcType=VARCHAR},
+            <if test="passportNumber != null and passportNumber != ''">
+                passport_number = #{passportNumber, jdbcType=VARCHAR},
             </if>
-            <if test="shortName != null and shortName != ''">
-                short_name = #{shortName, jdbcType=VARCHAR},
+            <if test="horseName != null and horseName != ''">
+                horse_name = #{horseName, jdbcType=VARCHAR},
             </if>
-            <if test="remark != null and remark != ''">
-                remark = #{remark, jdbcType=VARCHAR},
+            <if test="usedName != null and usedName != ''">
+                used_name = #{usedName, jdbcType=VARCHAR},
+            </if>
+            <if test="country != null and country != ''">
+                country = #{country, jdbcType=VARCHAR},
+            </if>
+            <if test="changeDate != null">
+                change_date = #{changeDate, jdbcType=TIMESTAMP},
+            </if>
+            <if test="birthday != null and birthday != ''">
+                birthday = #{birthday, jdbcType=VARCHAR},
+            </if>
+            <if test="height != null and height != ''">
+                height = #{height, jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex, jdbcType=VARCHAR},
+            </if>
+            <if test="barCode != null and barCode != ''">
+                bar_code = #{barCode, jdbcType=VARCHAR},
+            </if>
+            <if test="coatColour != null and coatColour != ''">
+                coat_colour = #{coatColour, jdbcType=VARCHAR},
+            </if>
+            <if test="headDesc != null and headDesc != ''">
+                head_desc = #{headDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="leftForeDesc != null and leftForeDesc != ''">
+                left_fore_desc = #{leftForeDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="rightForeDesc != null and rightForeDesc != ''">
+                right_fore_desc = #{rightForeDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="leftHindDesc != null and leftHindDesc != ''">
+                left_hind_desc = #{leftHindDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="rightHindDesc != null and rightHindDesc != ''">
+                right_hind_desc = #{rightHindDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="bodyDesc != null and bodyDesc != ''">
+                body_desc = #{bodyDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="rightImage != null and rightImage != ''">
+                right_image = #{rightImage, jdbcType=BLOB},
+            </if>
+            <if test="leftImage != null and leftImage != ''">
+                left_image = #{leftImage, jdbcType=BLOB},
+            </if>
+            <if test="upperEyelinerImage != null and upperEyelinerImage != ''">
+                upper_eyeliner_image = #{upperEyelinerImage, jdbcType=BLOB},
+            </if>
+            <if test="foreImage != null and foreImage != ''">
+                fore_image = #{foreImage, jdbcType=BLOB},
+            </if>
+            <if test="hindImage != null and hindImage != ''">
+                hind_image = #{hindImage, jdbcType=BLOB},
+            </if>
+            <if test="neckImage != null and neckImage != ''">
+                neck_image = #{neckImage, jdbcType=BLOB},
+            </if>
+            <if test="lipImage != null and lipImage != ''">
+                lip_image = #{lipImage, jdbcType=BLOB},
             </if>
             <if test="status != null">
                 status = #{status, jdbcType=INTEGER},
             </if>
             <if test="deleteFlag != null">
-                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+                delete_flag = #{deleteFlag, jdbcType=INTEGER},
             </if>
         </set>
         WHERE
-            department_id = #{departmentId, jdbcType=VARCHAR}
+            horse_id = #{horseId, jdbcType=VARCHAR}
     </update>
+
     <select id="selectDepartmentListByPage" parameterType="com.equestrianism.api.model.vo.DepartmentInfoListVO" resultType="com.equestrianism.api.model.model.DepartmentInfoListModel">
         SELECT
             department_id     departmentId,

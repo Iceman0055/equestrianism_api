@@ -17,7 +17,7 @@ public class HorseInfoAddVO extends BaseViewModel {
     private String usedName;
     private String country;
     private Date changeDate;
-    private Date birthday;
+    private String birthday;
     private String height;
     private String sex;
     private String barCode;
@@ -78,11 +78,11 @@ public class HorseInfoAddVO extends BaseViewModel {
         this.changeDate = changeDate;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday( String birthday) {
         this.birthday = birthday;
     }
 
