@@ -24,7 +24,7 @@ public class HorseInfoEntity extends BasePO {
 
     private String headDesc;
     private String leftForeDesc;
-    private String rigthForeDesc;
+    private String rightForeDesc;
     private String leftHindDesc;
     private String rightHindDesc;
     private String bodyDesc;
@@ -35,7 +35,7 @@ public class HorseInfoEntity extends BasePO {
     private byte[] foreImage;
     private byte[] hindImage;
     private byte[] neckImage;
-    private byte[] shoulderImage;
+    private byte[] lipImage;
 
     /** base **/
     public String getHorseId() {
@@ -143,14 +143,6 @@ public class HorseInfoEntity extends BasePO {
         this.leftForeDesc = leftForeDesc;
     }
 
-    public String getRigthForeDesc() {
-        return rigthForeDesc;
-    }
-
-    public void setRigthForeDesc(String rigthForeDesc) {
-        this.rigthForeDesc = rigthForeDesc;
-    }
-
     public String getLeftHindDesc() {
         return leftHindDesc;
     }
@@ -224,12 +216,19 @@ public class HorseInfoEntity extends BasePO {
         this.neckImage = neckImage;
     }
 
-    public byte[] getShoulderImage() {
-        return shoulderImage;
+    public String getRightForeDesc() {
+        return rightForeDesc;
     }
 
-    public void setShoulderImage(byte[] shoulderImage) {
-        this.shoulderImage = shoulderImage;
+    public void setRightForeDesc( String rightForeDesc ) {
+        this.rightForeDesc = rightForeDesc;
     }
 
+    public byte[] getLipImage() {
+        return lipImage;
+    }
+
+    public void setLipImage( byte[] lipImage ) {
+        this.lipImage = lipImage;
+    }
 }

@@ -56,5 +56,38 @@ CREATE TABLE `department_info` (
   PRIMARY KEY (`department_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门信息表';
 
+CREATE TABLE `horse_info` (
+  `horse_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `passport_number` varchar(4) NOT NULL COMMENT '护照卡号',
+  `horse_name` varchar(16) NOT NULL COMMENT '姓名',
+  `used_name` varchar(16) NOT NULL COMMENT '变更马名',
+  `country` varchar(16) NOT NULL COMMENT '国籍',
+  `change_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '变更日期',
+  `birthday` datetime NOT NULL COMMENT '出生日期',
+  `height` varchar(8) NOT NULL COMMENT '身高',
+  `sex` varchar(32) NOT NULL COMMENT '性别',
+  `bar_code` varchar(16) NOT NULL COMMENT '皮下微型条码',
+  `coat_colour` varchar(8) NOT NULL COMMENT '毛色',
+  `head_desc` varchar(32) NOT NULL COMMENT '头部描述',
+  `left_fore_desc` varchar(32) NOT NULL COMMENT '左前肢描述',
+  `right_fore_desc` varchar(32) NOT NULL COMMENT '右前肢描述',
+  `left_hind_desc` varchar(32) NOT NULL COMMENT '左后肢描述',
+  `right_hind_desc` varchar(32) NOT NULL COMMENT '右后肢描述',
+  `body_desc` varchar(32) NOT NULL COMMENT '体驱描述',
+  `right_image` blob NOT NULL COMMENT '右侧图片',
+  `left_image` blob NOT NULL COMMENT '左侧图片',
+  `upper_eyeliner_image` blob NOT NULL COMMENT '上眼线图片',
+  `fore_image` blob NOT NULL COMMENT '前肢图片',
+  `hind_image` blob NOT NULL COMMENT '后肢描述',
+  `neck_image` blob NOT NULL COMMENT '颈部图片',
+  `lip_image` blob NOT NULL COMMENT '唇部图片',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：0-未删除 1-已删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`horse_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='马匹基本信息表';
+
 
 
