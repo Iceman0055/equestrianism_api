@@ -42,6 +42,10 @@ public class HorseInfoEntity extends BasePO {
     public HorseInfoEntity() {
     }
 
+    public HorseInfoEntity( String horseId ) {
+        this.horseId = horseId;
+    }
+
     public HorseInfoEntity( String passportNumber, String horseName, String usedName, String country,
                             Date changeDate, String birthday, String height, String sex, String barCode, String coatColour,
                             String headDesc, String leftForeDesc, String rightForeDesc, String leftHindDesc, String rightHindDesc,

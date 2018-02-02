@@ -194,7 +194,7 @@
             horse_id = #{horseId, jdbcType=VARCHAR}
     </update>
 
-    <select id="selectDepartmentListByPage" parameterType="com.equestrianism.api.model.vo.DepartmentInfoListVO" resultType="com.equestrianism.api.model.model.DepartmentInfoListModel">
+    <select id="selectHorseListByPage" parameterType="com.equestrianism.api.model.vo.horse_info.HorseInfoListVO" resultType="com.equestrianism.api.model.model.HorseInfoListModel">
         SELECT
             department_id     departmentId,
             department_name   departmentName,
