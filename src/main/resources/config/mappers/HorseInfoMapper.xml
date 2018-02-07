@@ -11,7 +11,7 @@
         <result column="horse_name" property="horseName" jdbcType="VARCHAR"/>
         <result column="used_name" property="usedName" jdbcType="VARCHAR"/>
         <result column="country" property="country" jdbcType="VARCHAR"/>
-        <result column="change_date" property="changeDate" jdbcType="TIMESTAMP"/>
+        <result column="change_date" property="changeDate" jdbcType="VARCHAR"/>
         <result column="birthday" property="birthday" jdbcType="VARCHAR"/>
         <result column="height" property="height" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="VARCHAR"/>
@@ -83,7 +83,7 @@
                 #{horseName, jdbcType=VARCHAR},
                 #{usedName, jdbcType=VARCHAR},
                 #{country, jdbcType=VARCHAR},
-                #{changeDate, jdbcType=TIMESTAMP},
+                #{changeDate, jdbcType=VARCHAR},
                 #{birthday, jdbcType=VARCHAR},
                 #{height, jdbcType=VARCHAR},
                 #{sex, jdbcType=VARCHAR},
@@ -127,7 +127,7 @@
                 country = #{country, jdbcType=VARCHAR},
             </if>
             <if test="changeDate != null">
-                change_date = #{changeDate, jdbcType=TIMESTAMP},
+                change_date = #{changeDate, jdbcType=VARCHAR},
             </if>
             <if test="birthday != null and birthday != ''">
                 birthday = #{birthday, jdbcType=VARCHAR},
@@ -196,68 +196,49 @@
 
     <select id="selectHorseListByPage" parameterType="com.equestrianism.api.model.vo.horse_info.HorseInfoListVO" resultType="com.equestrianism.api.model.model.HorseInfoListModel">
         SELECT
-            department_id     departmentId,
-            department_name   departmentName,
-            short_name        shortName,
-            remark            remark,
+            horse_id          horseId,
+            passport_number   passportNumber,
+            horse_name        horseName,
+            sex               sex,
+            used_name         usedName,
+            change_date       changeDate,
+            birthday          birthday,
+            country           country,
+            height            height,
+            coat_colour       coatColour,
+            bar_code          barCode,
             status            status
         FROM
-            department_info
+            horse_info
         WHERE
             delete_flag = 0
-        <if test="status != null">
+        <if test="passportNumber != null and passportNumber != ''">
             AND
-                status = #{status, jdbcType=INTEGER}
+                passport_number like CONCAT('%',#{passportNumber, jdbcType=VARCHAR},'%')
         </if>
-        <if test="departmentName != null and departmentName != ''">
+        <if test="horseName != null and horseName != ''">
             AND
-                department_name like CONCAT('%',#{departmentName, jdbcType=VARCHAR},'%')
+                horse_name like CONCAT('%', #{horseName, jdbcType=VARCHAR}, '%')
         </if>
         limit #{beginIndex}, #{pageRecorders}
     </select>
 
-    <select id="countDepartmentListByPage" parameterType="com.equestrianism.api.model.vo.RoleInfoListVO" resultType="java.lang.Integer">
+    <select id="countHorseListByPage" parameterType="com.equestrianism.api.model.vo.horse_info.HorseInfoListVO" resultType="java.lang.Integer">
         SELECT
             IFNULL( count(1), 0 )
         FROM
-            department_info
+            horse_info
         WHERE
             delete_flag = 0
-        <if test="status != null">
+        <if test="passportNumber != null and passportNumber != ''">
             AND
-            status = #{status, jdbcType=INTEGER}
+            passport_number like CONCAT('%',#{passportNumber, jdbcType=VARCHAR},'%')
         </if>
-        <if test="departmentName != null and departmentName != ''">
+        <if test="horseName != null and horseName != ''">
             AND
-            department_name like CONCAT('%',#{departmentName, jdbcType=VARCHAR},'%')
+            horse_name like CONCAT('%', #{horseName, jdbcType=VARCHAR}, '%')
         </if>
     </select>
 
-    <select id="selectDepartmentListByComboBox" resultType="com.equestrianism.api.model.model.DepartmentInfoComboBoxModel">
-        SELECT
-            department_id     departmentId,
-            department_name   departmentName
-        FROM
-            department_info
-        WHERE
-            delete_flag = 0
-        AND
-            status = 1
-        ORDER BY
-            create_date
-    </select>
-
-    <select id="selectDepartmentByDepartmentId" parameterType="java.lang.String" resultType="com.equestrianism.api.model.bo.DepartmentInfoDetailBO">
-        SELECT
-            department_id       departmentId,
-            department_name     departmentName,
-            short_name          shortName,
-            status              status,
-            remark              remark
-        FROM
-            department_info
-        WHERE
-            department_id = #{departmentId, jdbcType=VARCHAR}
-    </select>
 
 </mapper>

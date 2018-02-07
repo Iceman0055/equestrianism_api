@@ -1,6 +1,7 @@
 package com.equestrianism.api.controller;
 
 import com.equestrianism.api.core.container.BaseController;
+import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
@@ -31,9 +32,14 @@ public class UserInfoController extends BaseController {
     public Map< String, Object > add( @RequestBody UserInfoAddVO userInfoAddVo ) {
         userInfoAddVo.setAccessId( getAccessId() );
         LOGGER.info( "【UserInfoController】【add】inputs : " + userInfoAddVo.toJsonString() );
-        if ( userInfoService.addUserInfo( userInfoAddVo ) ) {
-            LOGGER.info( "【UserInfoController】【add】result : success" );
-            return ContainerUtils.buildResSuccessMap();
+        try {
+            if ( userInfoService.addUserInfo( userInfoAddVo ) ) {
+                LOGGER.info( "【UserInfoController】【add】result : success" );
+                return ContainerUtils.buildResSuccessMap();
+            }
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【add】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
         }
         LOGGER.info( "【UserInfoController】【add】result : fail" );
         return ContainerUtils.buildResFailMap( "操作失败" );
@@ -44,9 +50,14 @@ public class UserInfoController extends BaseController {
     public Map< String, Object > update( @RequestBody UserInfoUpdateVO userInfoUpdateVo ) {
         userInfoUpdateVo.setAccessId( getAccessId() );
         LOGGER.info( "【UserInfoController】【update】inputs : " + userInfoUpdateVo.toJsonString() );
-        if ( userInfoService.updateUserInfo( userInfoUpdateVo ) ) {
-            LOGGER.info( "【UserInfoController】【update】result : success" );
-            return ContainerUtils.buildResSuccessMap();
+        try {
+            if ( userInfoService.updateUserInfo( userInfoUpdateVo ) ) {
+                LOGGER.info( "【UserInfoController】【update】result : success" );
+                return ContainerUtils.buildResSuccessMap();
+            }
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【update】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
         }
         LOGGER.info( "【UserInfoController】【update】result : fail" );
         return ContainerUtils.buildResFailMap( "操作失败" );
@@ -56,9 +67,14 @@ public class UserInfoController extends BaseController {
     @ResponseBody
     public Map< String, Object > delete( @RequestBody UserInfoDeleteVO userInfoDeleteVo ) {
         LOGGER.info( "【UserInfoController】【delete】inputs : " + userInfoDeleteVo.toJsonString() );
-        if ( userInfoService.removeUserInfo( userInfoDeleteVo ) ) {
-            LOGGER.info( "【UserInfoController】【delete】result : success" );
-            return ContainerUtils.buildResSuccessMap();
+        try {
+            if ( userInfoService.removeUserInfo( userInfoDeleteVo ) ) {
+                LOGGER.info( "【UserInfoController】【delete】result : success" );
+                return ContainerUtils.buildResSuccessMap();
+            }
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【delete】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
         }
         LOGGER.info( "【UserInfoController】【delete】result : fail" );
         return ContainerUtils.buildResFailMap( "操作失败" );
@@ -68,18 +84,28 @@ public class UserInfoController extends BaseController {
     @ResponseBody
     public Map<String, Object> list( UserInfoListVO userInfoListVo ) {
         LOGGER.info( "【UserInfoController】【list】inputs : " + userInfoListVo.toJsonString() );
-        UserInfoListBO response = userInfoService.userInfoList( userInfoListVo );
-        LOGGER.info( "【UserInfoController】【list】result : " + response.toJsonString() );
-        return ContainerUtils.buildResSuccessMap( response );
+        try {
+            UserInfoListBO response = userInfoService.userInfoList( userInfoListVo );
+            LOGGER.info( "【UserInfoController】【list】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【list】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
     }
 
     @RequestMapping( value = "/detail", method = RequestMethod.GET )
     @ResponseBody
     public Map<String, Object> detail( UserInfoDetailVO userInfoDetailVo ) {
         LOGGER.info( "【UserInfoController】【detail】inputs : " + userInfoDetailVo.toJsonString() );
-        UserInfoDetailBO response = userInfoService.userDetail( userInfoDetailVo );
-        LOGGER.info( "【UserInfoController】【detail】result : " + response.toJsonString() );
-        return ContainerUtils.buildResSuccessMap( response );
+        try {
+            UserInfoDetailBO response = userInfoService.userDetail( userInfoDetailVo );
+            LOGGER.info( "【UserInfoController】【detail】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【detail】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
     }
 
 }

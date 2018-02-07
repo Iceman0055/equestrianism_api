@@ -1,5 +1,6 @@
 package com.equestrianism.api.service;
 
+import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
 import com.equestrianism.api.model.bo.RoleInfoDetailBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
@@ -10,16 +11,16 @@ import com.equestrianism.api.model.vo.*;
  */
 public interface RoleInfoService {
 
-    Boolean addRoleInfo(RoleInfoAddVO roleInfoAddVo);
+    Boolean addRoleInfo(RoleInfoAddVO roleInfoAddVo) throws BaseException;
 
-    Boolean updateRoleInfo( RoleInfoUpdateVO roleInfoUpdateVo );
+    Boolean updateRoleInfo( RoleInfoUpdateVO roleInfoUpdateVo ) throws BaseException;
 
-    Boolean removeRoleInfo( RoleInfoDeleteVO roleInfoDeleteVo );
+    Boolean removeRoleInfo( RoleInfoDeleteVO roleInfoDeleteVo ) throws BaseException;
 
-    RoleInfoListBO roleInfoList( RoleInfoListVO roleInfoListVo );
+    RoleInfoListBO roleInfoList( RoleInfoListVO roleInfoListVo ) throws BaseException;
 
-    RoleInfoComboBoxBO comboBox();
+    RoleInfoComboBoxBO comboBox() throws BaseException;
 
-    RoleInfoDetailBO roleDetail( RoleInfoDetailVO roleInfoDetailVo );
+    RoleInfoDetailBO roleDetail( RoleInfoDetailVO roleInfoDetailVo ) throws BaseException;
 
 }

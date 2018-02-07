@@ -13,9 +13,9 @@ public class BasePageViewModel extends BaseViewModel {
     private Integer beginIndex;
 
     public BasePageViewModel() {
-        this.pageIndex = 1;
-        this.pageRecorders = 10;
-        this.beginIndex = 0;
+//        this.pageIndex = 1;
+//        this.pageRecorders = 10;
+//        this.beginIndex = 0;
     }
 
     public BasePageViewModel( Integer pageIndex, Integer pageRecorders ) {

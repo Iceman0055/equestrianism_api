@@ -1,5 +1,6 @@
 package com.equestrianism.api.service;
 
+import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.model.bo.DepartmentInfoComboBoxBO;
 import com.equestrianism.api.model.bo.DepartmentInfoDetailBO;
 import com.equestrianism.api.model.bo.DepartmentInfoListBO;
@@ -11,16 +12,16 @@ import com.equestrianism.api.model.vo.*;
  */
 public interface DepartmentInfoService {
 
-    Boolean addDepartmentInfo( DepartmentInfoAddVO departmentInfoAddVo );
+    Boolean addDepartmentInfo( DepartmentInfoAddVO departmentInfoAddVo ) throws BaseException;
 
-    Boolean updateDepartmentInfo( DepartmentInfoUpdateVO departmentInfoUpdateVo );
+    Boolean updateDepartmentInfo( DepartmentInfoUpdateVO departmentInfoUpdateVo ) throws BaseException;
 
-    Boolean removeDepartmentInfo( DepartmentInfoDeleteVO departmentInfoDeleteVo );
+    Boolean removeDepartmentInfo( DepartmentInfoDeleteVO departmentInfoDeleteVo ) throws BaseException;
 
-    DepartmentInfoListBO departmentInfoList( DepartmentInfoListVO departmentInfoListVo );
+    DepartmentInfoListBO departmentInfoList( DepartmentInfoListVO departmentInfoListVo ) throws BaseException;
 
-    DepartmentInfoComboBoxBO comboBox();
+    DepartmentInfoComboBoxBO comboBox() throws BaseException;
 
-    DepartmentInfoDetailBO departmentDetail( DepartmentInfoDetailVO departmentInfoDetailVo );
+    DepartmentInfoDetailBO departmentDetail( DepartmentInfoDetailVO departmentInfoDetailVo ) throws BaseException;
 
 }

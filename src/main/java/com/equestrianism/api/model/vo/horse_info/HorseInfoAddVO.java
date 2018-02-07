@@ -16,7 +16,7 @@ public class HorseInfoAddVO extends BaseViewModel {
     private String horseName;
     private String usedName;
     private String country;
-    private Date changeDate;
+    private String changeDate;
     private String birthday;
     private String height;
     private String sex;
@@ -70,11 +70,11 @@ public class HorseInfoAddVO extends BaseViewModel {
         this.country = country;
     }
 
-    public Date getChangeDate() {
+    public String getChangeDate() {
         return changeDate;
     }
 
-    public void setChangeDate(Date changeDate) {
+    public void setChangeDate(String changeDate) {
         this.changeDate = changeDate;
     }
 

@@ -2,6 +2,7 @@ package com.equestrianism.api.controller;
 
 import com.equestrianism.api.controller.valid.HorseInfoValid;
 import com.equestrianism.api.core.container.BaseController;
+import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.HorseInfoListBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
@@ -17,10 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Map;
@@ -37,35 +35,37 @@ public class HorseInfoController extends BaseController {
     @Autowired
     private HorseInfoService horseInfoService;
 
-    @RequestMapping( value = "/add", method = RequestMethod.POST, produces = "multipart/form-data" )
+    @RequestMapping( value = "/add", method = RequestMethod.POST )
     @ResponseBody
-    public Map<String, Object> add( @RequestBody HorseInfoAddVO horseInfoAddVo ) {
+    public Map<String, Object> add( HorseInfoAddVO horseInfoAddVo ) {
         horseInfoAddVo.setAccessId( getAccessId() );
-        LOGGER.info( "【HorseInfoController】【add】inputs : " + horseInfoAddVo.toJsonString() );
+        LOGGER.info( "【HorseInfoController】【add】begin" );
         try {
             if ( horseInfoService.addHorseInfo( HorseInfoValid.horseInfoAddValid( horseInfoAddVo ) ) ) {
                 LOGGER.info( "【HorseInfoController】【add】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
-        } catch (IOException e) {
+        } catch ( BaseException e ) {
             LOGGER.error( "【HorseInfoController】【add】【exception】", e );
+            return ContainerUtils.buildResFailMap();
         }
         LOGGER.info( "【HorseInfoController】【add】result : fail" );
         return ContainerUtils.buildResFailMap();
     }
 
-    @RequestMapping( value = "/update", method = RequestMethod.POST, produces = "application/json" )
+    @RequestMapping( value = "/update", method = RequestMethod.POST )
     @ResponseBody
-    public Map<String, Object> update( @RequestBody HorseInfoUpdateVO horseInfoUpdateVo ) {
+    public Map<String, Object> update( HorseInfoUpdateVO horseInfoUpdateVo ) {
         horseInfoUpdateVo.setAccessId( getAccessId() );
-        LOGGER.info( "【HorseInfoController】【update】inputs : " + horseInfoUpdateVo.toJsonString() );
+        LOGGER.info( "【HorseInfoController】【update】begin" );
         try {
             if ( horseInfoService.updateHorseInfo( HorseInfoValid.horseInfoUpdateValid( horseInfoUpdateVo ) ) ) {
                 LOGGER.info( "【HorseInfoController】【update】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
-        } catch ( IOException e ) {
+        } catch ( BaseException e ) {
             LOGGER.error( "【HorseInfoController】【update】【exception】", e );
+            return ContainerUtils.buildResFailMap();
         }
         LOGGER.info( "【HorseInfoController】【update】result : fail" );
         return ContainerUtils.buildResFailMap();
@@ -75,9 +75,14 @@ public class HorseInfoController extends BaseController {
     @ResponseBody
     public Map<String, Object> delete( @RequestBody HorseInfoDeleteVO horseInfoDeleteVo ) {
         LOGGER.info( "【HorseInfoController】【delete】inputs : " + horseInfoDeleteVo.toJsonString() );
-        if ( horseInfoService.removeHorseInfo( horseInfoDeleteVo ) ) {
-            LOGGER.info( "【HorseInfoController】【delete】result : success" );
-            return ContainerUtils.buildResSuccessMap();
+        try {
+            if ( horseInfoService.removeHorseInfo( horseInfoDeleteVo ) ) {
+                LOGGER.info( "【HorseInfoController】【delete】result : success" );
+                return ContainerUtils.buildResSuccessMap();
+            }
+        } catch ( BaseException e ) {
+            LOGGER.error( "【HorseInfoController】【delete】【exception】", e );
+            return ContainerUtils.buildResFailMap();
         }
         LOGGER.info( "【HorseInfoController】【delete】result : fail" );
         return ContainerUtils.buildResFailMap();
@@ -87,9 +92,14 @@ public class HorseInfoController extends BaseController {
     @ResponseBody
     public Map<String, Object> list( HorseInfoListVO horseInfoListVo ) {
         LOGGER.info( "【HorseInfoController】【list】inputs : " + horseInfoListVo.toJsonString() );
-        HorseInfoListBO response = horseInfoService.horseInfoList( horseInfoListVo );
-        LOGGER.info( "【HorseInfoController】【list】result : " + response.toJsonString() );
-        return ContainerUtils.buildResSuccessMap( response );
+        try {
+            HorseInfoListBO response = horseInfoService.horseInfoList( horseInfoListVo );
+            LOGGER.info( "【HorseInfoController】【list】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【HorseInfoController】【list】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
     }
 
 }

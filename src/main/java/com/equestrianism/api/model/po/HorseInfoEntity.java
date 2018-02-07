@@ -17,7 +17,7 @@ public class HorseInfoEntity extends BasePO {
     private String horseName;
     private String usedName;
     private String country;
-    private Date changeDate;
+    private String changeDate;
     private String birthday;
     private String height;
     private String sex;
@@ -47,7 +47,7 @@ public class HorseInfoEntity extends BasePO {
     }
 
     public HorseInfoEntity( String passportNumber, String horseName, String usedName, String country,
-                            Date changeDate, String birthday, String height, String sex, String barCode, String coatColour,
+                            String changeDate, String birthday, String height, String sex, String barCode, String coatColour,
                             String headDesc, String leftForeDesc, String rightForeDesc, String leftHindDesc, String rightHindDesc,
                             String bodyDesc, MultipartFile rightImage, MultipartFile leftImage, MultipartFile upperEyelinerImage,
                             MultipartFile foreImage, MultipartFile hindImage, MultipartFile neckImage, MultipartFile lipImage ) throws IOException {
@@ -57,7 +57,7 @@ public class HorseInfoEntity extends BasePO {
     }
 
     public HorseInfoEntity( String horseId, String passportNumber, String horseName, String usedName, String country,
-                            Date changeDate, String birthday, String height, String sex, String barCode, String coatColour,
+                            String changeDate, String birthday, String height, String sex, String barCode, String coatColour,
                             String headDesc, String leftForeDesc, String rightForeDesc, String leftHindDesc, String rightHindDesc,
                             String bodyDesc, MultipartFile rightImage, MultipartFile leftImage, MultipartFile upperEyelinerImage,
                             MultipartFile foreImage, MultipartFile hindImage, MultipartFile neckImage, MultipartFile lipImage ) throws IOException {
@@ -156,11 +156,11 @@ public class HorseInfoEntity extends BasePO {
         this.country = country;
     }
 
-    public Date getChangeDate() {
+    public String getChangeDate() {
         return changeDate;
     }
 
-    public void setChangeDate(Date changeDate) {
+    public void setChangeDate(String changeDate) {
         this.changeDate = changeDate;
     }
 
