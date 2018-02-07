@@ -272,4 +272,14 @@
             horse_id = #{horseId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectHorseListByComboBox" resultType="com.equestrianism.api.model.model.HorseInfoComboBoxModel">
+        SELECT
+            horse_id      horseId,
+            horse_name    horseName
+        FROM
+            horse_info
+        ORDER BY
+            create_date DESC
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.equestrianism.api.service;
 
 import com.equestrianism.api.core.container.BaseException;
+import com.equestrianism.api.model.bo.HorseInfoComboBoxBO;
 import com.equestrianism.api.model.bo.HorseInfoDetailBO;
 import com.equestrianism.api.model.bo.HorseInfoListBO;
 import com.equestrianism.api.model.vo.horse_info.*;
@@ -22,4 +23,5 @@ public interface HorseInfoService {
 
     HorseInfoDetailBO horseInfoDetail( HorseInfoDetailVO horseInfoDetailVo ) throws BaseException;
 
+    HorseInfoComboBoxBO comboBox() throws BaseException;
 }

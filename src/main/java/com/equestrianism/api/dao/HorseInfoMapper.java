@@ -1,6 +1,7 @@
 package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.bo.HorseInfoDetailBO;
+import com.equestrianism.api.model.model.HorseInfoComboBoxModel;
 import com.equestrianism.api.model.model.HorseInfoListModel;
 import com.equestrianism.api.model.po.HorseInfoEntity;
 import com.equestrianism.api.model.vo.horse_info.HorseInfoListVO;
@@ -22,5 +23,7 @@ public interface HorseInfoMapper {
     Integer countHorseListByPage( HorseInfoListVO horseInfoListVo );
 
     HorseInfoDetailBO selectHorseInfoByDetail( String horseId );
+
+    List<HorseInfoComboBoxModel> selectHorseListByComboBox();
 
 }

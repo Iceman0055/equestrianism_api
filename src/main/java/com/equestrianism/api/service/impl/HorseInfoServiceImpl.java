@@ -4,10 +4,10 @@ import com.equestrianism.api.constants.CodeEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.HorseInfoMapper;
-import com.equestrianism.api.model.bo.HorseInfoDetailBO;
-import com.equestrianism.api.model.bo.HorseInfoListBO;
-import com.equestrianism.api.model.bo.RoleInfoListBO;
+import com.equestrianism.api.model.bo.*;
+import com.equestrianism.api.model.model.HorseInfoComboBoxModel;
 import com.equestrianism.api.model.model.HorseInfoListModel;
+import com.equestrianism.api.model.model.RoleInfoComboBoxModel;
 import com.equestrianism.api.model.model.RoleInfoListModel;
 import com.equestrianism.api.model.po.HorseInfoEntity;
 import com.equestrianism.api.model.vo.horse_info.*;
@@ -113,7 +113,23 @@ public class HorseInfoServiceImpl implements HorseInfoService {
 
     @Override
     public HorseInfoDetailBO horseInfoDetail( HorseInfoDetailVO horseInfoDetailVo ) throws BaseException {
-        return horseInfoMapper.selectHorseInfoByDetail( horseInfoDetailVo.getHorseId() );
+        try {
+            return horseInfoMapper.selectHorseInfoByDetail( horseInfoDetailVo.getHorseId() );
+        } catch ( Exception e ) {
+            LOGGER.error( "【HorseInfoService】【horseInfoDetail】", e );
+            throw new BaseException( CodeEnum.PROCESS_FAIL.note );
+        }
+    }
+
+    @Override
+    public HorseInfoComboBoxBO comboBox() throws BaseException {
+        try {
+            List<HorseInfoComboBoxModel> horseList = horseInfoMapper.selectHorseListByComboBox();
+            return new HorseInfoComboBoxBO( horseList );
+        } catch ( Exception e ) {
+            LOGGER.error( "【HorseInfoService】【comboBox】", e );
+            throw new BaseException( CodeEnum.PROCESS_FAIL.note );
+        }
     }
 
 }

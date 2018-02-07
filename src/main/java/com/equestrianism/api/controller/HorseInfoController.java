@@ -4,9 +4,7 @@ import com.equestrianism.api.controller.valid.HorseInfoValid;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
-import com.equestrianism.api.model.bo.HorseInfoDetailBO;
-import com.equestrianism.api.model.bo.HorseInfoListBO;
-import com.equestrianism.api.model.bo.RoleInfoListBO;
+import com.equestrianism.api.model.bo.*;
 import com.equestrianism.api.model.vo.RoleInfoDeleteVO;
 import com.equestrianism.api.model.vo.RoleInfoListVO;
 import com.equestrianism.api.model.vo.RoleInfoUpdateVO;
@@ -110,6 +108,20 @@ public class HorseInfoController extends BaseController {
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {
             LOGGER.error( "【HorseInfoController】【detail】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/comboBox", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> comboBox() {
+        LOGGER.info( "【HorseInfoController】【comboBox】begin" );
+        try {
+            HorseInfoComboBoxBO response = horseInfoService.comboBox();
+            LOGGER.info( "【HorseInfoController】【comboBox】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【HorseInfoController】【comboBox】【Exception】", e );
             return ContainerUtils.buildResFailMap();
         }
     }
