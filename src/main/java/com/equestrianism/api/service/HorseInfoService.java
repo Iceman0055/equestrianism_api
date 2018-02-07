@@ -1,11 +1,9 @@
 package com.equestrianism.api.service;
 
 import com.equestrianism.api.core.container.BaseException;
+import com.equestrianism.api.model.bo.HorseInfoDetailBO;
 import com.equestrianism.api.model.bo.HorseInfoListBO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoAddVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoDeleteVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoListVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoUpdateVO;
+import com.equestrianism.api.model.vo.horse_info.*;
 
 import java.io.IOException;
 
@@ -21,5 +19,7 @@ public interface HorseInfoService {
     Boolean removeHorseInfo( HorseInfoDeleteVO horseInfoDeleteVo ) throws BaseException;
 
     HorseInfoListBO horseInfoList( HorseInfoListVO horseInfoListVo ) throws BaseException;
+
+    HorseInfoDetailBO horseInfoDetail( HorseInfoDetailVO horseInfoDetailVo ) throws BaseException;
 
 }

@@ -4,15 +4,13 @@ import com.equestrianism.api.constants.CodeEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.HorseInfoMapper;
+import com.equestrianism.api.model.bo.HorseInfoDetailBO;
 import com.equestrianism.api.model.bo.HorseInfoListBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
 import com.equestrianism.api.model.model.HorseInfoListModel;
 import com.equestrianism.api.model.model.RoleInfoListModel;
 import com.equestrianism.api.model.po.HorseInfoEntity;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoAddVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoDeleteVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoListVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoUpdateVO;
+import com.equestrianism.api.model.vo.horse_info.*;
 import com.equestrianism.api.service.HorseInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,6 +109,11 @@ public class HorseInfoServiceImpl implements HorseInfoService {
             LOGGER.error( "【HorseInfoService】【horseInfoList】", e );
             throw new BaseException( CodeEnum.PROCESS_FAIL.note );
         }
+    }
+
+    @Override
+    public HorseInfoDetailBO horseInfoDetail( HorseInfoDetailVO horseInfoDetailVo ) throws BaseException {
+        return horseInfoMapper.selectHorseInfoByDetail( horseInfoDetailVo.getHorseId() );
     }
 
 }

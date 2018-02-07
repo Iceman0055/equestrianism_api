@@ -240,5 +240,36 @@
         </if>
     </select>
 
+    <select id="selectHorseInfoByDetail" parameterType="java.lang.String" resultType="com.equestrianism.api.model.bo.HorseInfoDetailBO">
+        SELECT
+            horse_id                horseId,
+            passport_number         passportNumber,
+            horse_name              horseName,
+            used_name               usedName,
+            country                 country,
+            change_date             changeDate,
+            birthday                birthday,
+            height                  height,
+            sex                     sex,
+            bar_code                barCode,
+            coat_colour             coatColour,
+            head_desc               headDesc,
+            left_fore_desc          leftForeDesc,
+            right_fore_desc         rightForeDesc,
+            left_hind_desc          leftHindDesc,
+            right_hind_desc         rightHindDesc,
+            body_desc               bodyDesc,
+            right_image             rightImage,
+            left_image              leftImage,
+            upper_eyeliner_image    upperEyelinerImage,
+            fore_image              foreImage,
+            hind_image              hindImage,
+            neck_image              neckImage,
+            lip_image               lipImage
+        FROM
+            horse_info
+        WHERE
+            horse_id = #{horseId, jdbcType=VARCHAR}
+    </select>
 
 </mapper>

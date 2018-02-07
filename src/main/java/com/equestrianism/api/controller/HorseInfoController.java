@@ -4,15 +4,13 @@ import com.equestrianism.api.controller.valid.HorseInfoValid;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
+import com.equestrianism.api.model.bo.HorseInfoDetailBO;
 import com.equestrianism.api.model.bo.HorseInfoListBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
 import com.equestrianism.api.model.vo.RoleInfoDeleteVO;
 import com.equestrianism.api.model.vo.RoleInfoListVO;
 import com.equestrianism.api.model.vo.RoleInfoUpdateVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoAddVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoDeleteVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoListVO;
-import com.equestrianism.api.model.vo.horse_info.HorseInfoUpdateVO;
+import com.equestrianism.api.model.vo.horse_info.*;
 import com.equestrianism.api.service.HorseInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,6 +96,20 @@ public class HorseInfoController extends BaseController {
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {
             LOGGER.error( "【HorseInfoController】【list】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/detail", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> detail( HorseInfoDetailVO horseInfoDetailVo ) {
+        LOGGER.info( "【HorseInfoController】【detail】inputs : " + horseInfoDetailVo.toJsonString() );
+        try {
+            HorseInfoDetailBO response = horseInfoService.horseInfoDetail( horseInfoDetailVo );
+            LOGGER.info( "【HorseInfoController】【detail】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【HorseInfoController】【detail】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
     }
