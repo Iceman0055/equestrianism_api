@@ -53,7 +53,7 @@ public class HorseInfoController extends BaseController {
     @ResponseBody
     public Map<String, Object> update( HorseInfoUpdateVO horseInfoUpdateVo ) {
         horseInfoUpdateVo.setAccessId( getAccessId() );
-        LOGGER.info( "【HorseInfoController】【update】begin" );
+        LOGGER.info( "【HorseInfoController】【update】begin " + horseInfoUpdateVo.getHorseId() );
         try {
             if ( horseInfoService.updateHorseInfo( HorseInfoValid.horseInfoUpdateValid( horseInfoUpdateVo ) ) ) {
                 LOGGER.info( "【HorseInfoController】【update】result : success" );

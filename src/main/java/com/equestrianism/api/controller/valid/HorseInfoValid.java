@@ -51,6 +51,9 @@ public class HorseInfoValid {
         if ( horseInfoAddVo.getBodyDesc() == null || "".equals( horseInfoAddVo.getBodyDesc() ) ) {
             horseInfoAddVo.setBodyDesc( "" );
         }
+        if ( horseInfoAddVo.getChangeDate() == null || "".equals( horseInfoAddVo.getChangeDate() ) ) {
+            horseInfoAddVo.setChangeDate( "" );
+        }
         return horseInfoAddVo;
     }
 
