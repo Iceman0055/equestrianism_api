@@ -89,6 +89,49 @@ CREATE TABLE `horse_info` (
   PRIMARY KEY (`horse_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='马匹基本信息表';
 
+CREATE TABLE `dictionary_detail` (
+  `dictionary_detail_id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '字典详情主键',
+  `item_code` varchar(16) NOT NULL COMMENT '参数编码',
+  `item_value` varchar(16) NOT NULL COMMENT '参数值',
+  `dictionary_id` int(8) NOT NULL COMMENT '字典主键',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`dictionary_detail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典信息详情表';
+
+CREATE TABLE `dictionary_info` (
+  `dictionary_id` int(6) unsigned NOT NULL AUTO_INCREMENT COMMENT '字典主键',
+  `type_code` varchar(16) NOT NULL COMMENT '类型编码',
+  `type_name` varchar(16) NOT NULL COMMENT '类型名称',
+  `sort` int(6) NOT NULL COMMENT '排序',
+  `remark` varchar(32) NOT NULL COMMENT '备注',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`dictionary_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典信息表';
+
+CREATE TABLE `host_info` (
+  `host_id` varchar(32) NOT NULL COMMENT '马主主键',
+  `host_name` varchar(16) NOT NULL COMMENT '姓名',
+  `sex` varchar(32) NOT NULL COMMENT '性别',
+  `occupation` varchar(16) NOT NULL COMMENT '职业',
+  `contact_way` varchar(16) NOT NULL COMMENT '联系方式',
+  `address` varchar(32) NOT NULL COMMENT '地址',
+  `horse_id` varchar(32) NOT NULL COMMENT '马匹主键',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`host_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='马主信息表';
+
 
 
 
