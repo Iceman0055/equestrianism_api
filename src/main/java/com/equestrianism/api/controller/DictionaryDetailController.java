@@ -3,11 +3,18 @@ package com.equestrianism.api.controller;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
+import com.equestrianism.api.model.bo.DictionaryDetailInfoBO;
+import com.equestrianism.api.model.bo.DictionaryDetailListBO;
 import com.equestrianism.api.model.bo.DictionaryInfoListBO;
+import com.equestrianism.api.model.vo.dictionary_detail.DictionaryDetailAddVO;
+import com.equestrianism.api.model.vo.dictionary_detail.DictionaryDetailDeleteVO;
+import com.equestrianism.api.model.vo.dictionary_detail.DictionaryDetailListVO;
+import com.equestrianism.api.model.vo.dictionary_detail.DictionaryDetailUpdateVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoAddVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoDeleteVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoListVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoUpdateVO;
+import com.equestrianism.api.service.DictionaryDetailService;
 import com.equestrianism.api.service.DictionaryInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,77 +32,91 @@ import java.util.Map;
  * 2018/2/23
  */
 @Controller
-@RequestMapping( "/dictionaryInfo" )
+@RequestMapping( "/dictionaryDetail" )
 public class DictionaryDetailController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger( DictionaryDetailController.class );
 
     @Autowired
-    private DictionaryInfoService dictionaryInfoService;
+    private DictionaryDetailService dictionaryDetailService;
 
     @RequestMapping( value = "/add", method = RequestMethod.POST, produces = "application/json" )
     @ResponseBody
-    public Map<String, Object> add( @RequestBody DictionaryInfoAddVO dictionaryInfoAddVo ) {
-        dictionaryInfoAddVo.setAccessId( getAccessId() );
-        LOGGER.info( "【DictionaryInfoController】【add】【inputs】" + dictionaryInfoAddVo.toJsonString() );
+    public Map<String, Object> add( @RequestBody DictionaryDetailAddVO dictionaryDetailAddVo ) {
+        dictionaryDetailAddVo.setAccessId( getAccessId() );
+        LOGGER.info( "【DictionaryDetailController】【add】【inputs】" + dictionaryDetailAddVo.toJsonString() );
         try {
-            if ( dictionaryInfoService.addDictionaryInfo( dictionaryInfoAddVo ) ) {
-                LOGGER.info( "【DictionaryInfoController】【add】result : success" );
+            if ( dictionaryDetailService.addDictionaryDetail( dictionaryDetailAddVo ) ) {
+                LOGGER.info( "【DictionaryDetailController】【add】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
         } catch ( BaseException e ) {
-            LOGGER.error( "【DictionaryInfoController】【add】【exception】", e );
+            LOGGER.error( "【DictionaryDetailController】【add】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
-        LOGGER.info( "【DictionaryInfoController】【add】result : fail" );
+        LOGGER.info( "【DictionaryDetailController】【add】result : fail" );
         return ContainerUtils.buildResFailMap();
     }
 
     @RequestMapping( value = "/update", method = RequestMethod.POST, produces = "application/json" )
     @ResponseBody
-    public Map<String, Object> update( @RequestBody DictionaryInfoUpdateVO dictionaryInfoUpdateVo ) {
-        dictionaryInfoUpdateVo.setAccessId( getAccessId() );
-        LOGGER.info( "【DictionaryInfoController】【update】begin " + dictionaryInfoUpdateVo.toJsonString() );
+    public Map<String, Object> update( @RequestBody DictionaryDetailUpdateVO dictionaryDetailUpdateVo ) {
+        dictionaryDetailUpdateVo.setAccessId( getAccessId() );
+        LOGGER.info( "【DictionaryDetailController】【update】begin " + dictionaryDetailUpdateVo.toJsonString() );
         try {
-            if ( dictionaryInfoService.updateDictionaryInfo( dictionaryInfoUpdateVo ) ) {
-                LOGGER.info( "【DictionaryInfoController】【update】result : success" );
+            if ( dictionaryDetailService.updateDictionaryDetail( dictionaryDetailUpdateVo ) ) {
+                LOGGER.info( "【DictionaryDetailController】【update】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
         } catch ( BaseException e ) {
-            LOGGER.error( "【DictionaryInfoController】【update】【exception】", e );
+            LOGGER.error( "【DictionaryDetailController】【update】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
-        LOGGER.info( "【DictionaryInfoController】【update】result : fail" );
+        LOGGER.info( "【DictionaryDetailController】【update】result : fail" );
         return ContainerUtils.buildResFailMap();
     }
 
     @RequestMapping( value = "/delete", method = RequestMethod.POST, produces = "application/json" )
     @ResponseBody
-    public Map<String, Object> delete( @RequestBody DictionaryInfoDeleteVO dictionaryInfoDeleteVo ) {
-        LOGGER.info( "【DictionaryInfoController】【delete】inputs : " + dictionaryInfoDeleteVo.toJsonString() );
+    public Map<String, Object> delete( @RequestBody DictionaryDetailDeleteVO dictionaryDetailDeleteVo ) {
+        LOGGER.info( "【DictionaryDetailController】【delete】inputs : " + dictionaryDetailDeleteVo.toJsonString() );
         try {
-            if ( dictionaryInfoService.removeDictionaryInfo( dictionaryInfoDeleteVo ) ) {
-                LOGGER.info( "【DictionaryInfoController】【delete】result : success" );
+            if ( dictionaryDetailService.removeDictionaryDetail( dictionaryDetailDeleteVo ) ) {
+                LOGGER.info( "【DictionaryDetailController】【delete】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
         } catch ( BaseException e ) {
-            LOGGER.error( "【DictionaryInfoController】【delete】【exception】", e );
+            LOGGER.error( "【DictionaryDetailController】【delete】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
-        LOGGER.info( "【DictionaryInfoController】【delete】result : fail" );
+        LOGGER.info( "【DictionaryDetailController】【delete】result : fail" );
         return ContainerUtils.buildResFailMap();
     }
 
     @RequestMapping( value = "/list", method = RequestMethod.GET )
     @ResponseBody
-    public Map<String, Object> list( DictionaryInfoListVO dictionaryInfoListVo ) {
-        LOGGER.info( "【DictionaryInfoController】【list】inputs : " + dictionaryInfoListVo.toJsonString() );
+    public Map<String, Object> list( DictionaryDetailListVO dictionaryDetailListVo ) {
+        LOGGER.info( "【DictionaryDetailController】【list】inputs : " + dictionaryDetailListVo.toJsonString() );
         try {
-            DictionaryInfoListBO response = dictionaryInfoService.dictionaryInfoList( dictionaryInfoListVo );
-            LOGGER.info( "【DictionaryInfoController】【list】result : " + response.toJsonString() );
+            DictionaryDetailListBO response = dictionaryDetailService.dictionaryDetailList( dictionaryDetailListVo );
+            LOGGER.info( "【DictionaryDetailController】【list】result : " + response.toJsonString() );
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {
-            LOGGER.error( "【DictionaryInfoController】【list】【exception】", e );
+            LOGGER.error( "【DictionaryDetailController】【list】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/detail", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> detail( Integer dictionaryDetailId ) {
+        LOGGER.info( "【DictionaryDetailController】【detail】inputs : " + dictionaryDetailId );
+        try {
+            DictionaryDetailInfoBO response = dictionaryDetailService.dictionaryDetailInfo( dictionaryDetailId );
+            LOGGER.info( "【DictionaryDetailController】【detail】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【DictionaryDetailController】【detail】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
     }

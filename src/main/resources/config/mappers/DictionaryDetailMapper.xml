@@ -55,9 +55,6 @@
             <if test="itemValue != null and itemValue != ''">
                 item_value = #{itemValue, jdbcType=VARCHAR},
             </if>
-            <if test="dictionaryId != null">
-                dictionary_id = #{dictionaryId, jdbcType=INTEGER},
-            </if>
             <if test="status != null">
                 status = #{status, jdbcType=INTEGER},
             </if>
@@ -68,5 +65,43 @@
         WHERE
             dictionary_detail_id = #{dictionaryDetailId, jdbcType=INTEGER}
     </update>
+    
+    <select id="selectDictionaryDetailListByPage" parameterType="com.equestrianism.api.model.vo.dictionary_detail.DictionaryDetailListVO"
+            resultType="com.equestrianism.api.model.model.DictionaryDetailListModel">
+        SELECT
+            dictionary_detail_id      dictionaryDetailId,
+            item_code                 itemCode,
+            item_value                itemValue,
+            dictionary_id             dictionaryId
+        FROM
+            dictionary_detail
+        WHERE
+            delete_flag = 0
+        AND
+            dictionary_id = #{dictionaryId, jdbcType=INTEGER}
+        LIMIT
+            #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countDictionaryDetailListByPage" parameterType="com.equestrianism.api.model.vo.dictionary_detail.DictionaryDetailListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            dictionary_detail
+        WHERE
+            delete_flag = 0
+        AND
+            dictionary_id = #{dictionaryId, jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            dictionary_detail
+        WHERE
+            dictionary_detail_id = #{dictionaryDetailId, jdbcType=INTEGER}
+    </select>
 
 </mapper>

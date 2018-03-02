@@ -13,6 +13,19 @@ public class DictionaryDetailEntity extends BasePO {
     private String itemValue;
     private Integer dictionaryId;
 
+    public DictionaryDetailEntity() {
+    }
+
+    public DictionaryDetailEntity( Integer dictionaryDetailId ) {
+        this.dictionaryDetailId = dictionaryDetailId;
+    }
+
+    public DictionaryDetailEntity( String itemCode, String itemValue, Integer dictionaryId ) {
+        this.itemCode = itemCode;
+        this.itemValue = itemValue;
+        this.dictionaryId = dictionaryId;
+    }
+
     public Integer getDictionaryDetailId() {
         return dictionaryDetailId;
     }
