@@ -17,6 +17,10 @@ public class DictionaryInfoEntity extends BasePO {
     public DictionaryInfoEntity() {
     }
 
+    public DictionaryInfoEntity( Integer dictionaryId ) {
+        this.dictionaryId = dictionaryId;
+    }
+
     public DictionaryInfoEntity( String typeCode, String typeName, Integer sort, String remark ) {
         this.typeCode = typeCode;
         this.typeName = typeName;

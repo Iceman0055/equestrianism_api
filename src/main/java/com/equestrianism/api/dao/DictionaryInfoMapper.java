@@ -1,6 +1,8 @@
 package com.equestrianism.api.dao;
 
+import com.equestrianism.api.model.model.DictionaryInfoListModel;
 import com.equestrianism.api.model.po.DictionaryInfoEntity;
+import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoListVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoUpdateVO;
 
 import java.util.List;
@@ -13,8 +15,12 @@ public interface DictionaryInfoMapper {
 
     Integer insert( DictionaryInfoEntity dictionaryInfoEntity );
 
-    Integer updateBySelective( DictionaryInfoUpdateVO dictionaryInfoUpdateVo );
+    Integer updateBySelective( DictionaryInfoEntity dictionaryInfoEntity );
 
-//    List<DictionaryInfoEntity> selectDictionaryInfoListByPage();
+    List<DictionaryInfoListModel> selectDictionaryInfoListByPage( DictionaryInfoListVO dictionaryInfoListVo );
+
+    Integer countDictionaryInfoListByPage( DictionaryInfoListVO dictionaryInfoListVo );
+
+    DictionaryInfoEntity selectByPrimaryKey( Integer dictionaryId );
 
 }

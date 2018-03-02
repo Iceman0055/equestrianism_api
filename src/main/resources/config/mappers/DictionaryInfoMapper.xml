@@ -48,7 +48,7 @@
             )
     </insert>
 
-    <update id="updateBySelective" parameterType="com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoUpdateVO">
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.DictionaryDetailEntity">
         UPDATE
             dictionary_info
         <set>
@@ -74,5 +74,55 @@
         WHERE
             dictionary_id = #{dictionaryId, jdbcType=INTEGER}
     </update>
+
+    <select id="selectDictionaryInfoListByPage" parameterType="com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoListVO"
+            resultType="com.equestrianism.api.model.model.DictionaryInfoListModel">
+        SELECT
+            dictionary_id       dictionaryId,
+            type_code           typeCode,
+            type_name           typeName,
+            sort                sort,
+            remark              remark
+        FROM
+            dictionary_info
+        WHERE
+            delete_flag = 0
+        <if test="typeCode != null and typeCode != ''">
+            AND
+                type_code like CONCAT('%',#{typeCode, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="typeName != null and typeName != ''">
+            AND
+                type_name like CONCAT('%', #{typeName, jdbcType=VARCHAR}, '%')
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countDictionaryInfoListByPage" parameterType="com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+        dictionary_info
+        WHERE
+        delete_flag = 0
+        <if test="typeCode != null and typeCode != ''">
+            AND
+            type_code like CONCAT('%',#{typeCode, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="typeName != null and typeName != ''">
+            AND
+            type_name like CONCAT('%', #{typeName, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            dictionary_info
+        WHERE
+            dictionary_id = #{dictionaryId, jdbcType=INTEGER}
+    </select>
 
 </mapper>
