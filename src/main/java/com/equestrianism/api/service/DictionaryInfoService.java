@@ -1,6 +1,7 @@
 package com.equestrianism.api.service;
 
 import com.equestrianism.api.core.container.BaseException;
+import com.equestrianism.api.model.bo.DictionaryInfoAllBO;
 import com.equestrianism.api.model.bo.DictionaryInfoDetailBO;
 import com.equestrianism.api.model.bo.DictionaryInfoListBO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoAddVO;
@@ -23,5 +24,7 @@ public interface DictionaryInfoService {
     DictionaryInfoListBO dictionaryInfoList( DictionaryInfoListVO dictionaryInfoListVo ) throws BaseException;
 
     DictionaryInfoDetailBO dictionaryInfoDetail( Integer dictionaryId ) throws BaseException;
+
+    DictionaryInfoAllBO dictionaryInfoAll() throws BaseException;
 
 }

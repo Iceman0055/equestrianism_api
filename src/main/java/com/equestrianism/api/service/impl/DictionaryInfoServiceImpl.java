@@ -4,9 +4,11 @@ import com.equestrianism.api.constants.CodeEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.DictionaryInfoMapper;
+import com.equestrianism.api.model.bo.DictionaryInfoAllBO;
 import com.equestrianism.api.model.bo.DictionaryInfoDetailBO;
 import com.equestrianism.api.model.bo.DictionaryInfoListBO;
 import com.equestrianism.api.model.model.DictionaryInfoListModel;
+import com.equestrianism.api.model.model.DictionaryInfoModel;
 import com.equestrianism.api.model.po.DictionaryInfoEntity;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoAddVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoDeleteVO;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -110,6 +113,20 @@ public class DictionaryInfoServiceImpl implements DictionaryInfoService {
                 dictionaryInfoEntity.getTypeCode(), dictionaryInfoEntity.getTypeName(), dictionaryInfoEntity.getSort(),
                 dictionaryInfoEntity.getRemark() );
         return dictionaryInfoDetailBo;
+    }
+
+    @Override
+    public DictionaryInfoAllBO dictionaryInfoAll() throws BaseException {
+        List<DictionaryInfoEntity> dictionaryInfoList = dictionaryInfoMapper.selectAll();
+        if ( dictionaryInfoList == null || dictionaryInfoList.size() == 0 ) {
+            return null;
+        }
+        DictionaryInfoAllBO response = new DictionaryInfoAllBO();
+        List<DictionaryInfoModel> resDictionaryInfoList = new ArrayList<>( dictionaryInfoList.size() );
+        for ( DictionaryInfoEntity dictionaryInfoEntity : dictionaryInfoList ) {
+
+        }
+        return null;
     }
 
 }

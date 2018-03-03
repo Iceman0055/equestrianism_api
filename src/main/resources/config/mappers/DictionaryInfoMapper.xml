@@ -125,4 +125,15 @@
             dictionary_id = #{dictionaryId, jdbcType=INTEGER}
     </select>
 
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            dictionary_info
+        WHERE
+            status = 1
+        AND
+            delete_flag = 0
+    </select>
+
 </mapper>

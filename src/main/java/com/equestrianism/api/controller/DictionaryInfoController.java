@@ -4,6 +4,7 @@ import com.equestrianism.api.controller.valid.HorseInfoValid;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
+import com.equestrianism.api.model.bo.DictionaryInfoAllBO;
 import com.equestrianism.api.model.bo.DictionaryInfoDetailBO;
 import com.equestrianism.api.model.bo.DictionaryInfoListBO;
 import com.equestrianism.api.model.bo.HorseInfoListBO;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Map;
 
 /**
@@ -120,6 +120,20 @@ public class DictionaryInfoController extends BaseController {
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {
             LOGGER.error( "【DictionaryInfoController】【detail】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/all", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> all() {
+        LOGGER.info( "【DictionaryInfoController】【all】begin " );
+        try {
+            DictionaryInfoAllBO response = dictionaryInfoService.dictionaryInfoAll();
+            LOGGER.info( "【DictionaryInfoController】【all】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【DictionaryInfoController】【all】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
     }

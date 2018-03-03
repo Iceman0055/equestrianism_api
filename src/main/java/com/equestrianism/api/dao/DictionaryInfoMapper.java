@@ -23,4 +23,6 @@ public interface DictionaryInfoMapper {
 
     DictionaryInfoEntity selectByPrimaryKey( Integer dictionaryId );
 
+    List<DictionaryInfoEntity> selectAll();
+
 }
