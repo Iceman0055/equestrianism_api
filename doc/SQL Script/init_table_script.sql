@@ -81,6 +81,7 @@ CREATE TABLE `horse_info` (
   `hind_image` longblob NOT NULL COMMENT '后肢描述',
   `neck_image` longblob NOT NULL COMMENT '颈部图片',
   `lip_image` longblob NOT NULL COMMENT '唇部图片',
+  `host_id` varchar(32) NOT NULL DEFAULT '-1' COMMENT '马主主键',
   `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
   `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：0-未删除 1-已删除',
   `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
@@ -119,7 +120,7 @@ CREATE TABLE `dictionary_info` (
 CREATE TABLE `host_info` (
   `host_id` varchar(32) NOT NULL COMMENT '马主主键',
   `host_name` varchar(16) NOT NULL COMMENT '姓名',
-  `sex` varchar(32) NOT NULL COMMENT '性别',
+  `sex` int(8) NOT NULL COMMENT '性别',
   `occupation` varchar(16) NOT NULL COMMENT '职业',
   `contact_way` varchar(16) NOT NULL COMMENT '联系方式',
   `address` varchar(32) NOT NULL COMMENT '地址',
@@ -131,8 +132,3 @@ CREATE TABLE `host_info` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`host_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='马主信息表';
-
-
-
-
-
