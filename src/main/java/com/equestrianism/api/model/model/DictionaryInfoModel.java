@@ -15,6 +15,8 @@ public class DictionaryInfoModel extends BaseObject {
     private String typeName;
     private List<DictionaryDetailModel> dictionaryDetailList;
 
+
+
     public Integer getDictionaryId() {
         return dictionaryId;
     }

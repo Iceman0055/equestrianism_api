@@ -7,13 +7,16 @@ import com.equestrianism.api.dao.DictionaryInfoMapper;
 import com.equestrianism.api.model.bo.DictionaryInfoAllBO;
 import com.equestrianism.api.model.bo.DictionaryInfoDetailBO;
 import com.equestrianism.api.model.bo.DictionaryInfoListBO;
+import com.equestrianism.api.model.model.DictionaryDetailModel;
 import com.equestrianism.api.model.model.DictionaryInfoListModel;
 import com.equestrianism.api.model.model.DictionaryInfoModel;
+import com.equestrianism.api.model.po.DictionaryDetailEntity;
 import com.equestrianism.api.model.po.DictionaryInfoEntity;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoAddVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoDeleteVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoListVO;
 import com.equestrianism.api.model.vo.dictionary_info.DictionaryInfoUpdateVO;
+import com.equestrianism.api.service.DictionaryDetailService;
 import com.equestrianism.api.service.DictionaryInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +37,9 @@ public class DictionaryInfoServiceImpl implements DictionaryInfoService {
 
     @Autowired
     private DictionaryInfoMapper dictionaryInfoMapper;
+
+    @Autowired
+    private DictionaryDetailService dictionaryDetailService;
 
     @Override
     public Boolean addDictionaryInfo( DictionaryInfoAddVO dictionaryInfoAddVo ) throws BaseException {
@@ -123,10 +129,30 @@ public class DictionaryInfoServiceImpl implements DictionaryInfoService {
         }
         DictionaryInfoAllBO response = new DictionaryInfoAllBO();
         List<DictionaryInfoModel> resDictionaryInfoList = new ArrayList<>( dictionaryInfoList.size() );
+        DictionaryInfoModel dictionaryInfoModel;
         for ( DictionaryInfoEntity dictionaryInfoEntity : dictionaryInfoList ) {
-
+            List<DictionaryDetailEntity> dictionaryDetailList = dictionaryDetailService.getDictionaryDetailByDictionaryId( dictionaryInfoEntity.getDictionaryId() );
+            if ( dictionaryDetailList == null || dictionaryDetailList.size() == 0 ) {
+                continue;
+            }
+            List<DictionaryDetailModel> resDictionaryDetailList = new ArrayList<>( dictionaryDetailList.size() );
+            DictionaryDetailModel dictionaryDetailModel;
+            for ( DictionaryDetailEntity dictionaryDetailEntity : dictionaryDetailList ) {
+                dictionaryDetailModel = new DictionaryDetailModel();
+                dictionaryDetailModel.setDictionaryDetailId( dictionaryDetailEntity.getDictionaryDetailId() );
+                dictionaryDetailModel.setItemCode( dictionaryDetailEntity.getItemCode() );
+                dictionaryDetailModel.setItemValue( dictionaryDetailEntity.getItemValue() );
+                resDictionaryDetailList.add( dictionaryDetailModel );
+            }
+            dictionaryInfoModel = new DictionaryInfoModel();
+            dictionaryInfoModel.setDictionaryDetailList( resDictionaryDetailList );
+            dictionaryInfoModel.setDictionaryId( dictionaryInfoEntity.getDictionaryId() );
+            dictionaryInfoModel.setTypeCode( dictionaryInfoEntity.getTypeCode() );
+            dictionaryInfoModel.setTypeName( dictionaryInfoEntity.getTypeName() );
+            resDictionaryInfoList.add( dictionaryInfoModel );
         }
-        return null;
+        response.setDictionaryInfoList( resDictionaryInfoList );
+        return response;
     }
 
 }

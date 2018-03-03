@@ -22,4 +22,6 @@ public interface DictionaryDetailMapper {
 
     DictionaryDetailEntity selectByPrimaryKey( Integer dictionaryDetailId );
 
+    List<DictionaryDetailEntity> selectDictionaryDetailListByDictionaryId( Integer dictionaryId );
+
 }

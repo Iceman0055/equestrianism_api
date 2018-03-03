@@ -114,5 +114,10 @@ public class DictionaryDetailServiceImpl implements DictionaryDetailService {
         return dictionaryDetailInfoBo;
     }
 
+    @Override
+    public List<DictionaryDetailEntity> getDictionaryDetailByDictionaryId(Integer dictionaryId) throws BaseException {
+        return dictionaryDetailMapper.selectDictionaryDetailListByDictionaryId( dictionaryId );
+    }
+
 
 }
