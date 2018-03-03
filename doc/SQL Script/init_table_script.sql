@@ -105,7 +105,7 @@ CREATE TABLE `dictionary_detail` (
 
 CREATE TABLE `dictionary_info` (
   `dictionary_id` int(6) unsigned NOT NULL AUTO_INCREMENT COMMENT '字典主键',
-  `type_code` varchar(16) NOT NULL COMMENT '类型编码',
+  `type_code` varchar(24) NOT NULL COMMENT '类型编码',
   `type_name` varchar(16) NOT NULL COMMENT '类型名称',
   `sort` int(6) NOT NULL COMMENT '排序',
   `remark` varchar(32) NOT NULL COMMENT '备注',
