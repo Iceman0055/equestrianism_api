@@ -132,3 +132,23 @@ CREATE TABLE `host_info` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`host_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='马主信息表';
+
+CREATE TABLE `feeder_info` (
+  `feeder_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `feeder_name` varchar(16) NOT NULL COMMENT '饲养员姓名',
+  `sex` int(8) NOT NULL COMMENT '性别',
+  `skill_desc` varchar(16) NOT NULL COMMENT '技能描述',
+  `horse_id` varchar(32) NOT NULL COMMENT '马匹主键',
+  `hire_date` varchar(10) NOT NULL COMMENT '入职时间（YYYY-MM-DD）',
+  `id_card_image` blob NOT NULL COMMENT '身份证照片',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`feeder_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
