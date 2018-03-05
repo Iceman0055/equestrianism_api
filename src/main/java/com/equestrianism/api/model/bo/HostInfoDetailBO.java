@@ -1,16 +1,13 @@
-package com.equestrianism.api.model.po;
+package com.equestrianism.api.model.bo;
 
-import com.equestrianism.api.core.model.BasePO;
-
-import java.util.UUID;
+import com.equestrianism.api.core.model.BaseObject;
 
 /**
- * Iceman
- * 2018/3/2
+ * Created by Chenzq on 2018/3/4.
  */
-public class HostInfoEntity extends BasePO {
+public class HostInfoDetailBO extends BaseObject {
 
-    private String hostId = UUID.randomUUID().toString().replace( "-", "" );
+    private String hostId;
     private String hostName;
     private Integer sex;
     private String occupation;
@@ -18,29 +15,18 @@ public class HostInfoEntity extends BasePO {
     private String address;
     private String horseId;
 
-    public HostInfoEntity() {
+    public HostInfoDetailBO() {
     }
 
-    public HostInfoEntity( String hostId ) {
-        this.hostId = hostId;
-    }
-
-    public HostInfoEntity( String hostName, Integer sex, String occupation, String contactWay, String address, String horseId ) {
-        this( UUID.randomUUID().toString().replace( "-", "" ), hostName, sex, occupation, contactWay, address, horseId );
-    }
-
-    public HostInfoEntity( String hostId, String hostName, Integer sex, String occupation, String contactWay, String address, String horseId ) {
+    public HostInfoDetailBO( String hostId, String hostName, Integer sex, String occupation, String contactWay,
+                             String address, String horseId ) {
         this.hostId = hostId;
         this.hostName = hostName;
-        this.address = address;
         this.sex = sex;
-        this.contactWay = contactWay;
-        if ( horseId == null || horseId.equals( "" ) ) {
-            this.horseId = "";
-        } else {
-            this.horseId = horseId;
-        }
         this.occupation = occupation;
+        this.contactWay = contactWay;
+        this.address = address;
+        this.horseId = horseId;
     }
 
     public String getHostId() {
