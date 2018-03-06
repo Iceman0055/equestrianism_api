@@ -1,13 +1,16 @@
 package com.equestrianism.api.model.po;
 
 import com.equestrianism.api.core.model.BasePO;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
 
 /**
  * Created by Chenzq on 2018/3/6.
  */
 public class HorsePrizeInfoEntity extends BasePO {
 
-    private String horsePrizeId;
+    private String horsePrizeId = UUID.randomUUID().toString().replace( "-", "" );
     private String horseId;
     private String eventName;
     private String eventDate;
@@ -16,6 +19,26 @@ public class HorsePrizeInfoEntity extends BasePO {
     private String penaltyTerm;
     private String awarder;
     private byte[] descImage;
+
+    public HorsePrizeInfoEntity() {
+    }
+
+    public HorsePrizeInfoEntity( String horsePrizeId ) {
+        this.horsePrizeId = horsePrizeId;
+    }
+
+    public HorsePrizeInfoEntity( String horsePrizeId, String horseId, String eventName, String eventDate,
+                                 String eventPlace, String prizeName, String penaltyTerm, String awarder,
+                                 MultipartFile descImage ) {
+        this.horsePrizeId = horsePrizeId;
+        this.horseId = horseId;
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.eventPlace = eventPlace;
+        this.prizeName = prizeName;
+        this.penaltyTerm = penaltyTerm;
+        this.awarder = awarder;
+    }
 
     public String getHorsePrizeId() {
         return horsePrizeId;
