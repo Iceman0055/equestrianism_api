@@ -7,8 +7,10 @@ import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.FeederInfoDetailBO;
 import com.equestrianism.api.model.bo.FeederInfoListBO;
+import com.equestrianism.api.model.bo.HorsePrizeInfoDetailBO;
+import com.equestrianism.api.model.bo.HorsePrizeInfoListBO;
 import com.equestrianism.api.model.vo.feeder_info.*;
-import com.equestrianism.api.model.vo.horse_prize_info.HorsePrizeInfoAddVO;
+import com.equestrianism.api.model.vo.horse_prize_info.*;
 import com.equestrianism.api.service.HorsePrizeInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -54,11 +57,11 @@ public class HorsePrizeInfoController extends BaseController {
 
     @RequestMapping( value = "/update", method = RequestMethod.POST )
     @ResponseBody
-    public Map<String, Object> update( FeederInfoUpdateVO feederInfoUpdateVo ) {
-        feederInfoUpdateVo.setAccessId( getAccessId() );
-        LOGGER.info( "【HorsePrizeInfoController】【update】begin " + feederInfoUpdateVo.getHorseId() );
+    public Map<String, Object> update( HorsePrizeInfoUpdateVO horsePrizeInfoUpdateVo ) {
+        horsePrizeInfoUpdateVo.setAccessId( getAccessId() );
+        LOGGER.info( "【HorsePrizeInfoController】【update】begin " + horsePrizeInfoUpdateVo.getHorsePrizeId() );
         try {
-            if ( feederInfoService.updateFeederInfo( FeederInfoValid.feederInfoUpdateValid( feederInfoUpdateVo ) ) ) {
+            if ( horsePrizeInfoService.updateHorsePrizeInfo(HorsePrizeInfoValid.horsePrizeInfoUpdateValid(horsePrizeInfoUpdateVo)) ) {
                 LOGGER.info( "【HorsePrizeInfoController】【update】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
@@ -72,10 +75,10 @@ public class HorsePrizeInfoController extends BaseController {
 
     @RequestMapping( value = "/delete", method = RequestMethod.POST, produces = "application/json" )
     @ResponseBody
-    public Map<String, Object> delete( @RequestBody FeederInfoDeleteVO feederInfoDeleteVo ) {
-        LOGGER.info( "【HorsePrizeInfoController】【delete】inputs : " + feederInfoDeleteVo.toJsonString() );
+    public Map<String, Object> delete( @RequestBody HorsePrizeInfoDeleteVO horsePrizeInfoDeleteVo ) {
+        LOGGER.info( "【HorsePrizeInfoController】【delete】inputs : " + horsePrizeInfoDeleteVo.toJsonString() );
         try {
-            if ( feederInfoService.removeFeederInfo( feederInfoDeleteVo ) ) {
+            if ( horsePrizeInfoService.removeHorsePrizeInfo(horsePrizeInfoDeleteVo ) ) {
                 LOGGER.info( "【HorsePrizeInfoController】【delete】result : success" );
                 return ContainerUtils.buildResSuccessMap();
             }
@@ -89,10 +92,13 @@ public class HorsePrizeInfoController extends BaseController {
 
     @RequestMapping( value = "/list", method = RequestMethod.GET )
     @ResponseBody
-    public Map<String, Object> list( FeederInfoListVO feederInfoListVo ) {
-        LOGGER.info( "【HorsePrizeInfoController】【list】inputs : " + feederInfoListVo.toJsonString() );
+    public Map<String, Object> list( HorsePrizeInfoListVO horsePrizeInfoListVo ) throws UnsupportedEncodingException {
+        if ( horsePrizeInfoListVo.getEventName() != null && !"".equals(horsePrizeInfoListVo.getEventName()) ) {
+            horsePrizeInfoListVo.setEventName(new String(horsePrizeInfoListVo.getEventName().getBytes("ISO-8859-1"), "UTF-8"));
+        }
+        LOGGER.info( "【HorsePrizeInfoController】【list】inputs : " + horsePrizeInfoListVo.toJsonString() );
         try {
-            FeederInfoListBO response = feederInfoService.feederInfoList( feederInfoListVo );
+            HorsePrizeInfoListBO response = horsePrizeInfoService.horsePrizeInfoList(horsePrizeInfoListVo );
             LOGGER.info( "【HorsePrizeInfoController】【list】result : " + response.toJsonString() );
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {
@@ -103,10 +109,10 @@ public class HorsePrizeInfoController extends BaseController {
 
     @RequestMapping( value = "/detail", method = RequestMethod.GET )
     @ResponseBody
-    public Map<String, Object> detail( FeederInfoDetailVO feederInfoDetailVo ) {
-        LOGGER.info( "【HorsePrizeInfoController】【detail】inputs : " + feederInfoDetailVo.toJsonString() );
+    public Map<String, Object> detail( HorsePrizeInfoDetailVO horsePrizeInfoDetailVo ) {
+        LOGGER.info( "【HorsePrizeInfoController】【detail】inputs : " + horsePrizeInfoDetailVo.toJsonString() );
         try {
-            FeederInfoDetailBO response = feederInfoService.feederInfoDetail( feederInfoDetailVo );
+            HorsePrizeInfoDetailBO response = horsePrizeInfoService.horsePrizeInfoDetail(horsePrizeInfoDetailVo );
             LOGGER.info( "【HorsePrizeInfoController】【detail】result : " + response.toJsonString() );
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {

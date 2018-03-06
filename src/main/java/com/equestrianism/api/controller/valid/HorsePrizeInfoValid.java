@@ -1,6 +1,7 @@
 package com.equestrianism.api.controller.valid;
 
 import com.equestrianism.api.model.vo.horse_prize_info.HorsePrizeInfoAddVO;
+import com.equestrianism.api.model.vo.horse_prize_info.HorsePrizeInfoUpdateVO;
 
 /**
  * Iceman
@@ -18,5 +19,14 @@ public class HorsePrizeInfoValid {
         return horsePrizeInfoAddVo;
     }
 
+    public static HorsePrizeInfoUpdateVO horsePrizeInfoUpdateValid( HorsePrizeInfoUpdateVO horsePrizeInfoUpdateVo ) {
+        if ( horsePrizeInfoUpdateVo.getPenaltyTerm() == null || "".equals( horsePrizeInfoUpdateVo.getPenaltyTerm() ) ) {
+            horsePrizeInfoUpdateVo.setPenaltyTerm( "" );
+        }
+        if ( horsePrizeInfoUpdateVo.getAwarder() == null || "".equals( horsePrizeInfoUpdateVo.getAwarder() ) ) {
+            horsePrizeInfoUpdateVo.setAwarder( "" );
+        }
+        return horsePrizeInfoUpdateVo;
+    }
 
 }

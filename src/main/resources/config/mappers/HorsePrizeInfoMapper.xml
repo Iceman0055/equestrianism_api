@@ -36,6 +36,7 @@
                 event_name,
                 event_date,
                 event_place,
+                prize_name,
                 penalty_term,
                 awarder,
                 desc_image,
@@ -49,6 +50,7 @@
                 #{eventName, jdbcType=VARCHAR},
                 #{eventDate, jdbcType=VARCHAR},
                 #{eventPlace, jdbcType=VARCHAR},
+                #{prizeName, jdbcType=VARCHAR},
                 #{penaltyTerm, jdbcType=VARCHAR},
                 #{awarder, jdbcType=VARCHAR},
                 #{descImage, jdbcType=BLOB},
@@ -95,63 +97,79 @@
             horse_prize_id = #{horsePrizeId, jdbcType=VARCHAR}
     </update>
 
-    <select id="selectFeederListByPage" parameterType="com.equestrianism.api.model.vo.feeder_info.FeederInfoListVO"
-            resultType="com.equestrianism.api.model.model.FeederInfoListModel">
+    <select id="selectHorsePrizeInfoListByPage" parameterType="com.equestrianism.api.model.vo.horse_prize_info.HorsePrizeInfoListVO"
+            resultType="com.equestrianism.api.model.model.HorsePrizeInfoListModel">
         SELECT
-            a.feeder_id       feederId,
-            a.feeder_name     feederName,
-            a.sex             sex,
-            a.id_card_image   idCardImage,
-            a.skill_desc      skillDesc,
-            a.hire_date       hireDate,
-            b.horse_name      horseName
+            a.horse_prize_id        horsePrizeId,
+            b.horse_name            horseName,
+            a.event_date            eventDate,
+            a.event_name            eventName,
+            a.event_place           eventPlace,
+            a.prize_name            prizeName,
+            a.penalty_term          penaltyTerm
         FROM
-            feeder_info a
+            horse_prize_info a
         LEFT JOIN
             horse_info b
         ON
             a.horse_id = b.horse_id
         WHERE
             a.delete_flag = 0
-        <if test="feederName != null and feederName != ''">
+        <if test="horseId != null and horseId != ''">
             AND
-                a.feeder_name like CONCAT('%',#{feederName, jdbcType=VARCHAR},'%')
+                a.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        <if test="eventDate != null and eventDate != ''">
+            AND
+                a.event_date = #{eventDate, jdbcType=VARCHAR}
+        </if>
+        <if test="eventName != null and eventName != ''">
+            AND
+                a.event_name like CONCAT('%',#{eventName, jdbcType=VARCHAR},'%')
         </if>
         limit #{beginIndex}, #{pageRecorders}
     </select>
 
-    <select id="countFeederListByPage" parameterType="com.equestrianism.api.model.vo.feeder_info.FeederInfoListVO"
+    <select id="countHorsePrizeInfoListByPage" parameterType="com.equestrianism.api.model.vo.horse_prize_info.HorsePrizeInfoListVO"
             resultType="java.lang.Integer">
         SELECT
             count(1)
         FROM
-            feeder_info a
+            horse_prize_info a
         LEFT JOIN
             horse_info b
         ON
             a.horse_id = b.horse_id
         WHERE
             a.delete_flag = 0
-        <if test="feederName != null and feederName != ''">
+        <if test="horseId != null and horseId != ''">
             AND
-                a.feeder_name like CONCAT('%',#{feederName, jdbcType=VARCHAR},'%')
+                a.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        <if test="eventDate != null and eventDate != ''">
+            AND
+                a.event_date = #{eventDate, jdbcType=VARCHAR}
+        </if>
+        <if test="eventName != null and eventName != ''">
+            AND
+                a.event_name like CONCAT('%',#{eventName, jdbcType=VARCHAR},'%')
         </if>
     </select>
 
-    <select id="selectFeederInfoByDetail" parameterType="java.lang.String"
-            resultType="com.equestrianism.api.model.bo.FeederInfoDetailBO">
+    <select id="selectHorsePrizeInfoByDetail" parameterType="java.lang.String"
+            resultType="com.equestrianism.api.model.bo.HorsePrizeInfoDetailBO">
         SELECT
-            feeder_id           feederId,
-            feeder_name         feederName,
-            sex                 sex,
-            skill_desc          skillDesc,
-            horse_id            horseId,
-            hire_date           hireDate,
-            id_card_image       idCardImage
+            a.horse_prize_id        horsePrizeId,
+            a.horse_id              horseId,
+            a.event_date            eventDate,
+            a.event_name            eventName,
+            a.event_place           eventPlace,
+            a.prize_name            prizeName,
+            a.penalty_term          penaltyTerm
         FROM
-            feeder_info
+            horse_prize_info a
         WHERE
-            feeder_id = #{feederId, jdbcType=VARCHAR}
+            a.horse_prize_id = #{horsePrizeId, jdbcType=VARCHAR}
     </select>
 
 </mapper>
