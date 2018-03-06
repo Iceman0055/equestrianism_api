@@ -2,17 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- user_info表 -->
-<mapper namespace="com.equestrianism.api.dao.FeederInfoMapper">
+<mapper namespace="com.equestrianism.api.dao.HorsePrizeInfoMapper">
 
     <!--返回Map-->
-    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.FeederInfoEntity">
-        <id column="feeder_id" property="feederId" jdbcType="VARCHAR"/>
-        <result column="feeder_name" property="feederName" jdbcType="VARCHAR"/>
-        <result column="sex" property="sex" jdbcType="INTEGER"/>
-        <result column="skill_desc" property="skillDesc" jdbcType="VARCHAR"/>
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.HorsePrizeInfoEntity">
+        <id column="horse_prize_id" property="horsePrizeId" jdbcType="VARCHAR"/>
         <result column="horse_id" property="horseId" jdbcType="VARCHAR"/>
-        <result column="hire_date" property="hireDate" jdbcType="VARCHAR"/>
-        <result column="id_card_image" property="idCardImage" jdbcType="BLOB"/>
+        <result column="event_name" property="eventName" jdbcType="VARCHAR"/>
+        <result column="event_date" property="eventDate" jdbcType="VARCHAR"/>
+        <result column="event_place" property="eventPlace" jdbcType="VARCHAR"/>
+        <result column="prize_name" property="prizeName" jdbcType="VARCHAR"/>
+        <result column="penalty_term" property="penaltyTerm" jdbcType="VARCHAR"/>
+        <result column="awarder" property="awarder" jdbcType="VARCHAR"/>
+        <result column="desc_image" property="descImage" jdbcType="BLOB"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
         <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
@@ -22,32 +24,34 @@
 
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        feeder_id, feeder_name, sex, skill_desc, horse_id, hire_date, id_card_image, status,
-        delete_flag, data_version, create_date, update_date
+        horse_prize_id, horse_id, event_name, event_date, event_place, penalty_term, awarder,
+        desc_image, status, delete_flag, data_version, create_date, update_date
     </sql>
 
-    <insert id="insert" parameterType="com.equestrianism.api.model.po.FeederInfoEntity">
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.HorsePrizeInfoEntity">
         INSERT INTO
-            feeder_info (
-                feeder_id,
-                feeder_name,
-                sex,
-                skill_desc,
+            horse_prize_info (
+                horse_prize_id,
                 horse_id,
-                hire_date,
-                id_card_image,
+                event_name,
+                event_date,
+                event_place,
+                penalty_term,
+                awarder,
+                desc_image,
                 status,
                 delete_flag,
                 data_version,
                 create_date
             ) VALUES (
-                #{feederId, jdbcType=VARCHAR},
-                #{feederName, jdbcType=VARCHAR},
-                #{sex, jdbcType=INTEGER},
-                #{skillDesc, jdbcType=VARCHAR},
+                #{horsePrizeId, jdbcType=VARCHAR},
                 #{horseId, jdbcType=VARCHAR},
-                #{hireDate, jdbcType=VARCHAR},
-                #{idCardImage, jdbcType=BLOB},
+                #{eventName, jdbcType=VARCHAR},
+                #{eventDate, jdbcType=VARCHAR},
+                #{eventPlace, jdbcType=VARCHAR},
+                #{penaltyTerm, jdbcType=VARCHAR},
+                #{awarder, jdbcType=VARCHAR},
+                #{descImage, jdbcType=BLOB},
                 1,
                 0,
                 1,
@@ -55,27 +59,30 @@
             )
     </insert>
 
-    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.FeederInfoEntity">
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.HorsePrizeInfoEntity">
         UPDATE
-            feeder_info
+            horse_prize_info
         <set>
-            <if test="feederName != null and feederName != ''">
-                feeder_name = #{feederName, jdbcType=VARCHAR},
+            <if test="eventName != null and eventName != ''">
+                event_name = #{eventName, jdbcType=VARCHAR},
             </if>
-            <if test="sex != null">
-                sex = #{sex, jdbcType=INTEGER},
+            <if test="eventDate != null and eventDate != ''">
+                event_date = #{eventDate, jdbcType=VARCHAR},
             </if>
-            <if test="skillDesc != null and skillDesc != ''">
-                skill_desc = #{skillDesc, jdbcType=INTEGER},
+            <if test="eventPlace != null and eventPlace != ''">
+                event_place = #{eventPlace, jdbcType=VARCHAR},
             </if>
-            <if test="horseId != null and horseId != ''">
-                horse_id = #{horseId, jdbcType=VARCHAR},
+            <if test="prizeName != null and prizeName != ''">
+                prize_name = #{prizeName, jdbcType=VARCHAR},
             </if>
-            <if test="hireDate != null and hireDate != ''">
-                hire_date = #{hireDate, jdbcType=VARCHAR},
+            <if test="penaltyTerm != null and penaltyTerm != ''">
+                penalty_term = #{penaltyTerm, jdbcType=VARCHAR},
             </if>
-            <if test="idCardImage != null and idCardImage != ''">
-                id_card_image = #{idCardImage, jdbcType=BLOB},
+            <if test="awarder != null and awarder != ''">
+                awarder = #{awarder, jdbcType=VARCHAR},
+            </if>
+            <if test="descImage != null and descImage != ''">
+                desc_image = #{descImage, jdbcType=BLOB},
             </if>
             <if test="status != null">
                 status = #{status, jdbcType=INTEGER},
@@ -85,7 +92,7 @@
             </if>
         </set>
         WHERE
-            feeder_id = #{feederId, jdbcType=VARCHAR}
+            horse_prize_id = #{horsePrizeId, jdbcType=VARCHAR}
     </update>
 
     <select id="selectFeederListByPage" parameterType="com.equestrianism.api.model.vo.feeder_info.FeederInfoListVO"
