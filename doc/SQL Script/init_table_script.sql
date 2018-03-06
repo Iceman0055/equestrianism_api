@@ -149,6 +149,24 @@ CREATE TABLE `feeder_info` (
   PRIMARY KEY (`feeder_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `horse_prize_info` (
+  `horse_prize_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `horse_id` varchar(32) NOT NULL COMMENT '马匹主键',
+  `event_name` varchar(32) NOT NULL COMMENT '赛事名称',
+  `event_date` varchar(7) NOT NULL COMMENT '比赛时间',
+  `event_place` varchar(16) NOT NULL COMMENT '比赛地点',
+  `prize_name` varchar(16) NOT NULL COMMENT '奖项',
+  `penalty_term` varchar(16) NOT NULL COMMENT '罚分项',
+  `awarder` varchar(16) NOT NULL COMMENT '颁奖方',
+  `desc_image` longblob NOT NULL COMMENT '描述图片',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`horse_prize_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
