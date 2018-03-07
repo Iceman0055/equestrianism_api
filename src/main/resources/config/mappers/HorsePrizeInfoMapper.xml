@@ -165,7 +165,9 @@
             a.event_name            eventName,
             a.event_place           eventPlace,
             a.prize_name            prizeName,
-            a.penalty_term          penaltyTerm
+            a.penalty_term          penaltyTerm,
+            a.awarder               awarder,
+            a.desc_image            descImage
         FROM
             horse_prize_info a
         WHERE

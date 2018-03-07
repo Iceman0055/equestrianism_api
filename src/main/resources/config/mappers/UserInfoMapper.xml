@@ -241,4 +241,22 @@
             user_id = #{userId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectUserListByRole" parameterType="java.lang.String"
+            resultType="com.equestrianism.api.model.model.UserInfoVeterinarianModel">
+        SELECT
+            a.user_id       userId,
+            a.realname      realname
+        FROM
+            user_info a,
+            role_info b
+        WHERE
+            a.status = 1
+        AND
+            a.delete_flag = 0
+        AND
+            a.role_id = b.role_id
+        AND
+            b.short_name = #{shortName, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

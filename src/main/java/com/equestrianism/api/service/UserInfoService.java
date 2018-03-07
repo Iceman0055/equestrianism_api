@@ -1,8 +1,10 @@
 package com.equestrianism.api.service;
 
+import com.equestrianism.api.constants.RoleShortNameEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
+import com.equestrianism.api.model.bo.UserInfoVeterinarianBO;
 import com.equestrianism.api.model.vo.*;
 
 /**
@@ -19,5 +21,7 @@ public interface UserInfoService {
     UserInfoListBO userInfoList( UserInfoListVO userInfoListVo ) throws BaseException;
 
     UserInfoDetailBO userDetail( UserInfoDetailVO userInfoDetailVo ) throws BaseException;
-    
+
+    UserInfoVeterinarianBO getUserListByRole( RoleShortNameEnum roleShortNameEnum ) throws BaseException;
+
 }

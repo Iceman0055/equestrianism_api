@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.HospitalAppointInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.HospitalAppointInfoEntity">
+        <id column="hospital_appoint_id" property="hospitalAppointId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="appoint_date" property="appointDate" jdbcType="VARCHAR"/>
+        <result column="contacts" property="contacts" jdbcType="VARCHAR"/>
+        <result column="contact_way" property="contactWay" jdbcType="VARCHAR"/>
+        <result column="appoint_number" property="appointNumber" jdbcType="VARCHAR"/>
+        <result column="appoint_desc" property="appointDesc" jdbcType="VARCHAR"/>
+        <result column="appoint_status" property="appointStatus" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        hospital_appoint_id, user_id, appoint_date, contacts, contact_way, appoint_number, appoint_desc,
+        appoint_status, remark, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.HospitalAppointInfoEntity">
+        INSERT INTO
+            hospital_appoint_info (
+                hospital_appoint_id,
+                user_id,
+                appoint_date,
+                contacts,
+                contact_way,
+                appoint_number,
+                appoint_desc,
+                remark,
+                appoint_status,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{hospitalAppointId, jdbcType=VARCHAR},
+                #{userId, jdbcType=VARCHAR},
+                #{appointDate, jdbcType=VARCHAR},
+                #{contacts, jdbcType=VARCHAR},
+                #{contactWay, jdbcType=VARCHAR},
+                #{appointNumber, jdbcType=VARCHAR},
+                #{appointDesc, jdbcType=VARCHAR},
+                #{remark, jdbcType=VARCHAR},
+                #{appointStatus, jdbcType=INTEGER},
+                1,
+                0,
+                1,
+                now()
+            )
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.HospitalAppointInfoEntity">
+        UPDATE
+            hospital_appoint_info
+        <set>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="appointDate != null and appointDate != ''">
+                appoint_date = #{appointDate, jdbcType=VARCHAR},
+            </if>
+            <if test="contacts != null and contacts != ''">
+                contacts = #{contacts, jdbcType=VARCHAR},
+            </if>
+            <if test="contactWay != null and contactWay != ''">
+                contact_way = #{contactWay, jdbcType=VARCHAR},
+            </if>
+            <if test="appointNumber != null and appointNumber != ''">
+                appoint_number = #{appointNumber, jdbcType=VARCHAR},
+            </if>
+            <if test="appointDesc != null and appointDesc != ''">
+                appoint_desc = #{appointDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="appointStatus != null and appointStatus != ''">
+                appoint_status = #{appointStatus, jdbcType=INTEGER},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            hospital_appoint_id = #{hospitalAppointId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectAppointListByPage" parameterType="com.equestrianism.api.model.vo.hospital_appoint_info.HospitalAppointInfoListVO"
+            resultType="com.equestrianism.api.model.model.HospitalAppointInfoListModel">
+        SELECT
+            a.hospital_appoint_id       hospitalAppointId,
+            a.appoint_date              appointDate,
+            b.realname                  realname,
+            a.appoint_number            appointNumber,
+            a.appoint_desc              appointDesc,
+            a.contacts                  contacts,
+            a.contact_way               contactWay,
+            a.appoint_status            appointStatus,
+            a.remark                    remark
+        FROM
+            hospital_appoint_info a,
+            user_info b
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.user_id = b.user_id
+        <if test="appointDate != null and appointDate != ''">
+            AND
+            a.appoint_date like CONCAT(#{appointDate, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="userId != null and userId != ''">
+            AND
+            a.user_id = #{userId, jdbcType=VARCHAR}
+        </if>
+        <if test="appointNumber != null and appointNumber != ''">
+            AND
+            a.appoint_number like CONCAT('%', #{appointNumber, jdbcType=VARCHAR}, '%')
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countAppointListByPage" parameterType="com.equestrianism.api.model.vo.hospital_appoint_info.HospitalAppointInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            hospital_appoint_info a,
+            user_info b
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.user_id = b.user_id
+        <if test="appointDate != null and appointDate != ''">
+            AND
+            a.appoint_date like CONCAT(#{appointDate, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="userId != null and userId != ''">
+            AND
+            a.user_id = #{userId, jdbcType=VARCHAR}
+        </if>
+        <if test="appointNumber != null and appointNumber != ''">
+            AND
+            a.appoint_number like CONCAT('%', #{appointNumber, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+    <select id="selectAppointDetail" resultType="com.equestrianism.api.model.bo.HospitalAppointInfoDetailBO">
+        SELECT
+            hospital_appoint_id   hospitalAppointId,
+            appoint_date          appointDate,
+            user_id               userId,
+            appoint_desc          appointDesc,
+            appoint_number        appointNumber,
+            contacts              contacts,
+            contact_way           contactWay,
+            remark                remark,
+            appoint_status        appointStatus
+        FROM
+            hospital_appoint_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        AND
+            hospital_appoint_id = #{hospitalAppointId, jdbcType=VARCHAR}
+        ORDER BY
+            appoint_date
+        desc
+    </select>
+
+</mapper>

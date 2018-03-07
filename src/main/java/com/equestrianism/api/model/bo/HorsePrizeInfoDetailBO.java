@@ -14,6 +14,8 @@ public class HorsePrizeInfoDetailBO extends BaseObject {
     private String eventPlace;
     private String prizeName;
     private String penaltyTerm;
+    private String awarder;
+    private byte[] descImage;
 
     public String getHorsePrizeId() {
         return horsePrizeId;
@@ -69,5 +71,21 @@ public class HorsePrizeInfoDetailBO extends BaseObject {
 
     public void setHorseId(String horseId) {
         this.horseId = horseId;
+    }
+
+    public String getAwarder() {
+        return awarder;
+    }
+
+    public void setAwarder( String awarder ) {
+        this.awarder = awarder;
+    }
+
+    public byte[] getDescImage() {
+        return descImage;
+    }
+
+    public void setDescImage( byte[] descImage ) {
+        this.descImage = descImage;
     }
 }

@@ -1,10 +1,12 @@
 package com.equestrianism.api.controller;
 
+import com.equestrianism.api.constants.RoleShortNameEnum;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
+import com.equestrianism.api.model.bo.UserInfoVeterinarianBO;
 import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.UserInfoService;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -104,6 +107,20 @@ public class UserInfoController extends BaseController {
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {
             LOGGER.error( "【UserInfoController】【detail】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/veterinarian", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> veterinarian() {
+        LOGGER.info( "【UserInfoController】【veterinarian】inputs : " );
+        try {
+            UserInfoVeterinarianBO response = userInfoService.getUserListByRole( RoleShortNameEnum.H_VETERINARIAN );
+            LOGGER.info( "【UserInfoController】【veterinarian】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【veterinarian】【Exception】", e );
             return ContainerUtils.buildResFailMap();
         }
     }

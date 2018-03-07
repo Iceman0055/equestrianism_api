@@ -1,12 +1,15 @@
 package com.equestrianism.api.service.impl;
 
 import com.equestrianism.api.constants.CodeEnum;
+import com.equestrianism.api.constants.RoleShortNameEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.UserInfoMapper;
 import com.equestrianism.api.model.bo.UserInfoDetailBO;
 import com.equestrianism.api.model.bo.UserInfoListBO;
+import com.equestrianism.api.model.bo.UserInfoVeterinarianBO;
 import com.equestrianism.api.model.model.UserInfoListModel;
+import com.equestrianism.api.model.model.UserInfoVeterinarianModel;
 import com.equestrianism.api.model.po.UserInfoEntity;
 import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.UserInfoService;
@@ -104,6 +107,15 @@ public class UserInfoServiceImpl implements UserInfoService {
             LOGGER.error( "【UserInfoService】【userDetail】", e );
             throw new BaseException( CodeEnum.PROCESS_FAIL.note );
         }
+    }
+
+    @Override
+    public UserInfoVeterinarianBO getUserListByRole( RoleShortNameEnum roleShortNameEnum ) throws BaseException {
+        List<UserInfoVeterinarianModel> veterinarianList = userInfoMapper.selectUserListByRole( roleShortNameEnum.shortName );
+        if ( veterinarianList == null || veterinarianList.size() == 0 ) {
+            return null;
+        }
+        return new UserInfoVeterinarianBO( veterinarianList );
     }
 
 }
