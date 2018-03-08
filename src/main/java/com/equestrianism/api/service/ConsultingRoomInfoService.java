@@ -4,6 +4,7 @@ import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.model.bo.ConsultingRoomInfoComboBoxBO;
 import com.equestrianism.api.model.bo.ConsultingRoomInfoDetailBO;
 import com.equestrianism.api.model.bo.ConsultingRoomInfoListBO;
+import com.equestrianism.api.model.vo.brigandine_info.BrigandineInfoAddVO;
 import com.equestrianism.api.model.vo.consulting_room_info.*;
 
 /**

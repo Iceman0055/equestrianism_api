@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.BrigandineInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.BrigandineInfoEntity">
+        <id column="brigandine_id" property="brigandineId" jdbcType="VARCHAR"/>
+        <result column="horse_id" property="horseId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="brigandine_date" property="brigandineDate" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        brigandine_id, horse_id, user_id, brigandine_date, remark, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.BrigandineInfoEntity">
+        INSERT INTO
+            brigandine_info (
+                brigandine_id,
+                horse_id,
+                user_id,
+                brigandine_date,
+                remark,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{brigandineId, jdbcType=VARCHAR},
+                #{horseId, jdbcType=VARCHAR},
+                #{userId, jdbcType=VARCHAR},
+                #{brigandineDate, jdbcType=VARCHAR},
+                #{remark, jdbcType=VARCHAR},
+                1,
+                0,
+                1,
+                now()
+            )
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.BrigandineInfoEntity">
+        UPDATE
+            brigandine_info
+        <set>
+            <if test="horseId != null and horseId != ''">
+                horse_id = #{horseId, jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="brigandineDate != null and brigandineDate != ''">
+                brigandine_date = #{brigandineDate, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            brigandine_id = #{brigandineId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectBrigandineInfoListByPage" parameterType="com.equestrianism.api.model.vo.brigandine_info.BrigandineInfoListVO"
+            resultType="com.equestrianism.api.model.model.BrigandineInfoListModel">
+        SELECT
+            a.brigandine_id     brigandineId,
+            a.brigandine_date   brigandineDate,
+            b.horse_name        horseName,
+            c.realname          realname
+        FROM
+            brigandine_info a,
+            horse_info b,
+            user_info c
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.horse_id = b.horse_id
+        AND
+            a.user_id = c.user_id
+        <if test="horseId != null and horseId != ''">
+            AND
+                a.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countBrigandineInfoListByPage" parameterType="com.equestrianism.api.model.vo.brigandine_info.BrigandineInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            brigandine_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        <if test="horseId != null and horseId != ''">
+            AND
+                horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            brigandine_info
+        WHERE
+            brigandine_id = #{brigandineId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>
