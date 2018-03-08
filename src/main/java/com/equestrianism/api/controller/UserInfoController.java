@@ -125,4 +125,18 @@ public class UserInfoController extends BaseController {
         }
     }
 
+    @RequestMapping( value = "/feeder", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> feeder() {
+        LOGGER.info( "【UserInfoController】【feeder】inputs : " );
+        try {
+            UserInfoVeterinarianBO response = userInfoService.getUserListByRole( RoleShortNameEnum.H_FEEDER );
+            LOGGER.info( "【UserInfoController】【feeder】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【feeder】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
 }
