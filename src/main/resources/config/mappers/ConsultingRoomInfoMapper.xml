@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.ConsultingRoomInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.ConsultingRoomInfoEntity">
+        <id column="consulting_room_id" property="consultingRoomId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="short_name" property="shortName" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        consulting_room_id, name, short_name, remark, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.UserInfoEntity">
+        INSERT INTO
+            consulting_room_info (
+                consulting_room_id,
+                name,
+                short_name,
+                remark,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{consultingRoomId, jdbcType=VARCHAR},
+                #{name, jdbcType=VARCHAR},
+                #{shortName, jdbcType=VARCHAR},
+                #{remark, jdbcType=VARCHAR},
+                1,
+                0,
+                1,
+                now()
+            )
+
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.ConsultingRoomInfoEntity">
+        UPDATE
+            consulting_room_info
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name, jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null and shortName != ''">
+                short_name = #{shortName, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            consulting_room_id = #{consultingRoomId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectConsultingRoomListByPage" parameterType="com.equestrianism.api.model.vo.consulting_room_info.ConsultingRoomInfoListVO"
+            resultType="com.equestrianism.api.model.model.ConsultingRoomInfoListModel">
+        SELECT
+            consulting_room_id    consultingRoomId,
+            name                  name,
+            short_name            shortName,
+            remark                remark,
+            status                status
+        FROM
+            consulting_room_info
+        WHERE
+            delete_flag = 0
+        <if test="name != null and name != ''">
+            AND
+                name like CONCAT('%', #{name, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="shortName != null and shortName != ''">
+            AND
+                short_name like CONCAT('%', #{shortName, jdbcType=VARCHAR}, '%')
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countConsultingRoomListByPage" parameterType="com.equestrianism.api.model.vo.consulting_room_info.ConsultingRoomInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            consulting_room_info
+        WHERE
+            delete_flag = 0
+        <if test="name != null and name != ''">
+            AND
+                name like CONCAT('%', #{name, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="shortName != null and shortName != ''">
+            AND
+                short_name like CONCAT('%', #{shortName, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+    <select id="selectConsultingRoomListByComboBox" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            consulting_room_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        ORDER BY
+            create_date
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            consulting_room_info
+        WHERE
+            consulting_room_id = #{consultingRoomId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -100,7 +100,9 @@ public class DictionaryInfoController extends BaseController {
     public Map<String, Object> list( DictionaryInfoListVO dictionaryInfoListVo ) throws UnsupportedEncodingException {
         LOGGER.info( "【DictionaryInfoController】【list】inputs : " + dictionaryInfoListVo.toJsonString() );
         try {
-            dictionaryInfoListVo.setTypeName( new String( dictionaryInfoListVo.getTypeName().getBytes( "ISO-8859-1" ), "UTF-8" ) );
+            if ( dictionaryInfoListVo.getTypeName() != null && !"".equals( dictionaryInfoListVo.getTypeName() ) ) {
+                dictionaryInfoListVo.setTypeName( new String( dictionaryInfoListVo.getTypeName().getBytes( "ISO-8859-1" ), "UTF-8" ) );
+            }
             DictionaryInfoListBO response = dictionaryInfoService.dictionaryInfoList( dictionaryInfoListVo );
             LOGGER.info( "【DictionaryInfoController】【list】result : " + response.toJsonString() );
             return ContainerUtils.buildResSuccessMap( response );

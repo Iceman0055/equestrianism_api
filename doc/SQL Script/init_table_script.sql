@@ -187,6 +187,34 @@ CREATE TABLE `hospital_appoint_info` (
   PRIMARY KEY (`hospital_appoint_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `consulting_room_info` (
+  `consulting_room_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `name` varchar(16) NOT NULL COMMENT '诊疗室名称',
+  `short_name` varchar(8) NOT NULL COMMENT '简称',
+  `remark` varchar(16) NOT NULL COMMENT '备注',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`consulting_room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `brigandine_info` (
+  `brigandine_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `horse_id` varchar(32) NOT NULL COMMENT '马匹主键',
+  `user_id` varchar(32) NOT NULL COMMENT '用户主键',
+  `brigandine_date` varchar(20) NOT NULL COMMENT '钉甲时间',
+  `remark` varchar(32) NOT NULL COMMENT '备注',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`brigandine_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 
 
