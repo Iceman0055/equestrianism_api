@@ -11,6 +11,7 @@ public class BrigandineInfoListModel extends BaseObject {
     private String brigandineDate;
     private String horseName;
     private String realname;
+    private String remark;
 
     public String getBrigandineId() {
         return brigandineId;
@@ -44,4 +45,11 @@ public class BrigandineInfoListModel extends BaseObject {
         this.realname = realname;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark( String remark ) {
+        this.remark = remark;
+    }
 }

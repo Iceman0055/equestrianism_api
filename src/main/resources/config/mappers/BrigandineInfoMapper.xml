@@ -82,7 +82,8 @@
             a.brigandine_id     brigandineId,
             a.brigandine_date   brigandineDate,
             b.horse_name        horseName,
-            c.realname          realname
+            c.realname          realname,
+            a.remark            remark
         FROM
             brigandine_info a,
             horse_info b,
