@@ -125,7 +125,6 @@ public class ConsultingRoomInfoServiceImpl implements ConsultingRoomInfoService 
         ConsultingRoomInfoDetailBO response = new ConsultingRoomInfoDetailBO( consultingRoomInfoEntity.getConsultingRoomId(),
                 consultingRoomInfoEntity.getName(), consultingRoomInfoEntity.getShortName(), consultingRoomInfoEntity.getRemark(),
                 consultingRoomInfoEntity.getStatus() );
-
         return response;
     }
 }

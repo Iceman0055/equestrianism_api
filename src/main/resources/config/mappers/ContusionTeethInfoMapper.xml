@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.ContusionTeethInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.ContusionTeethInfoEntity">
+        <id column="contusion_teeth_id" property="contusionTeethId" jdbcType="VARCHAR"/>
+        <result column="horse_id" property="horseId" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="operate_date" property="operateDate" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        contusion_teeth_id, horse_id, user_id, operate_date, remark, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.ContusionTeethInfoEntity">
+        INSERT INTO
+            contusion_teeth_info (
+                contusion_teeth_id,
+                horse_id,
+                user_id,
+                operate_date,
+                remark,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{contusionTeethId, jdbcType=VARCHAR},
+                #{horseId, jdbcType=VARCHAR},
+                #{userId, jdbcType=VARCHAR},
+                #{operateDate, jdbcType=VARCHAR},
+                #{remark, jdbcType=VARCHAR},
+                1,
+                0,
+                1,
+                now()
+            )
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.ContusionTeethInfoEntity">
+        UPDATE
+            contusion_teeth_info
+        <set>
+            <if test="horseId != null and horseId != ''">
+                horse_id = #{horseId, jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId, jdbcType=VARCHAR},
+            </if>
+            <if test="operateDate != null and operateDate != ''">
+                operate_date = #{operateDate, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            contusion_teeth_id = #{contusionTeethId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectContusionTeethInfoListByPage" parameterType="com.equestrianism.api.model.vo.contusion_teeth_info.ContusionTeethInfoListVO"
+            resultType="com.equestrianism.api.model.model.ContusionTeethInfoListModel">
+        SELECT
+            a.contusion_teeth_id      contusionTeethId,
+            a.operate_date            operateDate,
+            b.horse_name              horseName,
+            c.realname                realname,
+            a.remark                  remark
+        FROM
+            contusion_teeth_info a,
+            horse_info b,
+            user_info c
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.horse_id = b.horse_id
+        AND
+            a.user_id = c.user_id
+        <if test="horseId != null and horseId != ''">
+            AND
+                a.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countContusionTeethInfoListByPage" parameterType="com.equestrianism.api.model.vo.contusion_teeth_info.ContusionTeethInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            contusion_teeth_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        <if test="horseId != null and horseId != ''">
+            AND
+                horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            contusion_teeth_info
+        WHERE
+            contusion_teeth_id = #{contusionTeethId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>
