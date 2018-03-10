@@ -228,6 +228,31 @@ CREATE TABLE `contusion_teeth_info` (
   PRIMARY KEY (`contusion_teeth_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `asset_type_info` (
+  `type_id` int(6) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `type_name` varchar(16) NOT NULL COMMENT '资产大类名称',
+  `remark` varchar(32) NOT NULL COMMENT '备注',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `asset_type_detail` (
+  `type_detail_id` int(6) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `type_detail_name` varchar(16) NOT NULL COMMENT '资产子类名称',
+  `type_id` int(6) NOT NULL COMMENT '资产大类主键',
+  `remark` varchar(32) NOT NULL COMMENT '备注',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`type_detail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资产子类信息表';
+
 
 
 

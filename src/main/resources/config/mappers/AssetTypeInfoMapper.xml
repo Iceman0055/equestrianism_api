@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.AssetTypeInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.AssetTypeInfoEntity">
+        <id column="type_id" property="typeId" jdbcType="INTEGER"/>
+        <result column="type_name" property="typeName" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        type_id, type_name, remark, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.AssetTypeInfoEntity">
+        INSERT INTO
+            asset_type_info (
+                type_name,
+                remark,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{typeName, jdbcType=VARCHAR},
+                #{remark, jdbcType=VARCHAR},
+                1,
+                0,
+                1,
+                now()
+            )
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.AssetTypeInfoEntity">
+        UPDATE
+            asset_type_info
+        <set>
+            <if test="typeName != null and typeName != ''">
+                type_name = #{typeName, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            type_id = #{typeId, jdbcType=INTEGER}
+    </update>
+
+    <select id="selectAssetTypeInfoListByPage" parameterType="com.equestrianism.api.model.vo.asset_type_info.AssetTypeInfoListVO"
+            resultType="com.equestrianism.api.model.model.AssetTypeInfoListModel">
+        SELECT
+            type_id     typeId,
+            type_name   typeName,
+            remark      remark
+        FROM
+            asset_type_info
+        WHERE
+            delete_flag = 0
+        <if test="typeName != null and typeName != ''">
+            AND
+                type_name like CONCAT('%', #{typeName, jdbcType=VARCHAR}, '%')
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countAssetTypeInfoListByPage" parameterType="com.equestrianism.api.model.vo.asset_type_info.AssetTypeInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            asset_type_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        <if test="typeName != null and typeName != ''">
+            AND
+                type_name like CONCAT('%', #{typeName, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            asset_type_info
+        WHERE
+            type_id = #{typeId, jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAssetTypeListByComboBox" resultType="com.equestrianism.api.model.model.AssetTypeInfoComboBoxModel">
+        SELECT
+            type_id     typeId,
+            type_name   typeName
+        FROM
+            asset_type_info
+        ORDER BY
+             CONVERT( type_name USING gbk )
+    </select>
+
+</mapper>

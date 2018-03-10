@@ -1,0 +1,47 @@
+package com.equestrianism.api.model.bo;
+
+import com.equestrianism.api.core.model.BaseObject;
+
+/**
+ * Created by Chenzq on 2018/3/11.
+ */
+public class AssetTypeInfoDetailBO extends BaseObject {
+
+    private Integer typeId;
+    private String typeName;
+    private String remark;
+
+    public AssetTypeInfoDetailBO() {
+    }
+
+    public AssetTypeInfoDetailBO( Integer typeId, String typeName, String remark ) {
+        this.typeId = typeId;
+        this.typeName = typeName;
+        this.remark = remark;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+}

@@ -27,5 +27,13 @@
 2、查询条件“马匹名称”下拉框（调用接口/horseInfo/comboBox，获取马匹）
 
 2018.03.10
-接种疫苗管理
+接种疫苗管理：
 1、列表查询条件为：“马匹名称”下拉框
+马匹基本信息：
+1、查询条件：“马匹名称”改为输入框，其他页面的延用下拉框
+
+2018.03.11
+1、增加菜单“系统管理”-“资产分类管理”，页面布局同字典管理
+分为assetTypeInfo和assetTypeDetail，用于“资产管理”相关功能的级联菜单。
+assetTypeInfo字段为typeId、typeName、remark。
+assetTypeDetail字段为typeDetailId、typeDetailName、typeId、remark。
