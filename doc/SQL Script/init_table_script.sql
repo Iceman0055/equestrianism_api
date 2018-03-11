@@ -253,6 +253,36 @@ CREATE TABLE `asset_type_detail` (
   PRIMARY KEY (`type_detail_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='资产子类信息表';
 
+CREATE TABLE `asset_info` (
+  `asset_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `type_id` int(6) NOT NULL COMMENT '资产大类主键',
+  `type_detail_id` int(6) NOT NULL COMMENT '资产子类主键',
+  `asset_type` int(1) NOT NULL DEFAULT '1' COMMENT '资产类别：1-马术中心 2-马医院',
+  `asset_number` varchar(64) NOT NULL COMMENT '资产编号',
+  `asset_name` varchar(32) NOT NULL COMMENT '资产名称',
+  `price` varchar(16) NOT NULL COMMENT '价值',
+  `acreage` varchar(16) NOT NULL COMMENT '面积',
+  `price_type` varchar(16) NOT NULL COMMENT '价值类型',
+  `acquire_way` varchar(16) NOT NULL COMMENT '取得方式',
+  `finance_accounts_date` varchar(20) NOT NULL COMMENT '财务出账日期',
+  `tab_date` varchar(20) NOT NULL COMMENT '制单日期',
+  `guarantee_date` varchar(20) NOT NULL COMMENT '保修截止日期',
+  `manage_department` varchar(32) NOT NULL COMMENT '管理部门',
+  `manage_user` varchar(32) NOT NULL COMMENT '管理人',
+  `remark` varchar(32) NOT NULL COMMENT '备注',
+  `purpose` varchar(32) NOT NULL COMMENT '设计用途',
+  `specification_model` varchar(32) NOT NULL COMMENT '规格型号',
+  `brand` varchar(32) NOT NULL COMMENT '品牌',
+  `voucher_number` varchar(32) NOT NULL COMMENT '会计凭证号',
+  `purchase_organize` varchar(32) NOT NULL COMMENT '采购组织形式',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`asset_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
