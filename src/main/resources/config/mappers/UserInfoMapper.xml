@@ -259,4 +259,19 @@
             b.short_name = #{shortName, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectUserListByComboBox" parameterType="java.lang.String"
+            resultType="com.equestrianism.api.model.model.UserInfoComboBoxModel">
+        SELECT
+            user_id     userId,
+            realname    realname
+        FROM
+            user_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        AND
+            department_id = #{departmentId, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

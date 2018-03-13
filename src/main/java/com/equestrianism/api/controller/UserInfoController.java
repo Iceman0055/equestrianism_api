@@ -4,9 +4,7 @@ import com.equestrianism.api.constants.RoleShortNameEnum;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
-import com.equestrianism.api.model.bo.UserInfoDetailBO;
-import com.equestrianism.api.model.bo.UserInfoListBO;
-import com.equestrianism.api.model.bo.UserInfoVeterinarianBO;
+import com.equestrianism.api.model.bo.*;
 import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.UserInfoService;
 import org.slf4j.Logger;
@@ -135,6 +133,20 @@ public class UserInfoController extends BaseController {
             return ContainerUtils.buildResSuccessMap( response );
         } catch ( BaseException e ) {
             LOGGER.error( "【UserInfoController】【feeder】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/comboBox", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> comboBox( String departmentId ) {
+        LOGGER.info( "【UserInfoController】【comboBox】begin: departmentId = " + departmentId );
+        try {
+            UserInfoComboBoxBO response = userInfoService.comboBox( departmentId );
+            LOGGER.info( "【UserInfoController】【comboBox】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【UserInfoController】【comboBox】【Exception】", e );
             return ContainerUtils.buildResFailMap();
         }
     }

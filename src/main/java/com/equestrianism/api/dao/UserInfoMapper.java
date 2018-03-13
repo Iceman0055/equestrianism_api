@@ -1,6 +1,7 @@
 package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.bo.UserInfoDetailBO;
+import com.equestrianism.api.model.model.UserInfoComboBoxModel;
 import com.equestrianism.api.model.model.UserInfoListModel;
 import com.equestrianism.api.model.model.UserInfoVeterinarianModel;
 import com.equestrianism.api.model.po.UserInfoEntity;
@@ -26,4 +27,5 @@ public interface UserInfoMapper {
 
     List<UserInfoVeterinarianModel> selectUserListByRole( String shortName );
 
+    List<UserInfoComboBoxModel> selectUserListByComboBox(String departmentId) ;
 }

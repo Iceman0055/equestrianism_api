@@ -5,9 +5,9 @@ import com.equestrianism.api.constants.RoleShortNameEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.UserInfoMapper;
-import com.equestrianism.api.model.bo.UserInfoDetailBO;
-import com.equestrianism.api.model.bo.UserInfoListBO;
-import com.equestrianism.api.model.bo.UserInfoVeterinarianBO;
+import com.equestrianism.api.model.bo.*;
+import com.equestrianism.api.model.model.DepartmentInfoComboBoxModel;
+import com.equestrianism.api.model.model.UserInfoComboBoxModel;
 import com.equestrianism.api.model.model.UserInfoListModel;
 import com.equestrianism.api.model.model.UserInfoVeterinarianModel;
 import com.equestrianism.api.model.po.UserInfoEntity;
@@ -116,6 +116,17 @@ public class UserInfoServiceImpl implements UserInfoService {
             return null;
         }
         return new UserInfoVeterinarianBO( veterinarianList );
+    }
+
+    @Override
+    public UserInfoComboBoxBO comboBox(String departmentId) throws BaseException {
+        try {
+            List<UserInfoComboBoxModel> userList = userInfoMapper.selectUserListByComboBox( departmentId );
+            return new UserInfoComboBoxBO( userList );
+        } catch ( Exception e ) {
+            LOGGER.error( "【UserInfoService】【comboBox】", e );
+            throw new BaseException( CodeEnum.PROCESS_FAIL.note );
+        }
     }
 
 }

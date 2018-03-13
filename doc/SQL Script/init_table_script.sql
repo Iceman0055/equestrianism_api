@@ -262,8 +262,8 @@ CREATE TABLE `asset_info` (
   `asset_name` varchar(32) NOT NULL COMMENT '资产名称',
   `price` varchar(16) NOT NULL COMMENT '价值',
   `acreage` varchar(16) NOT NULL COMMENT '面积',
-  `price_type` varchar(16) NOT NULL COMMENT '价值类型',
-  `acquire_way` varchar(16) NOT NULL COMMENT '取得方式',
+  `price_type` int(8) NOT NULL COMMENT '价值类型',
+  `acquire_way` int(8) NOT NULL COMMENT '取得方式',
   `finance_accounts_date` varchar(20) NOT NULL COMMENT '财务出账日期',
   `tab_date` varchar(20) NOT NULL COMMENT '制单日期',
   `guarantee_date` varchar(20) NOT NULL COMMENT '保修截止日期',
@@ -282,6 +282,7 @@ CREATE TABLE `asset_info` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`asset_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
