@@ -255,6 +255,7 @@ CREATE TABLE `asset_type_detail` (
 
 CREATE TABLE `asset_info` (
   `asset_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `bar_code` varchar(32) NOT NULL COMMENT '条形码',
   `type_id` int(6) NOT NULL COMMENT '资产大类主键',
   `type_detail_id` int(6) NOT NULL COMMENT '资产子类主键',
   `asset_type` int(1) NOT NULL DEFAULT '1' COMMENT '资产类别：1-马术中心 2-马医院',
@@ -282,6 +283,8 @@ CREATE TABLE `asset_info` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`asset_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 
 

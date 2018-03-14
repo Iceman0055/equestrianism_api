@@ -10,6 +10,7 @@ import java.util.UUID;
 public class AssetInfoEntity extends BasePO {
 
     private String assetId = UUID.randomUUID().toString().replace( "-", "" );
+    private String barCode;
     private Integer typeId;
     private Integer typeDetailId;
     private Integer assetType;
@@ -41,17 +42,18 @@ public class AssetInfoEntity extends BasePO {
     public AssetInfoEntity( Integer typeId, Integer typeDetailId, Integer assetType, String assetNumber, String assetName,
                             String price, String acreage, Integer priceType, Integer acquireWay, String financeAccountsDate,
                             String tabDate, String guaranteeDate, String manageDepartment, String manageUser, String remark,
-                            String purpose, String specificationModel, String brand, String voucherNumber, String purchaseOrganize ) {
+                            String purpose, String specificationModel, String brand, String voucherNumber, String purchaseOrganize,
+                            String barCode ) {
         this( UUID.randomUUID().toString().replace( "-", "" ), typeId, typeDetailId, assetType, assetNumber, assetName,
                 price, acreage, priceType, acquireWay, financeAccountsDate, tabDate, guaranteeDate, manageDepartment,
-                manageUser, remark, purpose, specificationModel, brand, voucherNumber, purchaseOrganize );
+                manageUser, remark, purpose, specificationModel, brand, voucherNumber, purchaseOrganize, barCode );
     }
 
     public AssetInfoEntity( String assetId, Integer typeId, Integer typeDetailId, Integer assetType, String assetNumber,
                             String assetName, String price, String acreage, Integer priceType, Integer acquireWay,
                             String financeAccountsDate, String tabDate, String guaranteeDate, String manageDepartment,
                             String manageUser, String remark, String purpose, String specificationModel, String brand,
-                            String voucherNumber, String purchaseOrganize ) {
+                            String voucherNumber, String purchaseOrganize, String barCode ) {
         this.assetId = assetId;
         this.typeId = typeId;
         this.typeDetailId = typeDetailId;
@@ -73,6 +75,7 @@ public class AssetInfoEntity extends BasePO {
         this.brand = brand;
         this.voucherNumber = voucherNumber;
         this.purchaseOrganize = purchaseOrganize;
+        this.barCode = barCode;
     }
 
     public String getAssetId() {
@@ -241,5 +244,13 @@ public class AssetInfoEntity extends BasePO {
 
     public void setPurchaseOrganize(String purchaseOrganize) {
         this.purchaseOrganize = purchaseOrganize;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 }

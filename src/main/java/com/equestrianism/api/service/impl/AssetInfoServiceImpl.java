@@ -37,13 +37,16 @@ public class AssetInfoServiceImpl implements AssetInfoService {
 
     @Override
     public Boolean addAssetInfo( AssetInfoAddVO assetInfoAddVo ) throws BaseException {
+        if ( assetInfoAddVo.getBarCode() == null ) {
+            assetInfoAddVo.setBarCode( "" );
+        }
         AssetInfoEntity assetInfoEntity = new AssetInfoEntity( assetInfoAddVo.getTypeId(), assetInfoAddVo.getTypeDetailId(),
                 assetInfoAddVo.getAssetType(), assetInfoAddVo.getAssetNumber(), assetInfoAddVo.getAssetName(),
                 assetInfoAddVo.getPrice(), assetInfoAddVo.getAcreage(), assetInfoAddVo.getPriceType(), assetInfoAddVo.getAcquireWay(),
                 assetInfoAddVo.getFinanceAccountsDate(), assetInfoAddVo.getTabDate(), assetInfoAddVo.getGuaranteeDate(),
                 assetInfoAddVo.getManageDepartment(), assetInfoAddVo.getManageUser(), assetInfoAddVo.getRemark(),
                 assetInfoAddVo.getPurpose(), assetInfoAddVo.getSpecificationModel(), assetInfoAddVo.getBrand(),
-                assetInfoAddVo.getVoucherNumber(), assetInfoAddVo.getPurchaseOrganize() );
+                assetInfoAddVo.getVoucherNumber(), assetInfoAddVo.getPurchaseOrganize(), assetInfoAddVo.getBarCode() );
         Integer insertCount;
         try {
             insertCount = assetInfoMapper.insert( assetInfoEntity );
@@ -59,13 +62,17 @@ public class AssetInfoServiceImpl implements AssetInfoService {
 
     @Override
     public Boolean updateAssetInfo(AssetInfoUpdateVO assetInfoUpdateVo) throws BaseException {
+        if ( assetInfoUpdateVo.getBarCode() == null ) {
+            assetInfoUpdateVo.setBarCode( "" );
+        }
         AssetInfoEntity assetInfoEntity = new AssetInfoEntity( assetInfoUpdateVo.getAssetId(), assetInfoUpdateVo.getTypeId(),
                 assetInfoUpdateVo.getTypeDetailId(), assetInfoUpdateVo.getAssetType(), assetInfoUpdateVo.getAssetNumber(),
                 assetInfoUpdateVo.getAssetName(), assetInfoUpdateVo.getPrice(), assetInfoUpdateVo.getAcreage(), assetInfoUpdateVo.getPriceType(),
                 assetInfoUpdateVo.getAcquireWay(), assetInfoUpdateVo.getFinanceAccountsDate(), assetInfoUpdateVo.getTabDate(),
                 assetInfoUpdateVo.getGuaranteeDate(), assetInfoUpdateVo.getManageDepartment(), assetInfoUpdateVo.getManageUser(),
                 assetInfoUpdateVo.getRemark(), assetInfoUpdateVo.getPurpose(), assetInfoUpdateVo.getSpecificationModel(),
-                assetInfoUpdateVo.getBrand(), assetInfoUpdateVo.getVoucherNumber(), assetInfoUpdateVo.getPurchaseOrganize() );
+                assetInfoUpdateVo.getBrand(), assetInfoUpdateVo.getVoucherNumber(), assetInfoUpdateVo.getPurchaseOrganize(),
+                assetInfoUpdateVo.getBarCode() );
         Integer updateCount;
         try {
             updateCount = assetInfoMapper.updateBySelective( assetInfoEntity );
@@ -121,6 +128,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 assetInfoEntity.getAcreage(), assetInfoEntity.getPriceType(), assetInfoEntity.getAcquireWay(), assetInfoEntity.getFinanceAccountsDate(),
                 assetInfoEntity.getTabDate(), assetInfoEntity.getGuaranteeDate(), assetInfoEntity.getManageDepartment(), assetInfoEntity.getManageUser(),
                 assetInfoEntity.getRemark(), assetInfoEntity.getPurpose(), assetInfoEntity.getSpecificationModel(),
-                assetInfoEntity.getBrand(), assetInfoEntity.getVoucherNumber(), assetInfoEntity.getPurchaseOrganize() );
+                assetInfoEntity.getBrand(), assetInfoEntity.getVoucherNumber(), assetInfoEntity.getPurchaseOrganize(),
+                assetInfoEntity.getBarCode() );
     }
 }

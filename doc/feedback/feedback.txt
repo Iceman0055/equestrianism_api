@@ -46,9 +46,9 @@ assetTypeDetail字段为typeDetailId、typeDetailName、typeId、remark。
 4、新增、更新时“管理人”根据“管理部门”读取人员列表改为下拉框（userInfo/comboBox）；
 5、列表查询条件增加“资产名称”为输入框。
 
-
-
-
+2018.03.14
+马医院固定资产管理：
+1、新增、更新时增加字段：“条形码”为输入框，可选；
 
 
 

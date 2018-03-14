@@ -9,6 +9,7 @@ import com.equestrianism.api.core.model.BaseObject;
 public class AssetInfoDetailBO extends BaseObject {
 
     private String assetId;
+    private String barCode;
     private Integer typeId;
     private Integer typeDetailId;
     private Integer assetType;
@@ -37,7 +38,7 @@ public class AssetInfoDetailBO extends BaseObject {
                             String assetName, String price, String acreage, Integer priceType, Integer acquireWay,
                             String financeAccountsDate, String tabDate, String guaranteeDate, String manageDepartment,
                             String manageUser, String remark, String purpose, String specificationModel, String brand,
-                            String voucherNumber, String purchaseOrganize ) {
+                            String voucherNumber, String purchaseOrganize, String barCode ) {
         this.setAssetId(assetId);
         this.setTypeId(typeId);
         this.setTypeDetailId(typeDetailId);
@@ -59,6 +60,7 @@ public class AssetInfoDetailBO extends BaseObject {
         this.setBrand(brand);
         this.setVoucherNumber(voucherNumber);
         this.setPurchaseOrganize(purchaseOrganize);
+        this.barCode = barCode;
     }
 
     public String getAssetId() {
@@ -227,5 +229,13 @@ public class AssetInfoDetailBO extends BaseObject {
 
     public void setPurchaseOrganize(String purchaseOrganize) {
         this.purchaseOrganize = purchaseOrganize;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 }

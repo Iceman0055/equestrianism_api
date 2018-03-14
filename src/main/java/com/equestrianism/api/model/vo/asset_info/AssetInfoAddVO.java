@@ -9,6 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class AssetInfoAddVO extends BaseViewModel {
 
+    private String barCode;
     private Integer typeId;
     private Integer typeDetailId;
     private Integer assetType;
@@ -190,4 +191,11 @@ public class AssetInfoAddVO extends BaseViewModel {
         this.purchaseOrganize = purchaseOrganize;
     }
 
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
 }
