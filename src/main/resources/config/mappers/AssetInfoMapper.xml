@@ -33,12 +33,13 @@
         <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="inventory" property="inventory" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
         asset_id, bar_code, type_id, type_detail_id, asset_type, asset_number, asset_name, price, acreage, price_type, acquire_way,
-        finance_accounts_date, tab_date, guarantee_date, manage_department, manage_user, remark, purpose,
+        finance_accounts_date, tab_date, guarantee_date, manage_department, manage_user, remark, purpose, inventory,
         specification_model, brand, voucher_number, purchase_organize, status, delete_flag, data_version, create_date, update_date
     </sql>
 
@@ -53,6 +54,7 @@
                 asset_type,
                 asset_number,
                 asset_name,
+                inventory,
                 price,
                 acreage,
                 price_type,
@@ -80,6 +82,7 @@
                 #{assetType, jdbcType=INTEGER},
                 #{assetNumber, jdbcType=VARCHAR},
                 #{assetName, jdbcType=VARCHAR},
+                #{inventory, jdbcType=INTEGER},
                 #{price, jdbcType=VARCHAR},
                 #{acreage, jdbcType=VARCHAR},
                 #{priceType, jdbcType=INTEGER},
@@ -202,7 +205,9 @@
             a.specification_model     specificationModel,
             a.brand           brand,
             a.voucher_number  voucherNumber,
-            a.purchase_organize       purchaseOrganize
+            a.purchase_organize       purchaseOrganize,
+            a.inventory       inventory,
+            a.bar_code        barCode
         FROM
             asset_info a
         INNER JOIN
@@ -281,5 +286,39 @@
         WHERE
             asset_id = #{assetId, jdbcType=VARCHAR}
     </select>
+
+    <select id="selectBySelective" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            asset_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        <if test="barCode != null and barCode != ''">
+        AND
+            bar_code = #{barCode, jdbcType=VARCHAR}
+        </if>
+        <if test="assetType != null">
+        AND
+            asset_type = #{assetType, jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <update id="inventory" parameterType="java.util.Map">
+        UPDATE
+            asset_info
+        SET
+            inventory = inventory + #{inventory, jdbcType=INTEGER}
+        WHERE
+            asset_id = #{assetId, jdbcType=VARCHAR}
+        AND
+            delete_flag = 0
+        AND
+            status = 1
+        AND
+            asset_type = #{assetType, jdbcType=INTEGER}
+    </update>
 
 </mapper>

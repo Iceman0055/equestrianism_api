@@ -5,6 +5,7 @@ import com.equestrianism.api.model.po.AssetInfoEntity;
 import com.equestrianism.api.model.vo.asset_info.AssetInfoListVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chenzq on 2018/3/14.
@@ -21,4 +22,7 @@ public interface AssetInfoMapper {
 
     AssetInfoEntity selectByPrimaryKey(String assetId);
 
+    AssetInfoEntity selectBySelective(Map<String, Object> params);
+
+    void inventory(Map<String, Object> params);
 }

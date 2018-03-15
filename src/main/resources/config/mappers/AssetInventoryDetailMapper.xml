@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.AssetInventoryDetailMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.AssetInventoryDetailEntity">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="asset_id" property="assetId" jdbcType="VARCHAR"/>
+        <result column="asset_type" property="assetType" jdbcType="INTEGER"/>
+        <result column="count" property="count" jdbcType="INTEGER"/>
+        <result column="dc_flag" property="dcFlag" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="inventory" property="inventory" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        id, asset_id, asset_type, count, dc_flag, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.AssetInfoEntity">
+        INSERT INTO
+            asset_inventory_detail (
+                id,
+                asset_id,
+                asset_type,
+                count,
+                dc_flag,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{id, jdbcType=VARCHAR},
+                #{assetId, jdbcType=VARCHAR},
+                #{assetType, jdbcType=INTEGER},
+                #{count, jdbcType=INTEGER},
+                #{dcFlag, jdbcType=INTEGER},
+                1,
+                0,
+                1,
+                now()
+            )
+    </insert>
+
+</mapper>

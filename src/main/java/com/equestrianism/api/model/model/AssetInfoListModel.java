@@ -28,6 +28,8 @@ public class AssetInfoListModel extends BaseObject {
     private String brand;
     private String voucherNumber;
     private String purchaseOrganize;
+    private String barCode;
+    private Integer inventory;
 
     public String getAssetId() {
         return assetId;
@@ -189,4 +191,19 @@ public class AssetInfoListModel extends BaseObject {
         this.purchaseOrganize = purchaseOrganize;
     }
 
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
+
+    public Integer getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Integer inventory) {
+        this.inventory = inventory;
+    }
 }

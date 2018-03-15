@@ -5,10 +5,7 @@ import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.*;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoAddVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoDeleteVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoListVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoUpdateVO;
+import com.equestrianism.api.model.vo.asset_info.*;
 import com.equestrianism.api.service.AssetInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,6 +112,39 @@ public class HospitalAssetInfoController extends BaseController {
             LOGGER.error( "【HospitalAssetInfoController】【detail】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
+    }
+
+    @RequestMapping( value = "/assetName", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> assetName( String barCode ) {
+        LOGGER.info( "【HospitalAssetInfoController】【assetName】inputs : " + barCode );
+        try {
+            AssetInfoNameBO response = assetInfoService.assetName( barCode, AssetTypeEnum.HOSPITAL_ASSET_TYPE.type );
+            LOGGER.info( "【HospitalAssetInfoController】【assetName】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【HospitalAssetInfoController】【assetName】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/inventory", method = RequestMethod.POST, produces = "application/json" )
+    @ResponseBody
+    public Map<String, Object> inventory( @RequestBody AssetInfoInventoryVO assetInfoInventoryVo ) {
+        assetInfoInventoryVo.setAccessId( getAccessId() );
+        assetInfoInventoryVo.setAssetType(AssetTypeEnum.HOSPITAL_ASSET_TYPE.type );
+        LOGGER.info( "【HospitalAssetInfoController】【inventory】【inputs】" + assetInfoInventoryVo.toJsonString() );
+        try {
+            if ( assetInfoService.inventory( assetInfoInventoryVo ) ) {
+                LOGGER.info( "【HospitalAssetInfoController】【inventory】result : success" );
+                return ContainerUtils.buildResSuccessMap();
+            }
+        } catch ( BaseException e ) {
+            LOGGER.error( "【HospitalAssetInfoController】【inventory】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+        LOGGER.info( "【HospitalAssetInfoController】【inventory】result : fail" );
+        return ContainerUtils.buildResFailMap();
     }
 
 }

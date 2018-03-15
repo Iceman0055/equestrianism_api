@@ -4,25 +4,24 @@ import com.equestrianism.api.constants.CodeEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.AssetInfoMapper;
-import com.equestrianism.api.model.bo.AssetInfoDetailBO;
-import com.equestrianism.api.model.bo.AssetInfoListBO;
-import com.equestrianism.api.model.bo.AssetTypeDetailInfoBO;
-import com.equestrianism.api.model.bo.AssetTypeDetailListBO;
+import com.equestrianism.api.dao.AssetInventoryDetailMapper;
+import com.equestrianism.api.model.bo.*;
+import com.equestrianism.api.model.model.AssetInfoInventoryModel;
 import com.equestrianism.api.model.model.AssetInfoListModel;
 import com.equestrianism.api.model.model.AssetTypeDetailListModel;
 import com.equestrianism.api.model.po.AssetInfoEntity;
+import com.equestrianism.api.model.po.AssetInventoryDetailEntity;
 import com.equestrianism.api.model.po.AssetTypeDetailEntity;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoAddVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoDeleteVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoListVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoUpdateVO;
+import com.equestrianism.api.model.vo.asset_info.*;
 import com.equestrianism.api.service.AssetInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chenzq on 2018/3/14.
@@ -35,10 +34,16 @@ public class AssetInfoServiceImpl implements AssetInfoService {
     @Autowired
     private AssetInfoMapper assetInfoMapper;
 
+    @Autowired
+    private AssetInventoryDetailMapper assetInventoryDetailMapper;
+
     @Override
     public Boolean addAssetInfo( AssetInfoAddVO assetInfoAddVo ) throws BaseException {
         if ( assetInfoAddVo.getBarCode() == null ) {
             assetInfoAddVo.setBarCode( "" );
+        }
+        if ( assetInfoAddVo.getInventory() == null ) {
+            assetInfoAddVo.setInventory( 0 );
         }
         AssetInfoEntity assetInfoEntity = new AssetInfoEntity( assetInfoAddVo.getTypeId(), assetInfoAddVo.getTypeDetailId(),
                 assetInfoAddVo.getAssetType(), assetInfoAddVo.getAssetNumber(), assetInfoAddVo.getAssetName(),
@@ -46,7 +51,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 assetInfoAddVo.getFinanceAccountsDate(), assetInfoAddVo.getTabDate(), assetInfoAddVo.getGuaranteeDate(),
                 assetInfoAddVo.getManageDepartment(), assetInfoAddVo.getManageUser(), assetInfoAddVo.getRemark(),
                 assetInfoAddVo.getPurpose(), assetInfoAddVo.getSpecificationModel(), assetInfoAddVo.getBrand(),
-                assetInfoAddVo.getVoucherNumber(), assetInfoAddVo.getPurchaseOrganize(), assetInfoAddVo.getBarCode() );
+                assetInfoAddVo.getVoucherNumber(), assetInfoAddVo.getPurchaseOrganize(), assetInfoAddVo.getBarCode(), assetInfoAddVo.getInventory() );
         Integer insertCount;
         try {
             insertCount = assetInfoMapper.insert( assetInfoEntity );
@@ -72,7 +77,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 assetInfoUpdateVo.getGuaranteeDate(), assetInfoUpdateVo.getManageDepartment(), assetInfoUpdateVo.getManageUser(),
                 assetInfoUpdateVo.getRemark(), assetInfoUpdateVo.getPurpose(), assetInfoUpdateVo.getSpecificationModel(),
                 assetInfoUpdateVo.getBrand(), assetInfoUpdateVo.getVoucherNumber(), assetInfoUpdateVo.getPurchaseOrganize(),
-                assetInfoUpdateVo.getBarCode() );
+                assetInfoUpdateVo.getBarCode(), null );
         Integer updateCount;
         try {
             updateCount = assetInfoMapper.updateBySelective( assetInfoEntity );
@@ -130,5 +135,44 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 assetInfoEntity.getRemark(), assetInfoEntity.getPurpose(), assetInfoEntity.getSpecificationModel(),
                 assetInfoEntity.getBrand(), assetInfoEntity.getVoucherNumber(), assetInfoEntity.getPurchaseOrganize(),
                 assetInfoEntity.getBarCode() );
+    }
+
+    @Override
+    public AssetInfoNameBO assetName(String barCode, Integer type) throws BaseException {
+        Map<String, Object> params = new HashMap<>();
+        params.put( "barCode", barCode );
+        params.put( "assetType", type );
+        AssetInfoEntity assetInfoEntity = assetInfoMapper.selectBySelective(params);
+        if ( assetInfoEntity == null ) {
+            return null;
+        }
+        return new AssetInfoNameBO( assetInfoEntity.getAssetId(), assetInfoEntity.getAssetName() );
+    }
+
+    @Override
+    public Boolean inventory(AssetInfoInventoryVO assetInfoInventoryVo) throws BaseException {
+        List<AssetInfoInventoryModel> inventoryList = assetInfoInventoryVo.getInventoryList();
+        if ( inventoryList == null || inventoryList.size() == 0 ) {
+            return true;
+        }
+        Map<String, Object> params;
+        for ( AssetInfoInventoryModel assetInfoInventoryModel : inventoryList ) {
+            if ( assetInfoInventoryModel.getInventory() <= 0 ) {
+                continue;
+            }
+            params = new HashMap<>();
+            params.put( "assetType", assetInfoInventoryVo.getAssetType() );
+            params.put( "assetId", assetInfoInventoryModel.getAssetId() );
+            params.put( "inventory", assetInfoInventoryModel.getInventory() );
+            AssetInventoryDetailEntity assetInventoryDetailEntity = new AssetInventoryDetailEntity( assetInfoInventoryModel.getAssetId(),
+                    assetInfoInventoryVo.getAssetType(), assetInfoInventoryModel.getInventory(), 1 );
+            try {
+                assetInfoMapper.inventory( params );
+                assetInventoryDetailMapper.insert( assetInventoryDetailEntity );
+            } catch ( Exception e ) {
+                LOGGER.error("【AssetInfoService】【inventory】", e);
+            }
+        }
+        return true;
     }
 }

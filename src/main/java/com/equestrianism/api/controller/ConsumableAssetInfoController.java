@@ -6,10 +6,8 @@ import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.AssetInfoDetailBO;
 import com.equestrianism.api.model.bo.AssetInfoListBO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoAddVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoDeleteVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoListVO;
-import com.equestrianism.api.model.vo.asset_info.AssetInfoUpdateVO;
+import com.equestrianism.api.model.bo.AssetInfoNameBO;
+import com.equestrianism.api.model.vo.asset_info.*;
 import com.equestrianism.api.service.AssetInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,6 +114,39 @@ public class ConsumableAssetInfoController extends BaseController {
             LOGGER.error( "【ConsumableAssetInfoController】【detail】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
+    }
+
+    @RequestMapping( value = "/assetName", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> assetName( String barCode ) {
+        LOGGER.info( "【ConsumableAssetInfoController】【assetName】inputs : " + barCode );
+        try {
+            AssetInfoNameBO response = assetInfoService.assetName( barCode, AssetTypeEnum.CONSUMABLE_ASSET_TYPE.type );
+            LOGGER.info( "【ConsumableAssetInfoController】【assetName】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【ConsumableAssetInfoController】【assetName】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/inventory", method = RequestMethod.POST, produces = "application/json" )
+    @ResponseBody
+    public Map<String, Object> inventory( @RequestBody AssetInfoInventoryVO assetInfoInventoryVo ) {
+        assetInfoInventoryVo.setAccessId( getAccessId() );
+        assetInfoInventoryVo.setAssetType(AssetTypeEnum.CONSUMABLE_ASSET_TYPE.type );
+        LOGGER.info( "【ConsumableAssetInfoController】【inventory】【inputs】" + assetInfoInventoryVo.toJsonString() );
+        try {
+            if ( assetInfoService.inventory( assetInfoInventoryVo ) ) {
+                LOGGER.info( "【ConsumableAssetInfoController】【inventory】result : success" );
+                return ContainerUtils.buildResSuccessMap();
+            }
+        } catch ( BaseException e ) {
+            LOGGER.error( "【ConsumableAssetInfoController】【inventory】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+        LOGGER.info( "【ConsumableAssetInfoController】【inventory】result : fail" );
+        return ContainerUtils.buildResFailMap();
     }
 
 }

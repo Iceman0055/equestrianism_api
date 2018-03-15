@@ -261,6 +261,7 @@ CREATE TABLE `asset_info` (
   `asset_type` int(1) NOT NULL DEFAULT '1' COMMENT '资产类别：1-马术中心 2-马医院',
   `asset_number` varchar(64) NOT NULL COMMENT '资产编号',
   `asset_name` varchar(32) NOT NULL COMMENT '资产名称',
+  `inventory` int(8) NOT NULL DEFAULT '0' COMMENT '库存量',
   `price` varchar(16) NOT NULL COMMENT '价值',
   `acreage` varchar(16) NOT NULL COMMENT '面积',
   `price_type` int(8) NOT NULL COMMENT '价值类型',
@@ -283,6 +284,21 @@ CREATE TABLE `asset_info` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`asset_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `asset_inventory_detail` (
+  `id` varchar(32) NOT NULL COMMENT '主键ID',
+  `asset_id` varchar(32) NOT NULL COMMENT '资产主键',
+  `asset_type` int(1) NOT NULL COMMENT '资产类别：1-马术中心 2-马医院',
+  `count` int(8) NOT NULL COMMENT '变化数量',
+  `dc_flag` int(1) NOT NULL COMMENT '进出标志位：1-入库 2-出库',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 

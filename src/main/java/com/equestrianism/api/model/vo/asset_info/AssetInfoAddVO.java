@@ -30,6 +30,7 @@ public class AssetInfoAddVO extends BaseViewModel {
     private String brand;
     private String voucherNumber;
     private String purchaseOrganize;
+    private Integer inventory;
 
     public Integer getTypeId() {
         return typeId;
@@ -197,5 +198,13 @@ public class AssetInfoAddVO extends BaseViewModel {
 
     public void setBarCode(String barCode) {
         this.barCode = barCode;
+    }
+
+    public Integer getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Integer inventory) {
+        this.inventory = inventory;
     }
 }
