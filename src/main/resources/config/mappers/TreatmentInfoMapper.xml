@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.TreatmentInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.TreatmentInfoEntity">
+        <id column="treatment_id" property="treatmentId" jdbcType="VARCHAR"/>
+        <result column="outpatient_type" property="outpatientType" jdbcType="INTEGER"/>
+        <result column="hospital_appoint_id" property="hospitalAppointId" jdbcType="VARCHAR"/>
+        <result column="horse_type" property="horseType" jdbcType="INTEGER"/>
+        <result column="horse_id" property="horseId" jdbcType="VARCHAR"/>
+        <result column="horse_name" property="horseName" jdbcType="VARCHAR"/>
+        <result column="begin_date" property="beginDate" jdbcType="VARCHAR"/>
+        <result column="begin_time" property="beginTime" jdbcType="VARCHAR"/>
+        <result column="end_date" property="endDate" jdbcType="VARCHAR"/>
+        <result column="end_time" property="endTime" jdbcType="VARCHAR"/>
+        <result column="treat_name" property="treatName" jdbcType="VARCHAR"/>
+        <result column="treat_desc" property="treatDesc" jdbcType="VARCHAR"/>
+        <result column="consulting_room_id" property="consultingRoomId" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        treatment_id, outpatient_type, hospital_appoint_id, horse_type, horse_id, horse_name, begin_date, begin_time,
+        end_date, end_time, treat_name, treat_desc, consulting_room_id, status, delete_flag, data_version, create_date,
+        update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.AssetInfoEntity">
+        INSERT INTO
+            treatment_info (
+                treatment_id,
+                outpatient_type,
+                hospital_appoint_id,
+                horse_type,
+                horse_id,
+                horse_name,
+                begin_date,
+                begin_time,
+                end_date,
+                end_time,
+                treat_name,
+                treat_desc,
+                consulting_room_id,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{treatmentId, jdbcType=VARCHAR},
+                #{outpatientType, jdbcType=INTEGER},
+                #{hospitalAppointId, jdbcType=VARCHAR},
+                #{horseType, jdbcType=INTEGER},
+                #{horseId, jdbcType=VARCHAR},
+                #{horseName, jdbcType=VARCHAR},
+                #{beginDate, jdbcType=VARCHAR},
+                #{beginTime, jdbcType=VARCHAR},
+                #{endDate, jdbcType=VARCHAR},
+                #{endTime, jdbcType=VARCHAR},
+                #{treatName, jdbcType=VARCHAR},
+                #{treatDesc, jdbcType=VARCHAR},
+                #{consultingRoomId, jdbcType=VARCHAR},
+                1,
+                0,
+                1,
+                now()
+            )
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.TreatmentInfoEntity">
+        UPDATE
+            treatment_info
+        <set>
+            <if test="outpatientType != null">
+                outpatient_type = #{outpatientType, jdbcType=INTEGER},
+            </if>
+            <if test="hospitalAppointId != null and hospitalAppointId != ''">
+                hospital_appoint_id = #{hospitalAppointId, jdbcType=VARCHAR},
+            </if>
+            <if test="horseType != null">
+                horse_type = #{horseType, jdbcType=INTEGER},
+            </if>
+            <if test="horseId != null and horseId != ''">
+                horse_id = #{horseId, jdbcType=VARCHAR},
+            </if>
+            <if test="horseName != null and horseName != ''">
+                horse_name = #{horseName, jdbcType=VARCHAR},
+            </if>
+            <if test="beginDate != null and beginDate != ''">
+                begin_date = #{beginDate, jdbcType=VARCHAR},
+            </if>
+            <if test="beginTime != null and beginTime != ''">
+                begin_time = #{beginTime, jdbcType=VARCHAR},
+            </if>
+            <if test="endDate != null and endDate != ''">
+                end_date = #{endDate, jdbcType=VARCHAR},
+            </if>
+            <if test="endTime != null and endTime != ''">
+                end_time = #{endTime, jdbcType=VARCHAR},
+            </if>
+            <if test="treatName != null and treatName != ''">
+                treat_name = #{treatName, jdbcType=VARCHAR},
+            </if>
+            <if test="treatDesc != null and treatDesc != ''">
+                treat_desc = #{treatDesc, jdbcType=VARCHAR},
+            </if>
+            <if test="consultingRoomId != null and consultingRoomId != ''">
+                consulting_room_id = #{consultingRoomId, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            treatment_id = #{treatmentId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectTreatmentListByPage" parameterType="com.equestrianism.api.model.vo.treatment_info.TreatmentInfoListVO"
+            resultType="com.equestrianism.api.model.model.TreatmentInfoListModel">
+        SELECT
+            a.treatment_id        treatmentId,
+            a.outpatient_type     outpatientType,
+            b.appoint_number      appointNumber,
+            a.horse_type          horseType,
+            a.horse_name          horseName,
+            d.horse_name          horseId,
+            a.begin_date          beginDate,
+            a.begin_time          beginTime,
+            a.treat_name          treatName,
+            a.treat_desc          treatDesc,
+            c.name                consultingRoomName
+        FROM
+            treatment_info a
+        LEFT JOIN hospital_appoint_info b ON a.hospital_appoint_id = b.hospital_appoint_id
+        LEFT JOIN consulting_room_info c ON a.consulting_room_id = c.consulting_room_id
+        LEFT JOIN horse_info d ON a.horse_id = d.horse_id
+        WHERE
+            a.status = 1
+        AND
+            a.delete_flag = 0
+        <if test="horseId != null and horseId != ''">
+            AND
+            a.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        <if test="treatName != null and treatName != ''">
+            AND
+            a.treat_name like CONCAT('%',#{treatName, jdbcType=VARCHAR},'%')
+        </if>
+        LIMIT
+            #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countTreatmentListByPage" parameterType="com.equestrianism.api.model.vo.treatment_info.TreatmentInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            treatment_info a
+        WHERE
+            a.status = 1
+        AND
+            a.delete_flag = 0
+        <if test="horseId != null and horseId != ''">
+            AND
+                a.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        <if test="treatName != null and treatName != ''">
+            AND
+                a.treat_name like CONCAT('%',#{treatName, jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            treatment_info
+        WHERE
+            treatment_id = #{treatmentId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -184,4 +184,17 @@
         desc
     </select>
 
+    <select id="selectByAppointNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            hospital_appoint_info
+        WHERE
+            appoint_number = #{appointNumber, jdbcType=VARCHAR}
+        AND
+            status = 1
+        AND
+            delete_flag = 0
+    </select>
+
 </mapper>

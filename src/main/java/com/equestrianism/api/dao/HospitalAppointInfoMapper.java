@@ -23,4 +23,6 @@ public interface HospitalAppointInfoMapper {
 
     HospitalAppointInfoDetailBO selectAppointDetail( String hospitalAppointId );
 
+    HospitalAppointInfoEntity selectByAppointNumber( String number );
+
 }

@@ -299,6 +299,42 @@ CREATE TABLE `asset_inventory_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `treatment_info` (
+  `treatment_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `outpatient_type` int(1) NOT NULL DEFAULT '1' COMMENT '门诊方式：1-普通 2-预约',
+  `hospital_appoint_id` varchar(32) NOT NULL COMMENT '预约日程主键',
+  `horse_type` int(1) NOT NULL DEFAULT '1' COMMENT '马匹类型：1-中心 2-外来',
+  `horse_id` varchar(32) NOT NULL COMMENT '马匹主键',
+  `horse_name` varchar(16) NOT NULL COMMENT '马匹名称',
+  `begin_date` varchar(10) NOT NULL DEFAULT '0000-00-00' COMMENT '治疗开始日期',
+  `begin_time` varchar(8) NOT NULL DEFAULT '00:00:00' COMMENT '开始时间',
+  `end_date` varchar(10) NOT NULL DEFAULT '0000-00-00' COMMENT '结束日期',
+  `end_time` varchar(8) NOT NULL DEFAULT '00:00:00' COMMENT '结束时间',
+  `treat_name` varchar(32) NOT NULL COMMENT '治疗名称',
+  `treat_desc` varchar(64) NOT NULL COMMENT '治疗描述',
+  `consulting_room_id` varchar(32) NOT NULL COMMENT '诊疗室主键',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`treatment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `treatment_asset_info` (
+  `treatment_asset_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `treatment_id` varchar(32) NOT NULL COMMENT '治疗日程主键',
+  `asset_type` int(1) NOT NULL DEFAULT '2' COMMENT '资产类别：1-马术中心 2-马医院 3-消耗品',
+  `asset_id` varchar(32) NOT NULL COMMENT '资产主键',
+  `count` int(8) NOT NULL COMMENT '数量',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`treatment_asset_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 
