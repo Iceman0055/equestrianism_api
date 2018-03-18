@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.TreatmentCaseInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.TreatmentCaseInfoEntity">
+        <id column="treatment_case_id" property="treatmentCaseId" jdbcType="VARCHAR"/>
+        <result column="treatment_id" property="treatmentId" jdbcType="VARCHAR"/>
+        <result column="operator_date" property="operatorDate" jdbcType="VARCHAR"/>
+        <result column="place" property="place" jdbcType="VARCHAR"/>
+        <result column="clinical" property="clinical" jdbcType="VARCHAR"/>
+        <result column="first_visit" property="firstVisit" jdbcType="VARCHAR"/>
+        <result column="advice" property="advice" jdbcType="VARCHAR"/>
+        <result column="title_tag" property="titleTag" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        treatment_case_id, treatment_id, operator_date, place, clinical, first_visit, advice, title_tag,
+        remark, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+
+    <insert id="insert" parameterType="com.equestrianism.api.model.po.TreatmentCaseInfoEntity">
+        INSERT INTO
+            treatment_case_info (
+                treatment_case_id,
+                treatment_id,
+                operator_date,
+                place,
+                clinical,
+                first_visit,
+                advice,
+                title_tag,
+                remark,
+                status,
+                delete_flag,
+                data_version,
+                create_date
+            ) VALUES (
+                #{treatmentCaseId, jdbcType=VARCHAR},
+                #{treatmentId, jdbcType=VARCHAR},
+                #{operatorDate, jdbcType=VARCHAR},
+                #{place, jdbcType=VARCHAR},
+                #{clinical, jdbcType=VARCHAR},
+                #{firstVisit, jdbcType=VARCHAR},
+                #{advice, jdbcType=VARCHAR},
+                #{titleTag, jdbcType=VARCHAR},
+                #{remark, jdbcType=VARCHAR},
+                1,
+                0,
+                1,
+                now()
+            )
+    </insert>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.TreatmentCaseInfoEntity">
+        UPDATE
+            treatment_case_info
+        <set>
+            <if test="operatorDate != null and operatorDate != ''">
+                operator_date = #{operatorDate, jdbcType=VARCHAR},
+            </if>
+            <if test="place != null and place != ''">
+                place = #{place, jdbcType=VARCHAR},
+            </if>
+            <if test="clinical != null and clinical != ''">
+                clinical = #{clinical, jdbcType=VARCHAR},
+            </if>
+            <if test="firstVisit != null and firstVisit != ''">
+                first_visit = #{firstVisit, jdbcType=VARCHAR},
+            </if>
+            <if test="advice != null and advice != ''">
+                advice = #{advice, jdbcType=VARCHAR},
+            </if>
+            <if test="titleTag != null and titleTag != ''">
+                title_tag = #{titleTag, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status, jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            treatment_case_id = #{treatmentCaseId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectTreatmentCaseListByPage" parameterType="com.equestrianism.api.model.vo.treatment_case.TreatmentCaseInfoListVO"
+            resultType="com.equestrianism.api.model.model.TreatmentCaseInfoListModel">
+        SELECT
+            a.treatment_case_id     treatmentCaseId,
+            a.operator_date         operatorDate,
+            a.place                 place,
+            a.clinical              clinical,
+            a.first_visit           firstVisit,
+            a.advice                advice,
+            a.title_tag             titleTag,
+            a.remark                remark,
+            c.horse_name            horseId,
+            b.horse_type            horseType,
+            b.horse_name            horseName
+        FROM
+            treatment_case_info a
+        INNER JOIN
+            treatment_info b
+        ON
+            a.treatment_id = b.treatment_id
+        LEFT JOIN
+            horse_info c
+        ON
+            c.horse_id = b.horse_id
+        WHERE
+            a.delete_flag = 0
+        <if test="horseId != null and horseId != ''">
+            AND
+            b.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        <if test="titleTag != null and titleTag != ''">
+            AND
+            a.title_tag like CONCAT('%',#{titleTag, jdbcType=VARCHAR},'%')
+        </if>
+        LIMIT
+            #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countTreatmentCaseListByPage" parameterType="com.equestrianism.api.model.vo.treatment_case.TreatmentCaseInfoListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+        treatment_case_info a
+        INNER JOIN
+        treatment_info b
+        ON
+        a.treatment_id = b.treatment_id
+        LEFT JOIN
+        horse_info c
+        ON
+        c.horse_id = b.horse_id
+        WHERE
+        a.delete_flag = 0
+        <if test="horseId != null and horseId != ''">
+            AND
+            b.horse_id = #{horseId, jdbcType=VARCHAR}
+        </if>
+        <if test="titleTag != null and titleTag != ''">
+            AND
+            a.title_tag like CONCAT('%',#{titleTag, jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String"
+            resultType="com.equestrianism.api.model.bo.TreatmentCaseInfoDetailBO">
+        SELECT
+            a.treatment_case_id     treatmentCaseId,
+            a.operator_date         operatorDate,
+            a.place                 place,
+            a.clinical              clinical,
+            a.first_visit           firstVisit,
+            a.advice                advice,
+            a.title_tag             titleTag,
+            a.remark                remark,
+            c.horse_name            horseId,
+            b.horse_type            horseType,
+            b.horse_name            horseName
+        FROM
+            treatment_case_info a
+        INNER JOIN
+            treatment_info b
+        ON
+            a.treatment_id = b.treatment_id
+        LEFT JOIN
+            horse_info c
+        ON
+            c.horse_id = b.horse_id
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.treatment_case_id = #{treatmentCaseId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -65,6 +65,18 @@ assetTypeDetail字段为typeDetailId、typeDetailName、typeId、remark。
 3、horseType '马匹类型：1-中心（马匹名称为下拉框horseId，默认） 2-外来（马匹名称为输入框，horseName）',
 4、修改时，“设备使用”和“消耗品使用”仅展示，不修改
 5、新增页面“新增病例”模块上放增加2个按钮“保存治疗日程”“添加病例”，点击“添加病例”才展示“新增病例”模块
-6、
 
+2018.03.18：
+病例管理：
+1、list中去掉字段“x光照片”、“数据照片”
+2、list中查询条件为“马匹名称”下拉框、“标题标签”输入框
+3、photoType：图片类型：1-x光照片 2-数据照片
+4、上传图片接口“treatmentCasePhoto/add”
+5、修改和查看页面接口加载方式：
+    /treatmentCaseInfo/detail（需判断horseType，1-中心：马匹名称读取horseId，2-外来：马匹名称读取horseName）
+    /treatmentCasePhoto/list（读取x光照片和数据照片）
+6、修改页面，删除图片时需调用/treatmentCasePhoto/delete
+7、所有病例管理中去掉“处方用药”字段
 
+马匹简历：
+1、查询条件：马匹名称（输入框）
