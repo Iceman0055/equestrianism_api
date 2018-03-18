@@ -11,4 +11,12 @@ public class HorseResumeListVO extends BasePageViewModel {
 
     private String horseName;
 
+    public String getHorseName() {
+        return horseName;
+    }
+
+    public void setHorseName(String horseName) {
+        this.horseName = horseName;
+    }
+
 }

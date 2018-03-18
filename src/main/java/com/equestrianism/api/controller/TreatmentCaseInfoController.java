@@ -111,7 +111,7 @@ public class TreatmentCaseInfoController extends BaseController {
     @RequestMapping( value = "/detail", method = RequestMethod.GET )
     @ResponseBody
     public Map<String, Object> detail( String treatmentCaseId ) {
-        LOGGER.info( "【AssetTypeInfoController】【detail】inputs : " + treatmentCaseId );
+        LOGGER.info( "【TreatmentCaseInfoController】【detail】inputs : " + treatmentCaseId );
         try {
             TreatmentCaseInfoDetailBO response = treatmentCaseInfoService.treatmentCaseInfoDetail(treatmentCaseId);
             LOGGER.info( "【TreatmentCaseInfoController】【detail】result : " + response.toJsonString() );

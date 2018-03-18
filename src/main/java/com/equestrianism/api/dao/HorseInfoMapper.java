@@ -3,8 +3,10 @@ package com.equestrianism.api.dao;
 import com.equestrianism.api.model.bo.HorseInfoDetailBO;
 import com.equestrianism.api.model.model.HorseInfoComboBoxModel;
 import com.equestrianism.api.model.model.HorseInfoListModel;
+import com.equestrianism.api.model.model.HorseResumeListModel;
 import com.equestrianism.api.model.po.HorseInfoEntity;
 import com.equestrianism.api.model.vo.horse_info.HorseInfoListVO;
+import com.equestrianism.api.model.vo.horse_resume.HorseResumeListVO;
 
 import java.util.List;
 
@@ -26,4 +28,9 @@ public interface HorseInfoMapper {
 
     List<HorseInfoComboBoxModel> selectHorseListByComboBox();
 
+    List<HorseResumeListModel> selectHorseResumeListByPage(HorseResumeListVO horseResumeListVo);
+
+    Integer countHorseResumeListByPage(HorseResumeListVO horseResumeListVo);
+
+    List<String> selectHorseIdList(HorseResumeListVO horseResumeListVo);
 }

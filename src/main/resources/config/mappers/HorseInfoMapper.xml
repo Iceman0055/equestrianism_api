@@ -282,4 +282,55 @@
             create_date DESC
     </select>
 
+    <select id="selectHorseResumeListByPage" parameterType="com.equestrianism.api.model.vo.horse_resume.HorseResumeListVO"
+            resultType="com.equestrianism.api.model.model.HorseResumeListModel">
+        SELECT
+            horse_id    horseId,
+            horse_name  horseName,
+            right_image image
+        FROM
+            horse_info
+        WHERE
+            status = 1
+        AND
+            delete_flag = 0
+        <if test="horseName != null and horseName != ''">
+            AND
+            horse_name like CONCAT('%', #{horseName, jdbcType=VARCHAR}, '%')
+        </if>
+        limit #{beginIndex}, #{pageRecorders}
+    </select>
+
+    <select id="countHorseResumeListByPage" parameterType="com.equestrianism.api.model.vo.horse_resume.HorseResumeListVO"
+            resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+        horse_info
+        WHERE
+        status = 1
+        AND
+        delete_flag = 0
+        <if test="horseName != null and horseName != ''">
+            AND
+            horse_name like CONCAT('%', #{horseName, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
+    <select id="selectHorseIdList" parameterType="com.equestrianism.api.model.vo.horse_resume.HorseResumeListVO"
+            resultType="java.lang.String">
+        SELECT
+            horse_id
+        FROM
+        horse_info
+        WHERE
+        status = 1
+        AND
+        delete_flag = 0
+        <if test="horseName != null and horseName != ''">
+            AND
+            horse_name like CONCAT('%', #{horseName, jdbcType=VARCHAR}, '%')
+        </if>
+    </select>
+
 </mapper>

@@ -20,6 +20,7 @@ public class TreatmentInfoListModel extends BaseObject {
     private String treatName;
     private String treatDesc;
     private String consultingRoomName;
+    private String treatmentCaseId;
 
     public String getTreatmentId() {
         return treatmentId;
@@ -109,4 +110,11 @@ public class TreatmentInfoListModel extends BaseObject {
         this.consultingRoomName = consultingRoomName;
     }
 
+    public String getTreatmentCaseId() {
+        return treatmentCaseId;
+    }
+
+    public void setTreatmentCaseId(String treatmentCaseId) {
+        this.treatmentCaseId = treatmentCaseId;
+    }
 }

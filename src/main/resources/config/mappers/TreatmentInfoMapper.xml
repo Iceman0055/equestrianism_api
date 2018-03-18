@@ -139,12 +139,14 @@
             a.begin_time          beginTime,
             a.treat_name          treatName,
             a.treat_desc          treatDesc,
-            c.name                consultingRoomName
+            c.name                consultingRoomName,
+            e.treatment_case_id   treatmentCaseId
         FROM
             treatment_info a
         LEFT JOIN hospital_appoint_info b ON a.hospital_appoint_id = b.hospital_appoint_id
         LEFT JOIN consulting_room_info c ON a.consulting_room_id = c.consulting_room_id
         LEFT JOIN horse_info d ON a.horse_id = d.horse_id
+        LEFT JOIN treatment_case_info e ON e.treatment_id = a.treatment_id
         WHERE
             a.status = 1
         AND
