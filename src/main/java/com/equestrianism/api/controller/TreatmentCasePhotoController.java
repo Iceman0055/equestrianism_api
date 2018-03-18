@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Map;
@@ -41,6 +42,24 @@ public class TreatmentCasePhotoController extends BaseController {
     @RequestMapping( value = "/add", method = RequestMethod.POST )
     @ResponseBody
     public Map<String, Object> add( TreatmentCasePhotoAddVO treatmentCasePhotoAddVo ) throws IOException {
+        treatmentCasePhotoAddVo.setAccessId( getAccessId() );
+        LOGGER.info( "【TreatmentCasePhotoController】【add】begin" );
+        try {
+            TreatmentCasePhotoAddBO treatmentCasePhotoAddBo = treatmentCasePhotoService.addTreatmentCasePhoto( treatmentCasePhotoAddVo );
+            LOGGER.info( "【TreatmentCasePhotoController】【add】result" + treatmentCasePhotoAddBo.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( treatmentCasePhotoAddBo );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【TreatmentCasePhotoController】【add】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/addXRay", method = RequestMethod.POST )
+    @ResponseBody
+    public Map<String, Object> addXRay( MultipartFile photo ) throws IOException {
+        TreatmentCasePhotoAddVO treatmentCasePhotoAddVo = new TreatmentCasePhotoAddVO();
+        treatmentCasePhotoAddVo.setPhoto( photo );
+        treatmentCasePhotoAddVo.setPhotoType( 1 );
         treatmentCasePhotoAddVo.setAccessId( getAccessId() );
         LOGGER.info( "【TreatmentCasePhotoController】【add】begin" );
         try {

@@ -25,7 +25,7 @@ import java.util.Map;
 @RequestMapping( "/horseResume" )
 public class HorseResumeController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HorseInfoController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HorseResumeController.class);
 
     @Autowired
     private HorseInfoService horseInfoService;
@@ -33,13 +33,13 @@ public class HorseResumeController extends BaseController {
     @RequestMapping( value = "/list", method = RequestMethod.GET )
     @ResponseBody
     public Map<String, Object> list( HorseInfoListVO horseInfoListVo ) {
-        LOGGER.info( "【HorseInfoController】【list】inputs : " + horseInfoListVo.toJsonString() );
+        LOGGER.info( "【HorseResumeController】【list】inputs : " + horseInfoListVo.toJsonString() );
         try {
             HorseInfoListBO response = horseInfoService.horseInfoList( horseInfoListVo );
-            LOGGER.info( "【HorseInfoController】【list】result : " + response.toJsonString() );
+            LOGGER.info( "【HorseResumeController】【list】result : " + response.toJsonString() );
             return ContainerUtils.buildResSuccessMap(response);
         } catch ( BaseException e ) {
-            LOGGER.error( "【HorseInfoController】【list】【exception】", e );
+            LOGGER.error( "【HorseResumeController】【list】【exception】", e );
             return ContainerUtils.buildResFailMap();
         }
     }
