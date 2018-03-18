@@ -16,15 +16,15 @@ import java.util.List;
  */
 public interface HorseInfoMapper {
 
-    Integer insert( HorseInfoEntity horseInfoEntity );
+    Integer insert(HorseInfoEntity horseInfoEntity);
 
-    Integer updateBySelective( HorseInfoEntity horseInfoEntity );
+    Integer updateBySelective(HorseInfoEntity horseInfoEntity);
 
-    List<HorseInfoListModel> selectHorseListByPage( HorseInfoListVO horseInfoListVo );
+    List<HorseInfoListModel> selectHorseListByPage(HorseInfoListVO horseInfoListVo);
 
-    Integer countHorseListByPage( HorseInfoListVO horseInfoListVo );
+    Integer countHorseListByPage(HorseInfoListVO horseInfoListVo);
 
-    HorseInfoDetailBO selectHorseInfoByDetail( String horseId );
+    HorseInfoDetailBO selectHorseInfoByDetail(String horseId);
 
     List<HorseInfoComboBoxModel> selectHorseListByComboBox();
 
@@ -33,4 +33,5 @@ public interface HorseInfoMapper {
     Integer countHorseResumeListByPage(HorseResumeListVO horseResumeListVo);
 
     List<String> selectHorseIdList(HorseResumeListVO horseResumeListVo);
+
 }

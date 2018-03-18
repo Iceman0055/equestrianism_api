@@ -152,4 +152,20 @@
             host_id = #{hostId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByResume" parameterType="java.lang.String" resultType="com.equestrianism.api.model.bo.HostInfoDetailBO">
+        SELECT
+            host_name     hostName,
+            sex           sex,
+            occupation    occupation,
+            contact_way   contactWay
+        FROM
+            host_info
+        WHERE
+            delete_flag = 0
+        AND
+            status = 1
+        AND
+            horse_id = #{horseId, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

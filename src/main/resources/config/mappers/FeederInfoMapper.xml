@@ -147,4 +147,20 @@
             feeder_id = #{feederId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByResume" parameterType="java.lang.String"
+            resultType="com.equestrianism.api.model.bo.FeederInfoDetailBO">
+        SELECT
+        feeder_id           feederId,
+        feeder_name         feederName,
+        sex                 sex,
+        skill_desc          skillDesc,
+        horse_id            horseId,
+        hire_date           hireDate,
+        id_card_image       idCardImage
+        FROM
+        feeder_info
+        WHERE
+        horse_id = #{horseId, jdbcType=VARCHAR}
+    </select>
+
 </mapper>

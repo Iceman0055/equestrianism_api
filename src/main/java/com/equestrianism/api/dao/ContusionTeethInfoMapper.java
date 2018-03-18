@@ -1,6 +1,7 @@
 package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.model.ContusionTeethInfoListModel;
+import com.equestrianism.api.model.model.horse_resume.HorseResumeContusionTeethModel;
 import com.equestrianism.api.model.po.ContusionTeethInfoEntity;
 import com.equestrianism.api.model.vo.contusion_teeth_info.ContusionTeethInfoListVO;
 
@@ -21,4 +22,5 @@ public interface ContusionTeethInfoMapper {
 
     ContusionTeethInfoEntity selectByPrimaryKey(String contusionTeethId);
 
+    List<HorseResumeContusionTeethModel> selectByResume(String horseId);
 }

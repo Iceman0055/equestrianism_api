@@ -1,6 +1,7 @@
 package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.model.VaccinationInfoListModel;
+import com.equestrianism.api.model.model.horse_resume.HorseResumeVaccinationModel;
 import com.equestrianism.api.model.po.VaccinationInfoEntity;
 import com.equestrianism.api.model.vo.vaccination_info.VaccinationInfoListVO;
 
@@ -21,4 +22,5 @@ public interface VaccinationInfoMapper {
 
     VaccinationInfoEntity selectByPrimaryKey(String vaccinationId);
 
+    List<HorseResumeVaccinationModel> selectByResume(String horseId);
 }

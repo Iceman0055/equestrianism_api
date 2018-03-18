@@ -126,4 +126,24 @@
             brigandine_id = #{brigandineId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByResume" parameterType="java.lang.String" resultType="com.equestrianism.api.model.model.horse_resume.HorseResumeBrigandineModel">
+        SELECT
+            a.brigandine_date   brigandineDate,
+            b.realname          realname,
+            a.remark            remark
+        FROM
+            brigandine_info a,
+            user_info b
+        WHERE
+            a.status = 1
+        AND
+            a.delete_flag = 0
+        AND
+            a.user_id = b.user_id
+        AND
+            a.horse_id = #{horseId, jdbcType=VARCHAR}
+        ORDER BY
+            a.brigandine_date DESC
+        limit 0, 4
+    </select>
 </mapper>

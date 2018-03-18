@@ -1,6 +1,7 @@
 package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.model.BrigandineInfoListModel;
+import com.equestrianism.api.model.model.horse_resume.HorseResumeBrigandineModel;
 import com.equestrianism.api.model.po.BrigandineInfoEntity;
 import com.equestrianism.api.model.vo.brigandine_info.BrigandineInfoListVO;
 
@@ -21,4 +22,5 @@ public interface BrigandineInfoMapper {
 
     BrigandineInfoEntity selectByPrimaryKey(String brigandineId);
 
+    List<HorseResumeBrigandineModel> selectByResume(String horseId);
 }

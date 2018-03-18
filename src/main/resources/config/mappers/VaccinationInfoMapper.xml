@@ -148,4 +148,25 @@
             vaccination_id = #{vaccinationId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByResume" parameterType="java.lang.String" resultType="com.equestrianism.api.model.model.horse_resume.HorseResumeVaccinationModel">
+        SELECT
+            a.operate_date    operateDate,
+            a.operate_place   operatePlace,
+            a.name            name,
+            b.realname        realname
+        FROM
+            vaccination_info a,
+            user_info b
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.status = 1
+        AND
+            a.user_id = b.user_id
+        AND
+            a.horse_id = #{horseId, jdbcType=VARCHAR}
+        ORDER BY
+            a.operate_date DESC
+        limit 0, 4
+    </select>
 </mapper>

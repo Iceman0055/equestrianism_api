@@ -23,4 +23,6 @@ public interface FeederInfoMapper {
 
     FeederInfoDetailBO selectFeederInfoByDetail( String feederId );
 
+    FeederInfoDetailBO selectByResume( String horseId );
+
 }

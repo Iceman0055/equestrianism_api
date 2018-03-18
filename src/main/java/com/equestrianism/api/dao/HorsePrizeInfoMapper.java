@@ -2,6 +2,7 @@ package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.bo.HorsePrizeInfoDetailBO;
 import com.equestrianism.api.model.model.HorsePrizeInfoListModel;
+import com.equestrianism.api.model.model.horse_resume.HorseResumePrizeModel;
 import com.equestrianism.api.model.po.HorsePrizeInfoEntity;
 import com.equestrianism.api.model.vo.horse_prize_info.HorsePrizeInfoListVO;
 
@@ -22,4 +23,5 @@ public interface HorsePrizeInfoMapper {
 
     HorsePrizeInfoDetailBO selectHorsePrizeInfoByDetail( String horsePrizeId );
 
+    List<HorseResumePrizeModel> selectByResume(String horseId);
 }

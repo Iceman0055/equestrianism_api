@@ -2,6 +2,7 @@ package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.bo.TreatmentCaseInfoDetailBO;
 import com.equestrianism.api.model.model.TreatmentCaseInfoListModel;
+import com.equestrianism.api.model.model.horse_resume.HorseResumeTreatmentCaseModel;
 import com.equestrianism.api.model.po.TreatmentCaseInfoEntity;
 import com.equestrianism.api.model.vo.treatment_case.TreatmentCaseInfoListVO;
 
@@ -21,4 +22,6 @@ public interface TreatmentCaseInfoMapper {
     Integer countTreatmentCaseListByPage(TreatmentCaseInfoListVO treatmentCaseInfoListVo);
 
     TreatmentCaseInfoDetailBO selectByPrimaryKey(String treatmentCaseId);
+
+    List<HorseResumeTreatmentCaseModel> selectByResume(String horseId);
 }

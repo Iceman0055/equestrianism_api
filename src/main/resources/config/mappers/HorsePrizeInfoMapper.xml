@@ -174,4 +174,22 @@
             a.horse_prize_id = #{horsePrizeId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByResume" parameterType="java.lang.String" resultType="com.equestrianism.api.model.model.horse_resume.HorseResumePrizeModel">
+        SELECT
+            event_date    eventDate,
+            event_name    eventName,
+            event_place   eventPlace,
+            prize_name    prizeName
+        FROM
+            horse_prize_info
+        WHERE
+            status = 1
+        AND
+            delete_flag = 0
+        AND
+            horse_id = #{horseId, jdbcType=VARCHAR}
+        ORDER BY
+            event_date DESC
+        limit 0,4
+    </select>
 </mapper>

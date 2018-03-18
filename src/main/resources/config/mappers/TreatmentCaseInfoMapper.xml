@@ -192,4 +192,27 @@
             a.treatment_case_id = #{treatmentCaseId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByResume" parameterType="java.lang.String" resultType="com.equestrianism.api.model.model.horse_resume.HorseResumeTreatmentCaseModel">
+        SELECT
+            a.operator_date   operateDate,
+            a.clinical        realname,
+            a.title_tag       titleTag,
+            a.place           place
+        FROM
+            treatment_case_info a
+        LEFT JOIN
+            treatment_info b
+        ON
+            a.treatment_id = b.treatment_id
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.status = 1
+        AND
+            horse_id = #{horseId, jdbcType=VARCHAR}
+        ORDER BY
+            a.operator_date DESC
+        limit 0, 4
+    </select>
+
 </mapper>

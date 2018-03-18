@@ -1,5 +1,6 @@
 package com.equestrianism.api.dao;
 
+import com.equestrianism.api.model.bo.HostInfoDetailBO;
 import com.equestrianism.api.model.model.HostInfoListModel;
 import com.equestrianism.api.model.po.HostInfoEntity;
 import com.equestrianism.api.model.vo.host_info.HostInfoListVO;
@@ -21,4 +22,5 @@ public interface HostInfoMapper {
 
     HostInfoEntity selectByPrimaryKey( String hostId );
 
+    HostInfoDetailBO selectByResume(String horseId);
 }

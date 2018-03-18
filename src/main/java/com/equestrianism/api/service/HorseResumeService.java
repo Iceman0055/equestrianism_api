@@ -1,7 +1,9 @@
 package com.equestrianism.api.service;
 
 import com.equestrianism.api.core.container.BaseException;
+import com.equestrianism.api.model.bo.HorseResumeDetailBO;
 import com.equestrianism.api.model.bo.HorseResumeListBO;
+import com.equestrianism.api.model.vo.horse_resume.HorseResumeDetailVO;
 import com.equestrianism.api.model.vo.horse_resume.HorseResumeListVO;
 
 /**
@@ -11,4 +13,5 @@ public interface HorseResumeService {
 
     HorseResumeListBO horseResumeList(HorseResumeListVO horseResumeListVo) throws BaseException;
 
+    HorseResumeDetailBO horseResumeDetail(HorseResumeDetailVO horseResumeDetailVo) throws BaseException;
 }

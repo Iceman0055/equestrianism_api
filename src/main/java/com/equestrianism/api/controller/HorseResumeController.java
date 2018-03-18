@@ -5,6 +5,7 @@ import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.HorseInfoDetailBO;
 import com.equestrianism.api.model.bo.HorseInfoListBO;
+import com.equestrianism.api.model.bo.HorseResumeDetailBO;
 import com.equestrianism.api.model.bo.HorseResumeListBO;
 import com.equestrianism.api.model.vo.horse_info.HorseInfoDetailVO;
 import com.equestrianism.api.model.vo.horse_info.HorseInfoListVO;
@@ -52,18 +53,18 @@ public class HorseResumeController extends BaseController {
         }
     }
 
-//    @RequestMapping( value = "/detail", method = RequestMethod.GET )
-//    @ResponseBody
-//    public Map<String, Object> detail( HorseResumeDetailVO horseResumeDetailVo ) {
-//        LOGGER.info( "【HorseResumeController】【detail】inputs : " + horseResumeDetailVo.toJsonString() );
-//        try {
-//            HorseInfoDetailBO response = horseResumeService.horseResumeDetail( horseResumeDetailVo );
-//            LOGGER.info( "【HorseResumeController】【detail】result : " + response.toJsonString() );
-//            return ContainerUtils.buildResSuccessMap( response );
-//        } catch ( BaseException e ) {
-//            LOGGER.error( "【HorseResumeController】【detail】【exception】", e );
-//            return ContainerUtils.buildResFailMap();
-//        }
-//    }
+    @RequestMapping( value = "/detail", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> detail( HorseResumeDetailVO horseResumeDetailVo ) {
+        LOGGER.info( "【HorseResumeController】【detail】inputs : " + horseResumeDetailVo.toJsonString() );
+        try {
+            HorseResumeDetailBO response = horseResumeService.horseResumeDetail( horseResumeDetailVo );
+            LOGGER.info( "【HorseResumeController】【detail】result : " + response.toJsonString() );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【HorseResumeController】【detail】【exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
 
 }
