@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by Chenzq on 2018/3/18.
  */
 @Controller
-@RequestMapping( "/horseInfo" )
+@RequestMapping( "/horseResume" )
 public class HorseResumeController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HorseInfoController.class);
