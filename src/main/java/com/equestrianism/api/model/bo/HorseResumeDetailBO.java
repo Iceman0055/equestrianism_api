@@ -18,6 +18,7 @@ public class HorseResumeDetailBO extends BaseObject {
     private List<HorseResumeVaccinationModel> vaccinationList;
     private List<HorseResumeBrigandineModel> brigandineList;
     private List<HorseResumeContusionTeethModel> contusionTeethList;
+    private List<HorseResumeTreatmentInfoModel> treatmentInfoList;
 
     public HorseInfoDetailBO getHorseInfo() {
         return horseInfo;
@@ -81,5 +82,13 @@ public class HorseResumeDetailBO extends BaseObject {
 
     public void setContusionTeethList(List<HorseResumeContusionTeethModel> contusionTeethList) {
         this.contusionTeethList = contusionTeethList;
+    }
+
+    public List<HorseResumeTreatmentInfoModel> getTreatmentInfoList() {
+        return treatmentInfoList;
+    }
+
+    public void setTreatmentInfoList(List<HorseResumeTreatmentInfoModel> treatmentInfoList) {
+        this.treatmentInfoList = treatmentInfoList;
     }
 }

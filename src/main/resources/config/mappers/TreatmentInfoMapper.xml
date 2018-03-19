@@ -12,6 +12,7 @@
         <result column="horse_type" property="horseType" jdbcType="INTEGER"/>
         <result column="horse_id" property="horseId" jdbcType="VARCHAR"/>
         <result column="horse_name" property="horseName" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="begin_date" property="beginDate" jdbcType="VARCHAR"/>
         <result column="begin_time" property="beginTime" jdbcType="VARCHAR"/>
         <result column="end_date" property="endDate" jdbcType="VARCHAR"/>
@@ -28,7 +29,7 @@
 
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        treatment_id, outpatient_type, hospital_appoint_id, horse_type, horse_id, horse_name, begin_date, begin_time,
+        treatment_id, outpatient_type, hospital_appoint_id, horse_type, horse_id, horse_name, user_id, begin_date, begin_time,
         end_date, end_time, treat_name, treat_desc, consulting_room_id, status, delete_flag, data_version, create_date,
         update_date
     </sql>
@@ -43,6 +44,7 @@
                 horse_type,
                 horse_id,
                 horse_name,
+                user_id,
                 begin_date,
                 begin_time,
                 end_date,
@@ -61,6 +63,7 @@
                 #{horseType, jdbcType=INTEGER},
                 #{horseId, jdbcType=VARCHAR},
                 #{horseName, jdbcType=VARCHAR},
+                #{userId, jdbcType=VARCHAR},
                 #{beginDate, jdbcType=VARCHAR},
                 #{beginTime, jdbcType=VARCHAR},
                 #{endDate, jdbcType=VARCHAR},
@@ -190,6 +193,29 @@
             treatment_info
         WHERE
             treatment_id = #{treatmentId, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByResume" parameterType="java.lang.String"
+            resultType="com.equestrianism.api.model.model.horse_resume.HorseResumeTreatmentInfoModel">
+        SELECT
+            a.begin_date    beginDate,
+            a.treat_name    treatName,
+            a.treat_desc    treatDesc,
+            b.realname      realname
+        FROM
+            treatment_info a
+        LEFT JOIN
+            user_id b
+        ON
+            a.user_id = b.user_id
+        WHERE
+            a.delete_flag = 0
+        AND
+            a.status = 1
+        AND
+            a.horse_type = 1
+        AND
+            a.horse_id = #{horseId, jdbcType=VARCHAR}
     </select>
 
 </mapper>

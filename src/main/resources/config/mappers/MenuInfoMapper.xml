@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- user_info表 -->
+<mapper namespace="com.equestrianism.api.dao.MenuInfoMapper">
+
+    <!--返回Map-->
+    <resultMap id="BaseResultMap" type="com.equestrianism.api.model.po.MenuInfoEntity">
+        <id column="menu_id" property="menuId" jdbcType="INTEGER"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="pre_menu_id" property="preMenuId" jdbcType="INTEGER"/>
+        <result column="level" property="level" jdbcType="INTEGER"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="data_version" property="dataVersion" jdbcType="INTEGER"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--基本的sql查询字段 公共引用...-->
+    <sql id="Base_Column_List">
+        menu_id, menu_name, pre_menu_id, level, sort, status, delete_flag, data_version, create_date, update_date
+    </sql>
+
+    <select id="selectAll" parameterType="com.equestrianism.api.model.po.MenuInfoEntity"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+            menu_info
+        WHERE
+            status = 1
+        AND
+            delete_flag = 0
+        <if test="level != null">
+            AND
+                level = #{level, jdbcType=INTEGER}
+        </if>
+        <if test="preMenuId != null">
+            AND
+                pre_menu_id = #{preMenuId, jdbcType=INTEGER}
+        </if>
+        ORDER BY
+            sort
+    </select>
+
+</mapper>

@@ -50,6 +50,9 @@ public class HorseResumeServiceImpl implements HorseResumeService {
     @Autowired
     private ContusionTeethInfoMapper contusionTeethInfoMapper;
 
+    @Autowired
+    private TreatmentInfoMapper treatmentInfoMapper;
+
     @Override
     public HorseResumeListBO horseResumeList(HorseResumeListVO horseResumeListVo) throws BaseException {
         horseResumeListVo.calculateBeginIndex();
@@ -85,6 +88,7 @@ public class HorseResumeServiceImpl implements HorseResumeService {
         List<HorseResumeVaccinationModel> vaccinationList = vaccinationInfoMapper.selectByResume( horseResumeDetailVo.getHorseId() );
         List<HorseResumeBrigandineModel> brigandineList = brigandineInfoMapper.selectByResume( horseResumeDetailVo.getHorseId() );
         List<HorseResumeContusionTeethModel> contusionTeethList = contusionTeethInfoMapper.selectByResume( horseResumeDetailVo.getHorseId() );
+        List<HorseResumeTreatmentInfoModel> treatmentInfoList = treatmentInfoMapper.selectByResume( horseResumeDetailVo.getHorseId() );
         HorseResumeDetailBO responseBo = new HorseResumeDetailBO();
         responseBo.setHorseInfo( horseInfoDetailBo );
         responseBo.setHostInfo( hostInfoDetailBo );
@@ -94,6 +98,7 @@ public class HorseResumeServiceImpl implements HorseResumeService {
         responseBo.setVaccinationList( vaccinationList );
         responseBo.setBrigandineList( brigandineList );
         responseBo.setContusionTeethList( contusionTeethList );
+        responseBo.setTreatmentInfoList( treatmentInfoList );
         return responseBo;
     }
 }

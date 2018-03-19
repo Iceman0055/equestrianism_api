@@ -306,6 +306,7 @@ CREATE TABLE `treatment_info` (
   `horse_type` int(1) NOT NULL DEFAULT '1' COMMENT '马匹类型：1-中心 2-外来',
   `horse_id` varchar(32) NOT NULL COMMENT '马匹主键',
   `horse_name` varchar(16) NOT NULL COMMENT '马匹名称',
+  `user_id` varchar(32) NOT NULL COMMENT '治疗医生',
   `begin_date` varchar(10) NOT NULL DEFAULT '0000-00-00' COMMENT '治疗开始日期',
   `begin_time` varchar(8) NOT NULL DEFAULT '00:00:00' COMMENT '开始时间',
   `end_date` varchar(10) NOT NULL DEFAULT '0000-00-00' COMMENT '结束日期',
@@ -335,6 +336,38 @@ CREATE TABLE `treatment_asset_info` (
   PRIMARY KEY (`treatment_asset_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `treatment_case_info` (
+  `treatment_case_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `treatment_id` varchar(32) NOT NULL COMMENT '治疗主键',
+  `operator_date` varchar(20) NOT NULL COMMENT '操作时间',
+  `place` varchar(16) NOT NULL COMMENT '地点',
+  `clinical` varchar(32) NOT NULL COMMENT '临诊',
+  `first_visit` varchar(32) NOT NULL COMMENT '初诊',
+  `advice` varchar(32) NOT NULL COMMENT '医嘱',
+  `title_tag` varchar(16) NOT NULL COMMENT '标题标签',
+  `user_id` varchar(32) NOT NULL COMMENT '治疗医生',
+  `remark` varchar(32) NOT NULL COMMENT '备注',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`treatment_case_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `menu_info` (
+  `menu_id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜单主键',
+  `menu_name` varchar(16) NOT NULL COMMENT '菜单名称',
+  `pre_menu_id` int(8) NOT NULL COMMENT '上级菜单主键',
+  `level` int(2) NOT NULL COMMENT '目录层级',
+  `sort` int(8) NOT NULL COMMENT '排序',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 

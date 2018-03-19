@@ -66,6 +66,7 @@ public class TreatmentInfoServiceImpl implements TreatmentInfoService {
                 treatmentInfoAddVo.getBeginDate(), treatmentInfoAddVo.getBeginTime(), treatmentInfoAddVo.getEndDate(),
                 treatmentInfoAddVo.getEndTime(), treatmentInfoAddVo.getTreatName(), treatmentInfoAddVo.getTreatDesc(),
                 treatmentInfoAddVo.getConsultingRoomId() );
+        treatmentInfoEntity.setUserId( treatmentInfoAddVo.getAccessId() );
         Integer insertCount;
         try {
             insertCount = treatmentInfoMapper.insert( treatmentInfoEntity );

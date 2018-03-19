@@ -44,6 +44,7 @@ public class TreatmentCaseInfoServiceImpl implements TreatmentCaseInfoService {
                 treatmentCaseInfoAddVo.getOperatorDate(), treatmentCaseInfoAddVo.getPlace(), treatmentCaseInfoAddVo.getClinical(),
                 treatmentCaseInfoAddVo.getFirstVisit(), treatmentCaseInfoAddVo.getAdvice(), treatmentCaseInfoAddVo.getTitleTag(),
                 treatmentCaseInfoAddVo.getRemark() );
+        treatmentCaseInfoEntity.setUserId( treatmentCaseInfoAddVo.getAccessId() );
         try {
             Integer insertCount = treatmentCaseInfoMapper.insert( treatmentCaseInfoEntity );
             if ( insertCount > 0 ) {

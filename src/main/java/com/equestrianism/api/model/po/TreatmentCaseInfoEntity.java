@@ -18,6 +18,7 @@ public class TreatmentCaseInfoEntity extends BasePO {
     private String advice;
     private String titleTag;
     private String remark;
+    private String userId;
 
     public TreatmentCaseInfoEntity() {
     }
@@ -115,5 +116,13 @@ public class TreatmentCaseInfoEntity extends BasePO {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

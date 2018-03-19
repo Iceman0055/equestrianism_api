@@ -15,6 +15,7 @@ public class TreatmentInfoEntity extends BasePO {
     private Integer horseType;
     private String horseId;
     private String horseName;
+    private String userId;
     private String beginDate;
     private String beginTime;
     private String endDate;
@@ -157,5 +158,13 @@ public class TreatmentInfoEntity extends BasePO {
 
     public void setConsultingRoomId(String consultingRoomId) {
         this.consultingRoomId = consultingRoomId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

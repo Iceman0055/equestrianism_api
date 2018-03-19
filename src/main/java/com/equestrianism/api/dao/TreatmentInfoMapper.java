@@ -1,6 +1,7 @@
 package com.equestrianism.api.dao;
 
 import com.equestrianism.api.model.model.TreatmentInfoListModel;
+import com.equestrianism.api.model.model.horse_resume.HorseResumeTreatmentInfoModel;
 import com.equestrianism.api.model.po.TreatmentInfoEntity;
 import com.equestrianism.api.model.vo.treatment_info.TreatmentInfoListVO;
 
@@ -20,4 +21,7 @@ public interface TreatmentInfoMapper {
     Integer countTreatmentListByPage(TreatmentInfoListVO treatmentInfoListVo);
 
     TreatmentInfoEntity selectByPrimaryKey(String treatmentId);
+
+    List<HorseResumeTreatmentInfoModel> selectByResume(String horseId);
+
 }
