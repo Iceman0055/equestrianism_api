@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -123,6 +124,38 @@ public class RoleInfoController extends BaseController {
             LOGGER.error( "【RoleInfoController】【detail】【Exception】", e );
             return ContainerUtils.buildResFailMap();
         }
+    }
+
+    @RequestMapping( value = "/menuList", method = RequestMethod.GET )
+    @ResponseBody
+    public Map<String, Object> menuList( String roleId ) {
+        LOGGER.info( "【RoleInfoController】【menuList】inputs : " + roleId );
+        try {
+            RoleInfoMenuListBO response = roleInfoService.menuList(roleId);
+            LOGGER.info( "【RoleInfoController】【menuList】success" );
+            return ContainerUtils.buildResSuccessMap( response );
+        } catch ( BaseException e ) {
+            LOGGER.error( "【RoleInfoController】【menuList】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping( value = "/updateMenu", method = RequestMethod.POST, produces = "application/json" )
+    @ResponseBody
+    public Map<String, Object> updateMenu( @RequestBody RoleInfoUpdateMenuVO roleInfoUpdateMenuVo ) {
+        roleInfoUpdateMenuVo.setAccessId( getAccessId() );
+        LOGGER.info( "【RoleInfoController】【updateMenu】inputs : " + roleInfoUpdateMenuVo.toJsonString() );
+        try {
+            if ( roleInfoService.updateMenu(roleInfoUpdateMenuVo ) ) {
+                LOGGER.info( "【RoleInfoController】【updateMenu】result : success" );
+                return ContainerUtils.buildResSuccessMap();
+            }
+        } catch ( BaseException e ) {
+            LOGGER.error( "【RoleInfoController】【updateMenu】【Exception】", e );
+            return ContainerUtils.buildResFailMap();
+        }
+        LOGGER.info( "【RoleInfoController】【updateMenu】result : fail" );
+        return ContainerUtils.buildResFailMap();
     }
 
 }

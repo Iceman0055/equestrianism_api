@@ -80,3 +80,8 @@ assetTypeDetail字段为typeDetailId、typeDetailName、typeId、remark。
 
 马匹简历：
 1、查询条件：马匹名称（输入框）
+
+2018.03.20：
+1、新增接口：roleInfo/menuList（入参roleId），用于角色管理-分配权限时加载已拥有权限菜单
+2、新增接口：roleInfo/updateMenu，用于角色管理-分配权限-保存时。deleteMenuList为移除的菜单id数组，addMenuList为新增的菜单id数组
+3、新增接口：auth/login，用户登录

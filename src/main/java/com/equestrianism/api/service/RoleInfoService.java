@@ -4,7 +4,10 @@ import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
 import com.equestrianism.api.model.bo.RoleInfoDetailBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
+import com.equestrianism.api.model.bo.RoleInfoMenuListBO;
 import com.equestrianism.api.model.vo.*;
+
+import java.util.List;
 
 /**
  * Created by Chenzq on 2018/1/22.
@@ -23,4 +26,7 @@ public interface RoleInfoService {
 
     RoleInfoDetailBO roleDetail( RoleInfoDetailVO roleInfoDetailVo ) throws BaseException;
 
+    RoleInfoMenuListBO menuList(String roleId) throws BaseException;
+
+    Boolean updateMenu(RoleInfoUpdateMenuVO roleInfoUpdateMenuVo) throws BaseException;
 }

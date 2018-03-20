@@ -4,12 +4,15 @@ import com.equestrianism.api.constants.CodeEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.RoleInfoMapper;
+import com.equestrianism.api.dao.RoleMenuInfoMapper;
 import com.equestrianism.api.model.bo.RoleInfoComboBoxBO;
 import com.equestrianism.api.model.bo.RoleInfoDetailBO;
 import com.equestrianism.api.model.bo.RoleInfoListBO;
+import com.equestrianism.api.model.bo.RoleInfoMenuListBO;
 import com.equestrianism.api.model.model.RoleInfoComboBoxModel;
 import com.equestrianism.api.model.model.RoleInfoListModel;
 import com.equestrianism.api.model.po.RoleInfoEntity;
+import com.equestrianism.api.model.po.RoleMenuInfoEntity;
 import com.equestrianism.api.model.vo.*;
 import com.equestrianism.api.service.RoleInfoService;
 import org.slf4j.Logger;
@@ -29,6 +32,9 @@ public class RoleInfoServiceImpl implements RoleInfoService {
 
     @Autowired
     private RoleInfoMapper roleInfoMapper;
+
+    @Autowired
+    private RoleMenuInfoMapper roleMenuInfoMapper;
 
     @Override
     public Boolean addRoleInfo( RoleInfoAddVO roleInfoAddVo ) throws BaseException {
@@ -114,6 +120,39 @@ public class RoleInfoServiceImpl implements RoleInfoService {
             LOGGER.error( "【RoleInfoService】【roleDetail】", e );
             throw new BaseException( CodeEnum.PROCESS_FAIL.note );
         }
+    }
+
+    @Override
+    public RoleInfoMenuListBO menuList(String roleId) throws BaseException {
+        List<Integer> menuList = roleMenuInfoMapper.selectByRoleId( roleId );
+        return new RoleInfoMenuListBO( menuList );
+    }
+
+    @Override
+    public Boolean updateMenu(RoleInfoUpdateMenuVO roleInfoUpdateMenuVo) throws BaseException {
+        List<Integer> deleteList = roleInfoUpdateMenuVo.getDeleteMenuList();
+        List<Integer> insertList = roleInfoUpdateMenuVo.getAddMenuList();
+        if ( deleteList != null && deleteList.size() > 0 ) {
+            RoleMenuInfoEntity roleMenuInfoEntity;
+            for ( Integer menuId : deleteList ) {
+                roleMenuInfoEntity = new RoleMenuInfoEntity();
+                roleMenuInfoEntity.setMenuId( menuId );
+                roleMenuInfoEntity.setRoleId( roleInfoUpdateMenuVo.getRoleId() );
+                roleMenuInfoEntity.setDeleteFlag( 1 );
+                roleMenuInfoEntity.setStatus( 0 );
+                roleMenuInfoMapper.updateBySelective( roleMenuInfoEntity );
+            }
+        }
+        if ( insertList != null && insertList.size() > 0 ) {
+            RoleMenuInfoEntity roleMenuInfoEntity;
+            for ( Integer menuId : insertList ) {
+                roleMenuInfoEntity = new RoleMenuInfoEntity();
+                roleMenuInfoEntity.setMenuId( menuId );
+                roleMenuInfoEntity.setRoleId( roleInfoUpdateMenuVo.getRoleId() );
+                roleMenuInfoMapper.insert( roleMenuInfoEntity );
+            }
+        }
+        return true;
     }
 
 }

@@ -28,4 +28,6 @@ public interface UserInfoMapper {
     List<UserInfoVeterinarianModel> selectUserListByRole( String shortName );
 
     List<UserInfoComboBoxModel> selectUserListByComboBox(String departmentId) ;
+
+    UserInfoEntity selectByCondition(UserInfoEntity userInfoEntity);
 }

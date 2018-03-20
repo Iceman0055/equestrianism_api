@@ -274,4 +274,19 @@
             department_id = #{departmentId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByCondition" parameterType="com.equestrianism.api.model.po.UserInfoEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+            user_info
+        WHERE
+            status = 1
+        AND
+            delete_flag = 0
+        AND
+            login_name = #{loginName, jdbcType=VARCHAR}
+        AND
+            login_password = #{loginPassword, jdbcType=VARCHAR}
+    </select>
+
 </mapper>
