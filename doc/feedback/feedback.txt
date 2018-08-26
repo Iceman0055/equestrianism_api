@@ -85,3 +85,17 @@ assetTypeDetail字段为typeDetailId、typeDetailName、typeId、remark。
 1、新增接口：roleInfo/menuList（入参roleId），用于角色管理-分配权限时加载已拥有权限菜单
 2、新增接口：roleInfo/updateMenu，用于角色管理-分配权限-保存时。deleteMenuList为移除的菜单id数组，addMenuList为新增的菜单id数组
 3、新增接口：auth/login，用户登录
+
+2018.08.24
+1、增加 钉甲师 角色
+2、治疗概述改为整行textarea
+3、病例添加附件上传
+4、病例中临诊、初诊、医嘱、备注改为整行textarea
+5、马匹的comboBox去已删除
+6、接种疫苗提醒、治疗日程提醒
+7、新增治疗设备、消耗品选中问题
+8、治疗查看时，设备、消耗品显示问题
+
+2018.08.26
+1、登录页增加回车事件，用于登录
+2、切换不同角色的账号时，菜单没有在登录后自动刷新，需要刷新页面才会更新菜单
