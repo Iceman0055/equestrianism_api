@@ -1,24 +1,24 @@
-package com.equestrianism.api.model.bo;
+package com.equestrianism.api.model.model;
 
 import com.equestrianism.api.core.model.BaseObject;
-
+import com.equestrianism.api.model.po.AssetInfoEntity;
 
 /**
- * Created by Chenzq on 2018/3/14.
+ * Created by Chenzq on 2018/9/2.
  */
-public class AssetInfoDetailBO extends BaseObject {
+public class AssetInfoImportModel extends BaseObject {
 
-    private String assetId;
     private String barCode;
-    private Integer typeId;
-    private Integer typeDetailId;
+    private String typeId;
+    private String typeDetailId;
     private Integer assetType;
     private String assetNumber;
     private String assetName;
+    private Integer inventory;
     private String price;
     private String acreage;
-    private Integer priceType;
-    private Integer acquireWay;
+    private String priceType;
+    private String acquireWay;
     private String financeAccountsDate;
     private String tabDate;
     private String guaranteeDate;
@@ -32,60 +32,60 @@ public class AssetInfoDetailBO extends BaseObject {
     private String purchaseOrganize;
     private String scrapDate;
 
-    public AssetInfoDetailBO() {
+    public AssetInfoImportModel() {
     }
 
-    public AssetInfoDetailBO( String assetId, Integer typeId, Integer typeDetailId, Integer assetType, String assetNumber,
-                            String assetName, String price, String acreage, Integer priceType, Integer acquireWay,
+    public AssetInfoImportModel( String typeId, String typeDetailId, Integer assetType, String assetNumber,
+                            String assetName, String price, String acreage, String priceType, String acquireWay,
                             String financeAccountsDate, String tabDate, String guaranteeDate, String manageDepartment,
                             String manageUser, String remark, String purpose, String specificationModel, String brand,
-                            String voucherNumber, String purchaseOrganize, String barCode, String scrapDate ) {
-        this.setAssetId(assetId);
-        this.setTypeId(typeId);
-        this.setTypeDetailId(typeDetailId);
-        this.setAssetType(assetType);
-        this.setAssetNumber(assetNumber);
-        this.setAssetName(assetName);
-        this.setPrice(price);
-        this.setAcreage(acreage);
-        this.setPriceType(priceType);
-        this.setAcquireWay(acquireWay);
-        this.setFinanceAccountsDate(financeAccountsDate);
-        this.setTabDate(tabDate);
-        this.setGuaranteeDate(guaranteeDate);
-        this.setManageDepartment(manageDepartment);
-        this.setManageUser(manageUser);
-        this.setRemark(remark);
-        this.setPurpose(purpose);
-        this.setSpecificationModel(specificationModel);
-        this.setBrand(brand);
-        this.setVoucherNumber(voucherNumber);
-        this.setPurchaseOrganize(purchaseOrganize);
+                            String voucherNumber, String purchaseOrganize, String barCode, Integer inventory, String scrapDate ) {
+        this.typeId = typeId;
+        this.typeDetailId = typeDetailId;
+        this.assetType = assetType;
+        this.assetNumber = assetNumber;
+        this.assetName = assetName;
+        this.price = price;
+        this.acreage = acreage;
+        this.priceType = priceType;
+        this.acquireWay = acquireWay;
+        this.financeAccountsDate = financeAccountsDate;
+        this.tabDate = tabDate;
+        this.guaranteeDate = guaranteeDate;
+        this.manageDepartment = manageDepartment;
+        this.manageUser = manageUser;
+        this.remark = remark;
+        this.purpose = purpose;
+        this.specificationModel = specificationModel;
+        this.brand = brand;
+        this.voucherNumber = voucherNumber;
+        this.purchaseOrganize = purchaseOrganize;
         this.barCode = barCode;
+        this.inventory = inventory;
         this.scrapDate = scrapDate;
     }
 
-    public String getAssetId() {
-        return assetId;
+    public AssetInfoEntity transToAssetInfo( Integer typeId, Integer typeDetailId, Integer priceType, Integer acquireWay,
+                                             String manageDepartment, String manageUser ) {
+        return new AssetInfoEntity( typeId, typeDetailId, this.assetType, this.assetNumber, this.assetName, this.price,
+                this.acreage, priceType, acquireWay, this.financeAccountsDate, this.tabDate, this.guaranteeDate, manageDepartment,
+                manageUser, this.remark, this.purpose, this.specificationModel, this.brand, this.voucherNumber, this.purchaseOrganize,
+                this.barCode, this.inventory, this.scrapDate );
     }
 
-    public void setAssetId(String assetId) {
-        this.assetId = assetId;
-    }
-
-    public Integer getTypeId() {
+    public String getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Integer typeId) {
+    public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
 
-    public Integer getTypeDetailId() {
+    public String getTypeDetailId() {
         return typeDetailId;
     }
 
-    public void setTypeDetailId(Integer typeDetailId) {
+    public void setTypeDetailId(String typeDetailId) {
         this.typeDetailId = typeDetailId;
     }
 
@@ -129,19 +129,19 @@ public class AssetInfoDetailBO extends BaseObject {
         this.acreage = acreage;
     }
 
-    public Integer getPriceType() {
+    public String getPriceType() {
         return priceType;
     }
 
-    public void setPriceType(Integer priceType) {
+    public void setPriceType(String priceType) {
         this.priceType = priceType;
     }
 
-    public Integer getAcquireWay() {
+    public String getAcquireWay() {
         return acquireWay;
     }
 
-    public void setAcquireWay(Integer acquireWay) {
+    public void setAcquireWay(String acquireWay) {
         this.acquireWay = acquireWay;
     }
 
@@ -241,6 +241,14 @@ public class AssetInfoDetailBO extends BaseObject {
         this.barCode = barCode;
     }
 
+    public Integer getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Integer inventory) {
+        this.inventory = inventory;
+    }
+
     public String getScrapDate() {
         return scrapDate;
     }
@@ -248,4 +256,5 @@ public class AssetInfoDetailBO extends BaseObject {
     public void setScrapDate(String scrapDate) {
         this.scrapDate = scrapDate;
     }
+
 }

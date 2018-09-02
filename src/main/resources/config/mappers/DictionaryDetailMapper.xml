@@ -24,7 +24,7 @@
     </sql>
 
 
-    <insert id="insert" parameterType="com.equestrianism.api.model.po.DictionaryDetailEntity">
+    <insert id="insert" keyProperty="dictionaryDetailId" useGeneratedKeys="true" parameterType="com.equestrianism.api.model.po.DictionaryDetailEntity">
         INSERT INTO
             dictionary_detail (
                 item_code,
@@ -111,6 +111,31 @@
             dictionary_detail
         WHERE
             dictionary_id = #{dictionaryId, jdbcType=INTEGER}
+    </select>
+
+    <select id="selectDictionaryDetailListByCondition" parameterType="com.equestrianism.api.model.po.DictionaryDetailEntity"
+            resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            dictionary_detail
+        WHERE
+            dictionary_id = #{dictionaryId, jdbcType=INTEGER}
+        AND
+            item_value = #{itemValue, jdbcType=VARCHAR}
+        limit 0, 1
+    </select>
+
+    <select id="selectLast" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        dictionary_detail
+        WHERE
+        dictionary_id = #{dictionaryId, jdbcType=INTEGER}
+        order BY create_date DESC
+        limit 0, 1
     </select>
 
 </mapper>

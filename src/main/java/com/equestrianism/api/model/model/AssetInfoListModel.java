@@ -30,6 +30,13 @@ public class AssetInfoListModel extends BaseObject {
     private String purchaseOrganize;
     private String barCode;
     private Integer inventory;
+    private String departmentId;
+
+    public AssetInfoListModel() {}
+
+    public AssetInfoListModel(String departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public String getAssetId() {
         return assetId;
@@ -205,5 +212,13 @@ public class AssetInfoListModel extends BaseObject {
 
     public void setInventory(Integer inventory) {
         this.inventory = inventory;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 }

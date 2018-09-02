@@ -381,6 +381,27 @@ CREATE TABLE `role_menu_info` (
   PRIMARY KEY (`role_menu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
+# 2018.09.01
+ALTER TABLE `asset_info`
+ADD COLUMN `scrap_date`  varchar(16) NOT NULL DEFAULT '' COMMENT '报废日期' AFTER `purchase_organize`;
+
+ALTER TABLE `department_info`
+MODIFY COLUMN `short_name`  varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '部门简称' AFTER `department_name`;
+
+CREATE TABLE `asset_detail` (
+  `asset_detail_id` varchar(32) NOT NULL COMMENT '主键ID',
+  `asset_id` varchar(32) NOT NULL COMMENT 'asset_info.asset_id',
+  `batch_number` varchar(16) NOT NULL COMMENT '批次号',
+  `scrap_type` int(1) unsigned NOT NULL DEFAULT '0' COMMENT '报废标志位：1-报废 0-正常',
+  `create_user` varchar(32) NOT NULL COMMENT '创建用户',
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT '启用标志位：1-启用 0-停用',
+  `delete_flag` int(1) NOT NULL DEFAULT '0' COMMENT '删除标志位：1-已删除 0-未删除',
+  `data_version` int(8) NOT NULL DEFAULT '1' COMMENT '数据版本',
+  `create_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`asset_detail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 

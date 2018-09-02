@@ -30,4 +30,7 @@ public interface UserInfoMapper {
     List<UserInfoComboBoxModel> selectUserListByComboBox(String departmentId) ;
 
     UserInfoEntity selectByCondition(UserInfoEntity userInfoEntity);
+
+    UserInfoDetailBO selectByRealName( String realName );
+
 }

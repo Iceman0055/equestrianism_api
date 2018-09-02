@@ -26,4 +26,6 @@ public interface DepartmentInfoMapper {
 
     DepartmentInfoDetailBO selectDepartmentByDepartmentId( String departmentId );
 
+    DepartmentInfoEntity selectByName( String departmentName );
+
 }

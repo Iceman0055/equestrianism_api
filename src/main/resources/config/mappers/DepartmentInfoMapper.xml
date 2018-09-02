@@ -136,4 +136,15 @@
             department_id = #{departmentId, jdbcType=VARCHAR}
     </select>
 
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        department_info
+        WHERE
+        department_name = #{departmentName, jdbcType=VARCHAR}
+        order BY create_date DESC
+        limit 0, 1
+    </select>
+
 </mapper>
