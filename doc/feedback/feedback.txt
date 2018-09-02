@@ -99,3 +99,4 @@ assetTypeDetail字段为typeDetailId、typeDetailName、typeId、remark。
 2018.08.26
 1、登录页增加回车事件，用于登录
 2、切换不同角色的账号时，菜单没有在登录后自动刷新，需要刷新页面才会更新菜单
+3、

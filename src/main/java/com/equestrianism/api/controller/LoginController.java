@@ -32,7 +32,7 @@ public class LoginController extends BaseController {
     @RequestMapping( value = "/login", method = RequestMethod.POST )
     @ResponseBody
     public Map<String, Object> login( @RequestBody AuthLoginVO authLoginVo) {
-        LOGGER.info( "【LoginController】【login】begin" );
+        LOGGER.info( "【LoginController】【login】begin : " + authLoginVo.toJsonString() );
         try {
             AuthLoginBO authRegisterBo = registerService.login(authLoginVo);
             if ( authRegisterBo != null ) {

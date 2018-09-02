@@ -205,7 +205,7 @@
         FROM
             treatment_info a
         LEFT JOIN
-            user_id b
+            user_info b
         ON
             a.user_id = b.user_id
         WHERE
