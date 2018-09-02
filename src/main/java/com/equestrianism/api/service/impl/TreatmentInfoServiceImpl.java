@@ -7,6 +7,7 @@ import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.*;
 import com.equestrianism.api.model.bo.*;
 import com.equestrianism.api.model.model.AssetTypeDetailListModel;
+import com.equestrianism.api.model.model.TreatmentAssetModel;
 import com.equestrianism.api.model.model.TreatmentInfoAddAssetModel;
 import com.equestrianism.api.model.model.TreatmentInfoListModel;
 import com.equestrianism.api.model.po.*;

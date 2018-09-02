@@ -5,6 +5,9 @@ import com.equestrianism.api.model.bo.AssetInfoDetailBO;
 import com.equestrianism.api.model.bo.AssetInfoListBO;
 import com.equestrianism.api.model.bo.AssetInfoNameBO;
 import com.equestrianism.api.model.vo.asset_info.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletOutputStream;
 
 /**
  * Created by Chenzq on 2018/3/14.
@@ -24,5 +27,9 @@ public interface AssetInfoService {
     AssetInfoNameBO assetName(String barCode, Integer type) throws BaseException;
 
     Boolean inventory(AssetInfoInventoryVO assetInfoInventoryVo) throws BaseException;
+
+    void exportExcel(String[] assetExcelTitle, ServletOutputStream out, AssetInfoListVO assetInfoListVo);
+
+    void batchImport(MultipartFile file, String createUser);
 
 }

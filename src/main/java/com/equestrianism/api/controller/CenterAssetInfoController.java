@@ -1,6 +1,7 @@
 package com.equestrianism.api.controller;
 
 import com.equestrianism.api.constants.AssetTypeEnum;
+import com.equestrianism.api.constants.SystemParamsConstants;
 import com.equestrianism.api.core.container.BaseController;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
@@ -13,140 +14,171 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 /**
  * Created by Chenzq on 2018/3/14.
  */
 @Controller
-@RequestMapping( "/centerAssetInfo" )
+@RequestMapping("/centerAssetInfo")
 public class CenterAssetInfoController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger( CenterAssetInfoController.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger(CenterAssetInfoController.class);
 
     @Autowired
     private AssetInfoService assetInfoService;
 
-    @RequestMapping( value = "/add", method = RequestMethod.POST, produces = "application/json" )
+    @RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Map<String, Object> add( @RequestBody AssetInfoAddVO assetInfoAddVo ) {
-        assetInfoAddVo.setAccessId( getAccessId() );
-        assetInfoAddVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type );
-        LOGGER.info( "【CenterAssetInfoController】【add】【inputs】" + assetInfoAddVo.toJsonString() );
+    public Map<String, Object> add(@RequestBody AssetInfoAddVO assetInfoAddVo) {
+        assetInfoAddVo.setAccessId(getAccessId());
+        assetInfoAddVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
+        LOGGER.info("【CenterAssetInfoController】【add】【inputs】" + assetInfoAddVo.toJsonString());
         try {
-            if ( assetInfoService.addAssetInfo(assetInfoAddVo) ) {
-                LOGGER.info( "【CenterAssetInfoController】【add】result : success" );
+            if (assetInfoService.addAssetInfo(assetInfoAddVo)) {
+                LOGGER.info("【CenterAssetInfoController】【add】result : success");
                 return ContainerUtils.buildResSuccessMap();
             }
-        } catch ( BaseException e ) {
-            LOGGER.error( "【CenterAssetInfoController】【add】【exception】", e );
+        } catch (BaseException e) {
+            LOGGER.error("【CenterAssetInfoController】【add】【exception】", e);
             return ContainerUtils.buildResFailMap();
         }
-        LOGGER.info( "【CenterAssetInfoController】【add】result : fail" );
+        LOGGER.info("【CenterAssetInfoController】【add】result : fail");
         return ContainerUtils.buildResFailMap();
     }
 
-    @RequestMapping( value = "/update", method = RequestMethod.POST, produces = "application/json" )
+    @RequestMapping(value = "/update", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Map<String, Object> update( @RequestBody AssetInfoUpdateVO assetInfoUpdateVo ) {
-        assetInfoUpdateVo.setAccessId( getAccessId() );
-        assetInfoUpdateVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type );
-        LOGGER.info( "【CenterAssetInfoController】【update】begin " + assetInfoUpdateVo.toJsonString() );
+    public Map<String, Object> update(@RequestBody AssetInfoUpdateVO assetInfoUpdateVo) {
+        assetInfoUpdateVo.setAccessId(getAccessId());
+        assetInfoUpdateVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
+        LOGGER.info("【CenterAssetInfoController】【update】begin " + assetInfoUpdateVo.toJsonString());
         try {
-            if ( assetInfoService.updateAssetInfo(assetInfoUpdateVo) ) {
-                LOGGER.info( "【CenterAssetInfoController】【update】result : success" );
+            if (assetInfoService.updateAssetInfo(assetInfoUpdateVo)) {
+                LOGGER.info("【CenterAssetInfoController】【update】result : success");
                 return ContainerUtils.buildResSuccessMap();
             }
-        } catch ( BaseException e ) {
-            LOGGER.error( "【CenterAssetInfoController】【update】【exception】", e );
+        } catch (BaseException e) {
+            LOGGER.error("【CenterAssetInfoController】【update】【exception】", e);
             return ContainerUtils.buildResFailMap();
         }
-        LOGGER.info( "【CenterAssetInfoController】【update】result : fail" );
+        LOGGER.info("【CenterAssetInfoController】【update】result : fail");
         return ContainerUtils.buildResFailMap();
     }
 
-    @RequestMapping( value = "/delete", method = RequestMethod.POST, produces = "application/json" )
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Map<String, Object> delete( @RequestBody AssetInfoDeleteVO assetInfoDeleteVo ) {
-        LOGGER.info( "【CenterAssetInfoController】【delete】inputs : " + assetInfoDeleteVo.toJsonString() );
+    public Map<String, Object> delete(@RequestBody AssetInfoDeleteVO assetInfoDeleteVo) {
+        LOGGER.info("【CenterAssetInfoController】【delete】inputs : " + assetInfoDeleteVo.toJsonString());
         try {
-            if ( assetInfoService.removeAssetInfo(assetInfoDeleteVo) ) {
-                LOGGER.info( "【CenterAssetInfoController】【delete】result : success" );
+            if (assetInfoService.removeAssetInfo(assetInfoDeleteVo)) {
+                LOGGER.info("【CenterAssetInfoController】【delete】result : success");
                 return ContainerUtils.buildResSuccessMap();
             }
-        } catch ( BaseException e ) {
-            LOGGER.error( "【CenterAssetInfoController】【delete】【exception】", e );
+        } catch (BaseException e) {
+            LOGGER.error("【CenterAssetInfoController】【delete】【exception】", e);
             return ContainerUtils.buildResFailMap();
         }
-        LOGGER.info( "【CenterAssetInfoController】【delete】result : fail" );
+        LOGGER.info("【CenterAssetInfoController】【delete】result : fail");
         return ContainerUtils.buildResFailMap();
     }
 
-    @RequestMapping( value = "/list", method = RequestMethod.GET )
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> list( AssetInfoListVO assetInfoListVo ) {
-        assetInfoListVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type );
-        LOGGER.info( "【CenterAssetInfoController】【list】inputs : " + assetInfoListVo.toJsonString() );
+    public Map<String, Object> list(AssetInfoListVO assetInfoListVo) {
+        assetInfoListVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
+        LOGGER.info("【CenterAssetInfoController】【list】inputs : " + assetInfoListVo.toJsonString());
         try {
             AssetInfoListBO response = assetInfoService.assetInfoList(assetInfoListVo);
-            LOGGER.info( "【CenterAssetInfoController】【list】result : " + response.toJsonString() );
-            return ContainerUtils.buildResSuccessMap( response );
-        } catch ( BaseException e ) {
-            LOGGER.error( "【CenterAssetInfoController】【list】【exception】", e );
+            LOGGER.info("【CenterAssetInfoController】【list】result : " + response.toJsonString());
+            return ContainerUtils.buildResSuccessMap(response);
+        } catch (BaseException e) {
+            LOGGER.error("【CenterAssetInfoController】【list】【exception】", e);
             return ContainerUtils.buildResFailMap();
         }
     }
 
-    @RequestMapping( value = "/detail", method = RequestMethod.GET )
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> detail( String assetId ) {
-        LOGGER.info( "【CenterAssetInfoController】【detail】inputs : " + assetId );
+    public Map<String, Object> detail(String assetId) {
+        LOGGER.info("【CenterAssetInfoController】【detail】inputs : " + assetId);
         try {
-            AssetInfoDetailBO response = assetInfoService.assetInfoDetail( assetId );
-            LOGGER.info( "【CenterAssetInfoController】【detail】result : " + response.toJsonString() );
-            return ContainerUtils.buildResSuccessMap( response );
-        } catch ( BaseException e ) {
-            LOGGER.error( "【CenterAssetInfoController】【detail】【exception】", e );
+            AssetInfoDetailBO response = assetInfoService.assetInfoDetail(assetId);
+            LOGGER.info("【CenterAssetInfoController】【detail】result : " + response.toJsonString());
+            return ContainerUtils.buildResSuccessMap(response);
+        } catch (BaseException e) {
+            LOGGER.error("【CenterAssetInfoController】【detail】【exception】", e);
             return ContainerUtils.buildResFailMap();
         }
     }
 
-    @RequestMapping( value = "/assetName", method = RequestMethod.GET )
+    @RequestMapping(value = "/assetName", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> assetName( String barCode ) {
-        LOGGER.info( "【CenterAssetInfoController】【assetName】inputs : " + barCode );
+    public Map<String, Object> assetName(String barCode) {
+        LOGGER.info("【CenterAssetInfoController】【assetName】inputs : " + barCode);
         try {
-            AssetInfoNameBO response = assetInfoService.assetName( barCode, AssetTypeEnum.CENTER_ASSET_TYPE.type );
-            LOGGER.info( "【CenterAssetInfoController】【assetName】result : " + response.toJsonString() );
-            return ContainerUtils.buildResSuccessMap( response );
-        } catch ( BaseException e ) {
-            LOGGER.error( "【CenterAssetInfoController】【assetName】【exception】", e );
+            AssetInfoNameBO response = assetInfoService.assetName(barCode, AssetTypeEnum.CENTER_ASSET_TYPE.type);
+            LOGGER.info("【CenterAssetInfoController】【assetName】result : " + response.toJsonString());
+            return ContainerUtils.buildResSuccessMap(response);
+        } catch (BaseException e) {
+            LOGGER.error("【CenterAssetInfoController】【assetName】【exception】", e);
             return ContainerUtils.buildResFailMap();
         }
     }
 
-    @RequestMapping( value = "/inventory", method = RequestMethod.POST, produces = "application/json" )
+    @RequestMapping(value = "/inventory", method = RequestMethod.POST, produces = "application/json")
     @ResponseBody
-    public Map<String, Object> inventory( @RequestBody AssetInfoInventoryVO assetInfoInventoryVo ) {
-        assetInfoInventoryVo.setAccessId( getAccessId() );
-        assetInfoInventoryVo.setAssetType(AssetTypeEnum.CONSUMABLE_ASSET_TYPE.type );
-        LOGGER.info( "【CenterAssetInfoController】【inventory】【inputs】" + assetInfoInventoryVo.toJsonString() );
+    public Map<String, Object> inventory(@RequestBody AssetInfoInventoryVO assetInfoInventoryVo) {
+        assetInfoInventoryVo.setAccessId(getAccessId());
+        assetInfoInventoryVo.setAssetType(AssetTypeEnum.CONSUMABLE_ASSET_TYPE.type);
+        LOGGER.info("【CenterAssetInfoController】【inventory】【inputs】" + assetInfoInventoryVo.toJsonString());
         try {
-            if ( assetInfoService.inventory( assetInfoInventoryVo ) ) {
-                LOGGER.info( "【CenterAssetInfoController】【inventory】result : success" );
+            if (assetInfoService.inventory(assetInfoInventoryVo)) {
+                LOGGER.info("【CenterAssetInfoController】【inventory】result : success");
                 return ContainerUtils.buildResSuccessMap();
             }
-        } catch ( BaseException e ) {
-            LOGGER.error( "【CenterAssetInfoController】【inventory】【exception】", e );
+        } catch (BaseException e) {
+            LOGGER.error("【CenterAssetInfoController】【inventory】【exception】", e);
             return ContainerUtils.buildResFailMap();
         }
-        LOGGER.info( "【CenterAssetInfoController】【inventory】result : fail" );
+        LOGGER.info("【CenterAssetInfoController】【inventory】result : fail");
         return ContainerUtils.buildResFailMap();
+    }
+
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> exportExcel(HttpServletResponse response, AssetInfoListVO assetInfoListVo) {
+        assetInfoListVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
+        response.setContentType("application/binary;charset=UTF-8");
+        try {
+            ServletOutputStream out = response.getOutputStream();
+            String fileName = new String(("固定资产类品_" + new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getBytes(), "UTF-8");
+            response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
+            assetInfoService.exportExcel(SystemParamsConstants.ASSET_EXCEL_TITLE, out, assetInfoListVo);
+            return ContainerUtils.buildResSuccessMap();
+        } catch (Exception e) {
+            LOGGER.error("【CenterAssetInfoController】【exportExcel】【exception】", e);
+            return ContainerUtils.buildResFailMap();
+        }
+    }
+
+    @RequestMapping(value = "/batchImport", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> batchImport(@RequestParam(value="filename") MultipartFile file) {
+        try {
+            assetInfoService.batchImport(file, getAccessId());
+            return ContainerUtils.buildResSuccessMap();
+        } catch (Exception e) {
+            LOGGER.error("【CenterAssetInfoController】【batchImport】【exception】", e);
+            return ContainerUtils.buildResFailMap();
+        }
     }
 
 }

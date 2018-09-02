@@ -22,7 +22,7 @@
     </sql>
 
 
-    <insert id="insert" parameterType="com.equestrianism.api.model.po.AssetTypeInfoEntity">
+    <insert id="insert" keyProperty="typeId" useGeneratedKeys="true" parameterType="com.equestrianism.api.model.po.AssetTypeInfoEntity">
         INSERT INTO
             asset_type_info (
                 type_name,
@@ -112,6 +112,15 @@
             asset_type_info
         ORDER BY
              CONVERT( type_name USING gbk )
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            asset_type_info
+        WHERE
+            type_name = #{typeName, jdbcType=VARCHAR}
     </select>
 
 </mapper>

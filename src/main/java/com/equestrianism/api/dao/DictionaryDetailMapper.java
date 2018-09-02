@@ -24,4 +24,8 @@ public interface DictionaryDetailMapper {
 
     List<DictionaryDetailEntity> selectDictionaryDetailListByDictionaryId( Integer dictionaryId );
 
+    DictionaryDetailEntity selectDictionaryDetailListByCondition( DictionaryDetailEntity dictionaryDetailEntity );
+
+    DictionaryDetailEntity selectLast(Integer priceType);
+
 }

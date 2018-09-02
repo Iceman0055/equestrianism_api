@@ -23,4 +23,7 @@ public interface AssetTypeInfoMapper {
     Integer countAssetTypeInfoListByPage(AssetTypeInfoListVO assetTypeInfoListVo);
 
     List<AssetTypeInfoComboBoxModel> selectAssetTypeListByComboBox();
+
+    AssetTypeInfoEntity selectByName(String typeName);
+
 }

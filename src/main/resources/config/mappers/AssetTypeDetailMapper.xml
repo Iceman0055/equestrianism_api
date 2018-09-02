@@ -24,7 +24,7 @@
     </sql>
 
 
-    <insert id="insert" parameterType="com.equestrianism.api.model.po.AssetTypeDetailEntity">
+    <insert id="insert" keyProperty="typeDetailId" useGeneratedKeys="true" parameterType="com.equestrianism.api.model.po.AssetTypeDetailEntity">
         INSERT INTO
             asset_type_detail (
                 type_detail_name,
@@ -113,6 +113,15 @@
             asset_type_detail
         WHERE
             type_id = #{typeId, jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            asset_type_detail
+        WHERE
+            type_detail_name = #{typeDetailName, jdbcType=VARCHAR}
     </select>
 
 </mapper>

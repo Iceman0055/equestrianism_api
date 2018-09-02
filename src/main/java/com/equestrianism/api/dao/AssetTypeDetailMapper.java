@@ -24,4 +24,6 @@ public interface AssetTypeDetailMapper {
 
     List<AssetTypeDetailComboBoxModel> selectByComboBox(Integer typeId);
 
+    AssetTypeDetailEntity selectByName(String typeDetailName);
+
 }

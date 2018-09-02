@@ -1,6 +1,9 @@
 package com.equestrianism.api.model.bo;
 
 import com.equestrianism.api.core.model.BaseObject;
+import com.equestrianism.api.model.model.TreatmentAssetModel;
+
+import java.util.List;
 
 /**
  * Created by Chenzq on 2018/3/17.
@@ -146,4 +149,5 @@ public class TreatmentInfoDetailBO extends BaseObject {
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
+
 }

@@ -32,6 +32,7 @@ public class AssetInfoEntity extends BasePO {
     private String brand;
     private String voucherNumber;
     private String purchaseOrganize;
+    private String scrapDate;
 
     public AssetInfoEntity() {
     }
@@ -44,17 +45,17 @@ public class AssetInfoEntity extends BasePO {
                             String price, String acreage, Integer priceType, Integer acquireWay, String financeAccountsDate,
                             String tabDate, String guaranteeDate, String manageDepartment, String manageUser, String remark,
                             String purpose, String specificationModel, String brand, String voucherNumber, String purchaseOrganize,
-                            String barCode, Integer inventory ) {
+                            String barCode, Integer inventory, String scrapDate ) {
         this( UUID.randomUUID().toString().replace( "-", "" ), typeId, typeDetailId, assetType, assetNumber, assetName,
                 price, acreage, priceType, acquireWay, financeAccountsDate, tabDate, guaranteeDate, manageDepartment,
-                manageUser, remark, purpose, specificationModel, brand, voucherNumber, purchaseOrganize, barCode, inventory );
+                manageUser, remark, purpose, specificationModel, brand, voucherNumber, purchaseOrganize, barCode, inventory, scrapDate );
     }
 
     public AssetInfoEntity( String assetId, Integer typeId, Integer typeDetailId, Integer assetType, String assetNumber,
                             String assetName, String price, String acreage, Integer priceType, Integer acquireWay,
                             String financeAccountsDate, String tabDate, String guaranteeDate, String manageDepartment,
                             String manageUser, String remark, String purpose, String specificationModel, String brand,
-                            String voucherNumber, String purchaseOrganize, String barCode, Integer inventory ) {
+                            String voucherNumber, String purchaseOrganize, String barCode, Integer inventory, String scrapDate ) {
         this.assetId = assetId;
         this.typeId = typeId;
         this.typeDetailId = typeDetailId;
@@ -78,6 +79,7 @@ public class AssetInfoEntity extends BasePO {
         this.purchaseOrganize = purchaseOrganize;
         this.barCode = barCode;
         this.inventory = inventory;
+        this.scrapDate = scrapDate;
     }
 
     public String getAssetId() {
@@ -262,5 +264,13 @@ public class AssetInfoEntity extends BasePO {
 
     public void setInventory(Integer inventory) {
         this.inventory = inventory;
+    }
+
+    public String getScrapDate() {
+        return scrapDate;
+    }
+
+    public void setScrapDate(String scrapDate) {
+        this.scrapDate = scrapDate;
     }
 }
