@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -32,8 +33,11 @@ public class CenterAssetDetailController extends BaseController {
 
     @RequestMapping( value = "/list", method = RequestMethod.GET )
     @ResponseBody
-    public Map<String, Object> list( AssetDetailListVO assetDetailListVo ) {
+    public Map<String, Object> list( AssetDetailListVO assetDetailListVo ) throws UnsupportedEncodingException {
         assetDetailListVo.setAssetType( AssetTypeEnum.CENTER_ASSET_TYPE.type);
+        if ( assetDetailListVo.getAssetName() != null && !"".equals( assetDetailListVo.getAssetName() ) ) {
+            assetDetailListVo.setAssetName(new String(assetDetailListVo.getAssetName().getBytes("ISO-8859-1"), "UTF-8"));
+        }
         LOGGER.info("【CenterAssetDetailController】【list】inputs : " + assetDetailListVo.toJsonString());
         try {
             AssetDetailListBO response = assetDetailService.assetDetailList( assetDetailListVo);

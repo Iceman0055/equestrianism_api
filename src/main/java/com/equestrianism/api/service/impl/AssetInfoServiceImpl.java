@@ -317,7 +317,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 dictionaryDetailEntity = new DictionaryDetailEntity(tempDictDetail.generateItemCode(), priceName, DictionaryConstants.PRICE_TYPE);
                 dictionaryDetailMapper.insert(dictionaryDetailEntity);
             }
-            Integer priceType = Integer.parseInt(dictionaryDetailEntity.getItemCode());
+            Integer priceType = dictionaryDetailEntity.getDictionaryDetailId();
             // acquire way
             String acquireWayName = assetInfoImportModel.getAcquireWay().trim();
             dictionaryDetailEntity = new DictionaryDetailEntity(acquireWayName, DictionaryConstants.ACQUIRE_WAY);

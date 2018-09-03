@@ -134,7 +134,7 @@
         dictionary_detail
         WHERE
         dictionary_id = #{dictionaryId, jdbcType=INTEGER}
-        order BY create_date DESC
+        order BY dictionary_detail_id DESC
         limit 0, 1
     </select>
 

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -92,8 +93,11 @@ public class CenterAssetInfoController extends BaseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> list(AssetInfoListVO assetInfoListVo) {
+    public Map<String, Object> list(AssetInfoListVO assetInfoListVo) throws UnsupportedEncodingException {
         assetInfoListVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
+        if ( assetInfoListVo.getAssetName() != null && !"".equals( assetInfoListVo.getAssetName() ) ) {
+            assetInfoListVo.setAssetName(new String(assetInfoListVo.getAssetName().getBytes("ISO-8859-1"), "UTF-8"));
+        }
         LOGGER.info("【CenterAssetInfoController】【list】inputs : " + assetInfoListVo.toJsonString());
         try {
             AssetInfoListBO response = assetInfoService.assetInfoList(assetInfoListVo);
