@@ -50,135 +50,58 @@
             )
     </insert>
 
-    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.AssetInfoEntity">
-        UPDATE
-            asset_info
-        <set>
-            <if test="typeId != null">
-                type_id = #{typeId, jdbcType=INTEGER},
-            </if>
-            <if test="barCode != null and barCode != ''">
-                bar_code = #{barCode, jdbcType=VARCHAR},
-            </if>
-            <if test="typeDetailId != null">
-                type_detail_id = #{typeDetailId, jdbcType=INTEGER},
-            </if>
-            <if test="assetType != null">
-                asset_type = #{assetType, jdbcType=INTEGER},
-            </if>
-            <if test="assetNumber != null and assetNumber != ''">
-                asset_number = #{assetNumber, jdbcType=VARCHAR},
-            </if>
-            <if test="assetName != null and assetName != ''">
-                asset_name = #{assetName, jdbcType=VARCHAR},
-            </if>
-            <if test="price != null and price != ''">
-                price = #{price, jdbcType=VARCHAR},
-            </if>
-            <if test="acreage != null and acreage != ''">
-                acreage = #{acreage, jdbcType=VARCHAR},
-            </if>
-            <if test="priceType != null">
-                price_type = #{priceType, jdbcType=INTEGER},
-            </if>
-            <if test="acquireWay != null">
-                acquire_way = #{acquireWay, jdbcType=INTEGER},
-            </if>
-            <if test="financeAccountsDate != null and financeAccountsDate != ''">
-                finance_accounts_date = #{financeAccountsDate, jdbcType=VARCHAR},
-            </if>
-            <if test="tabDate != null and tabDate != ''">
-                tab_date = #{tabDate, jdbcType=VARCHAR},
-            </if>
-            <if test="guaranteeDate != null and guaranteeDate != ''">
-                guarantee_date = #{guaranteeDate, jdbcType=VARCHAR},
-            </if>
-            <if test="manageDepartment != null and manageDepartment != ''">
-                manage_department = #{manageDepartment, jdbcType=VARCHAR},
-            </if>
-            <if test="manageUser != null and manageUser != ''">
-                manage_user = #{manageUser, jdbcType=VARCHAR},
-            </if>
-            <if test="remark != null and remark != ''">
-                remark = #{remark, jdbcType=VARCHAR},
-            </if>
-            <if test="purpose != null and purpose != ''">
-                purpose = #{purpose, jdbcType=VARCHAR},
-            </if>
-            <if test="specificationModel != null and specificationModel != ''">
-                specification_model = #{specificationModel, jdbcType=VARCHAR},
-            </if>
-            <if test="brand != null and brand != ''">
-                brand = #{brand, jdbcType=VARCHAR},
-            </if>
-            <if test="voucherNumber != null and voucherNumber != ''">
-                voucher_number = #{voucherNumber, jdbcType=VARCHAR},
-            </if>
-            <if test="purchaseOrganize != null and purchaseOrganize != ''">
-                purchase_organize = #{purchaseOrganize, jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                status = #{status, jdbcType=INTEGER},
-            </if>
-            <if test="deleteFlag != null">
-                delete_flag = #{deleteFlag, jdbcType=INTEGER},
-            </if>
-            <if test="scrapDate != null and scrapDate != ''">
-                scrap_date = #{scrapDate, jdbcType=VARCHAR}
-            </if>
-        </set>
-        WHERE
-            asset_id = #{assetId, jdbcType=VARCHAR}
-    </update>
-
-    <select id="selectAssetInfoListByPage" parameterType="com.equestrianism.api.model.vo.asset_info.AssetInfoListVO"
-            resultType="com.equestrianism.api.model.model.AssetInfoListModel">
+    <select id="selectAssetDetailListByPage" parameterType="com.equestrianism.api.model.vo.asset_detail.AssetDetailListVO"
+            resultType="com.equestrianism.api.model.model.AssetDetailListModel">
         SELECT
-            a.asset_id        assetId,
-            b.type_name       typeName,
-            c.type_detail_name        typeDetailName,
-            a.asset_number    assetNumber,
-            a.asset_name      assetName,
-            a.price           price,
-            a.acreage         acreage,
-            d.item_value      priceTypeName,
-            e.item_value      acquireWayName,
+            a.asset_detail_id       assetDetailId,
+            b.type_name             typeName,
+            c.type_detail_name      typeDetailName,
+            a.asset_number          assetNumber,
+            a.asset_name            assetName,
+            a.price                 price,
+            a.acreage               acreage,
+            d.item_value            priceTypeName,
+            e.item_value            acquireWayName,
             a.finance_accounts_date   financeAccountsDate,
-            a.tab_date        tabDate,
-            a.guarantee_date  guaranteeDate,
-            f.department_name departmentName,
-            g.realname        realname,
-            a.purpose         purpose,
-            a.remark          remark,
-            a.specification_model     specificationModel,
-            a.brand           brand,
-            a.voucher_number  voucherNumber,
-            a.purchase_organize       purchaseOrganize,
-            a.inventory       inventory,
-            a.bar_code        barCode
+            a.tab_date              tabDate,
+            a.guarantee_date        guaranteeDate,
+            f.department_name       departmentName,
+            g.realname              realname,
+            a.purpose               purpose,
+            a.remark                remark,
+            a.specification_model   specificationModel,
+            a.brand                 brand,
+            a.voucher_number        voucherNumber,
+            a.purchase_organize     purchaseOrganize,
+            a.inventory             inventory,
+            a.bar_code              barCode
         FROM
+            asset_detail detail
+        LEFT JOIN
             asset_info a
-        INNER JOIN
+        ON
+            a.asset_id = detail.asset_id
+        LEFT JOIN
             asset_type_info b
         ON
             a.type_id = b.type_id
-        INNER JOIN
+        LEFT JOIN
             asset_type_detail c
         ON
             a.type_detail_id = c.type_detail_id
-        INNER JOIN
+        LEFT JOIN
             dictionary_detail d
         ON
             a.price_type = d.dictionary_detail_id
-        INNER JOIN
+        LEFT JOIN
             dictionary_detail e
         ON
             a.acquire_way = e.dictionary_detail_id
-        INNER JOIN
+        LEFT JOIN
             department_info f
         ON
             a.manage_department = f.department_id
-        INNER JOIN
+        LEFT JOIN
             user_info g
         ON
             a.manage_user = g.user_id
@@ -202,27 +125,28 @@
             #{beginIndex}, #{pageRecorders}
     </select>
 
-    <select id="countAssetInfoListByPage" parameterType="com.equestrianism.api.model.vo.asset_type_detail.AssetTypeDetailListVO"
+    <select id="countAssetDetailListByPage" parameterType="com.equestrianism.api.model.vo.asset_detail.AssetDetailListVO"
             resultType="java.lang.Integer">
         SELECT
             count(1)
         FROM
-            asset_info
+            asset_detail a,
+            asset_info   b
         WHERE
-            delete_flag = 0
+            b.delete_flag = 0
         AND
-            asset_type = #{assetType, jdbcType=INTEGER}
+            b.asset_type = #{assetType, jdbcType=INTEGER}
         <if test="typeId != null">
             AND
-            type_id = #{typeId, jdbcType=INTEGER}
+                b.type_id = #{typeId, jdbcType=INTEGER}
         </if>
         <if test="typeDetailId != null">
             AND
-            type_detail_id = #{typeDetailId, jdbcType=INTEGER}
+                b.type_detail_id = #{typeDetailId, jdbcType=INTEGER}
         </if>
         <if test="assetName != null and assetName != ''">
             AND
-            asset_name like CONCAT('%',#{assetName, jdbcType=VARCHAR},'%')
+                b.asset_name like CONCAT('%',#{assetName, jdbcType=VARCHAR},'%')
         </if>
     </select>
 

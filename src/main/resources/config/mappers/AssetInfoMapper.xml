@@ -222,27 +222,27 @@
             a.manage_department   departmentId
         FROM
             asset_info a
-        INNER JOIN
+        LEFT JOIN
             asset_type_info b
         ON
             a.type_id = b.type_id
-        INNER JOIN
+        LEFT JOIN
             asset_type_detail c
         ON
             a.type_detail_id = c.type_detail_id
-        INNER JOIN
+        LEFT JOIN
             dictionary_detail d
         ON
             a.price_type = d.dictionary_detail_id
-        INNER JOIN
+        LEFT JOIN
             dictionary_detail e
         ON
             a.acquire_way = e.dictionary_detail_id
-        INNER JOIN
+        LEFT JOIN
             department_info f
         ON
             a.manage_department = f.department_id
-        INNER JOIN
+        LEFT JOIN
             user_info g
         ON
             a.manage_user = g.user_id
