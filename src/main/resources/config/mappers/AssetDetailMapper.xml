@@ -74,7 +74,8 @@
             a.voucher_number        voucherNumber,
             a.purchase_organize     purchaseOrganize,
             a.inventory             inventory,
-            a.bar_code              barCode
+            a.bar_code              barCode,
+            detail.scrap_type       scrapType
         FROM
             asset_detail detail
         INNER JOIN
@@ -121,7 +122,15 @@
             AND
             a.asset_name like CONCAT('%',#{assetName, jdbcType=VARCHAR},'%')
         </if>
-        ORDER BY a.scrap_date DESC
+        <if test="assetNumber != null and assetNumber != ''">
+            AND
+            a.asset_number LIKE concat( '%', #{assetNumber, jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="barCode != null and barCode != ''">
+            AND
+            a.bar_code = #{barCode, jdbcType=VARCHAR}
+        </if>
+        ORDER BY detail.scrap_type ASC, a.scrap_date DESC
         LIMIT
             #{beginIndex}, #{pageRecorders}
     </select>

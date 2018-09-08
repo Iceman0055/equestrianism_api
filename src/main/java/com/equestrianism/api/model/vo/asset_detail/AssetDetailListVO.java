@@ -13,6 +13,8 @@ public class AssetDetailListVO extends BasePageViewModel {
     private Integer typeId;
     private Integer typeDetailId;
     private String assetName;
+    private String assetNumber;
+    private String barCode;
     private Integer assetType;
 
     public Integer getTypeId() {
@@ -45,5 +47,21 @@ public class AssetDetailListVO extends BasePageViewModel {
 
     public void setAssetType( Integer assetType ) {
         this.assetType = assetType;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode( String barCode ) {
+        this.barCode = barCode;
+    }
+
+    public String getAssetNumber() {
+        return assetNumber;
+    }
+
+    public void setAssetNumber( String assetNumber ) {
+        this.assetNumber = assetNumber;
     }
 }

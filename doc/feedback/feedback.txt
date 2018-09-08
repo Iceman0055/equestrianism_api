@@ -131,6 +131,12 @@ UI：
 6、/hospitalAssetInfo/list，增加返回字段departmentId
 7、/centerAssetInfo/exportExcel，马术中心资产管理 -- 固定资产类品管理 -- Excel导出。带入查询条件，不要分页参数。
 
+2018.09.04
+1、增加”固定资产明细“菜单的list接口，/centerAssetDetail/list，先全部在list显示，看看效果。
+2、增加”固定资产明细“菜单的报废接口，/centerAssetDetail/scrap
+
+2018.09.06
+1、list增加查询条件：资产编号、条形码
 
 
 
@@ -143,7 +149,3 @@ UI：
 
 
 
-
-
-
->>>>>>> fdb545c10c6a5eaba14a2bd7847d9221dd987c08
