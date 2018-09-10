@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,8 +59,8 @@ public class CenterAssetDetailController extends BaseController {
 
     @RequestMapping( value = "/scrap", method = RequestMethod.POST )
     @ResponseBody
-    public Map< String, Object > scrap( String assetDetailId ) {
-        LOGGER.info( "【CenterAssetDetailController】【scrap】inputs : " + assetDetailId );
+    public Map< String, Object > scrap( @RequestBody String assetDetailId ) {
+        LOGGER.info("【CenterAssetDetailController】【scrap】inputs : " + assetDetailId);
         try {
             if ( assetDetailService.scrap( assetDetailId ) ) {
                 LOGGER.info( "【CenterAssetDetailController】【scrap】result : SUCCESS " );
@@ -76,8 +77,8 @@ public class CenterAssetDetailController extends BaseController {
     @RequestMapping( value = "/exportExcel", method = RequestMethod.GET )
     @ResponseBody
     public Map< String, Object > exportExcel( HttpServletResponse response, AssetDetailListVO assetDetailListVo ) {
-        assetDetailListVo.setAssetType( AssetTypeEnum.CENTER_ASSET_TYPE.type );
-        response.setContentType( "application/binary;charset=UTF-8" );
+        assetDetailListVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
+        response.setContentType("application/binary;charset=UTF-8");
         try {
             ServletOutputStream out = response.getOutputStream();
             String fileName = new String( ( "固定资产明细_" + new SimpleDateFormat( "yyyy-MM-dd" ).format( new Date() ) ).getBytes(), "UTF-8" );

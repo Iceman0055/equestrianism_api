@@ -4,6 +4,7 @@ import com.equestrianism.api.constants.CodeEnum;
 import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.PageUtils;
 import com.equestrianism.api.dao.AssetDetailMapper;
+import com.equestrianism.api.dao.AssetInfoMapper;
 import com.equestrianism.api.model.bo.AssetDetailListBO;
 import com.equestrianism.api.model.bo.AssetInfoListBO;
 import com.equestrianism.api.model.model.AssetDetailListModel;
@@ -19,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletOutputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Iceman
@@ -32,6 +35,9 @@ public class AssetDetailServiceImpl implements AssetDetailService {
 
     @Autowired
     private AssetDetailMapper assetDetailMapper;
+
+    @Autowired
+    private AssetInfoMapper assetInfoMapper;
 
     @Override
     public AssetDetailListBO assetDetailList( AssetDetailListVO assetDetailListVo ) {
@@ -52,9 +58,10 @@ public class AssetDetailServiceImpl implements AssetDetailService {
     @Override
     public Boolean scrap( String assetDetailId ) {
         // update asset_detail.scrap_type
-        AssetDetailEntity assetDetailEntity = new AssetDetailEntity( assetDetailId );
-        assetDetailMapper.
+        Integer updateCount = assetDetailMapper.updateScrapType( assetDetailId );
+        System.out.println( updateCount );
         // update asset_info.inventory
+        assetInfoMapper.scrap( assetDetailId );
         return true;
     }
 
@@ -79,7 +86,7 @@ public class AssetDetailServiceImpl implements AssetDetailService {
                 hssfCell.setCellStyle( hssfCellStyle );//列居中显示
             }
             // 第五步，写入实体数据
-            List< AssetDetailListModel > assetInfoList = assetDetailMapper.selectAssetDetailListByPage( assetDetailListVo );
+            List< AssetDetailListModel > assetInfoList = assetDetailMapper.selectAssetDetailList(assetDetailListVo);
             if ( assetInfoList != null && ! assetInfoList.isEmpty() ) {
                 for ( int i = 0; i < assetInfoList.size(); i++ ) {
                     hssfRow = hssfSheet.createRow( i + 1 );

@@ -324,7 +324,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
             dictionaryDetailEntity = dictionaryDetailMapper.selectDictionaryDetailListByCondition(dictionaryDetailEntity);
             if ( dictionaryDetailEntity == null ) {
                 DictionaryDetailEntity tempDictDetail = dictionaryDetailMapper.selectLast(DictionaryConstants.ACQUIRE_WAY);
-                dictionaryDetailEntity = new DictionaryDetailEntity(tempDictDetail.generateItemCode(), priceName, DictionaryConstants.ACQUIRE_WAY);
+                dictionaryDetailEntity = new DictionaryDetailEntity(tempDictDetail.generateItemCode(), acquireWayName, DictionaryConstants.ACQUIRE_WAY);
                 dictionaryDetailMapper.insert(dictionaryDetailEntity);
             }
             Integer acquireWay = dictionaryDetailEntity.getDictionaryDetailId();

@@ -333,4 +333,13 @@
             asset_type = #{assetType, jdbcType=INTEGER}
     </update>
 
+    <update id="scrap" parameterType="java.lang.String">
+        UPDATE
+            asset_info
+        SET
+            inventory = inventory - 1
+        WHERE
+            asset_id = ( SELECT asset_id FROM asset_detail WHERE asset_detail_id = #{assetDetailId, jdbcType=VARCHAR} )
+    </update>
+
 </mapper>

@@ -17,4 +17,8 @@ public interface AssetDetailMapper {
 
     Integer countAssetDetailListByPage( AssetDetailListVO assetDetailListVo );
 
+    Integer updateScrapType( String assetDetailId );
+
+    List<AssetDetailListModel> selectAssetDetailList(AssetDetailListVO assetDetailListVo);
+
 }

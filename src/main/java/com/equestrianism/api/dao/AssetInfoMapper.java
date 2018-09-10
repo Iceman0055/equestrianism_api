@@ -24,5 +24,8 @@ public interface AssetInfoMapper {
 
     AssetInfoEntity selectBySelective(Map<String, Object> params);
 
-    void inventory(Map<String, Object> params);
+    Integer inventory(Map<String, Object> params);
+
+    Integer scrap(String assetDetailId);
+
 }
