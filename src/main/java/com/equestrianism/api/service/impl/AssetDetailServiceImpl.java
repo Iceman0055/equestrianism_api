@@ -8,6 +8,7 @@ import com.equestrianism.api.model.bo.AssetDetailListBO;
 import com.equestrianism.api.model.bo.AssetInfoListBO;
 import com.equestrianism.api.model.model.AssetDetailListModel;
 import com.equestrianism.api.model.model.AssetInfoListModel;
+import com.equestrianism.api.model.po.AssetDetailEntity;
 import com.equestrianism.api.model.vo.asset_detail.AssetDetailListVO;
 import com.equestrianism.api.model.vo.asset_info.AssetInfoListVO;
 import com.equestrianism.api.service.AssetDetailService;
@@ -51,7 +52,8 @@ public class AssetDetailServiceImpl implements AssetDetailService {
     @Override
     public Boolean scrap( String assetDetailId ) {
         // update asset_detail.scrap_type
-
+        AssetDetailEntity assetDetailEntity = new AssetDetailEntity( assetDetailId );
+        assetDetailMapper.
         // update asset_info.inventory
         return true;
     }
