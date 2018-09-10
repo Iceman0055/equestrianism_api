@@ -18,6 +18,10 @@ public class AssetDetailEntity extends BasePO {
     public AssetDetailEntity() {
     }
 
+    public AssetDetailEntity( String assetDetailId ) {
+        this.assetDetailId = assetDetailId;
+    }
+
     public AssetDetailEntity( String assetId, String batchNumber, Integer scrapType, String createUser ) {
         this.assetDetailId = UUID.randomUUID().toString().replace( "-", "" );
         this.assetId = assetId;
