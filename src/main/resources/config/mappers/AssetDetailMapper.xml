@@ -75,7 +75,8 @@
             a.purchase_organize     purchaseOrganize,
             a.inventory             inventory,
             a.bar_code              barCode,
-            detail.scrap_type       scrapType
+            detail.scrap_type       scrapType,
+            a.scrap_date            scrapDate
         FROM
             asset_detail detail
         INNER JOIN
@@ -131,8 +132,6 @@
             a.bar_code = #{barCode, jdbcType=VARCHAR}
         </if>
         ORDER BY detail.scrap_type ASC, a.scrap_date DESC
-        LIMIT
-            #{beginIndex}, #{pageRecorders}
     </select>
 
     <select id="countAssetDetailListByPage" parameterType="com.equestrianism.api.model.vo.asset_detail.AssetDetailListVO"

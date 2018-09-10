@@ -123,6 +123,9 @@ public class AssetDetailServiceImpl implements AssetDetailService {
                     hssfRow.createCell( 18 ).setCellValue( voucherNumber );
                     String purchaseOrganize = assetDetailListModel.getPurchaseOrganize();
                     hssfRow.createCell( 19 ).setCellValue( purchaseOrganize );
+                    hssfRow.createCell( 20 ).setCellValue( "1" );
+                    String scrapDate = assetDetailListModel.getScrapDate();
+                    hssfRow.createCell( 21 ).setCellValue( scrapDate );
                 }
             }
             // 第七步，将文件输出到客户端浏览器
@@ -130,7 +133,6 @@ public class AssetDetailServiceImpl implements AssetDetailService {
                 workbook.write( out );
                 out.flush();
                 out.close();
-
             } catch ( Exception e ) {
                 e.printStackTrace();
             }
