@@ -7,6 +7,7 @@ import com.equestrianism.api.core.container.BaseException;
 import com.equestrianism.api.core.utils.ContainerUtils;
 import com.equestrianism.api.model.bo.AssetDetailListBO;
 import com.equestrianism.api.model.vo.asset_detail.AssetDetailListVO;
+import com.equestrianism.api.model.vo.asset_detail.AssetDetailScrapVO;
 import com.equestrianism.api.model.vo.asset_info.AssetInfoListVO;
 import com.equestrianism.api.service.AssetDetailService;
 import com.equestrianism.api.service.AssetInfoService;
@@ -57,12 +58,12 @@ public class CenterAssetDetailController extends BaseController {
         }
     }
 
-    @RequestMapping( value = "/scrap", method = RequestMethod.POST )
+    @RequestMapping( value = "/scrap", method = RequestMethod.POST, produces = "application/json" )
     @ResponseBody
-    public Map< String, Object > scrap( @RequestBody String assetDetailId ) {
-        LOGGER.info("【CenterAssetDetailController】【scrap】inputs : " + assetDetailId);
+    public Map< String, Object > scrap( @RequestBody AssetDetailScrapVO assetDetailScrapVo ) {
+        LOGGER.info("【CenterAssetDetailController】【scrap】inputs : " + assetDetailScrapVo);
         try {
-            if ( assetDetailService.scrap( assetDetailId ) ) {
+            if ( assetDetailService.scrap( assetDetailScrapVo.getAssetDetailId() ) ) {
                 LOGGER.info( "【CenterAssetDetailController】【scrap】result : SUCCESS " );
                 return ContainerUtils.buildResSuccessMap();
             }

@@ -5,6 +5,7 @@ import com.equestrianism.api.model.po.AssetDetailEntity;
 import com.equestrianism.api.model.vo.asset_detail.AssetDetailListVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Chenzq on 2018/9/2.
@@ -20,5 +21,11 @@ public interface AssetDetailMapper {
     Integer updateScrapType( String assetDetailId );
 
     List<AssetDetailListModel> selectAssetDetailList(AssetDetailListVO assetDetailListVo);
+
+    AssetDetailEntity selectByPrimary( String assetDetailId );
+
+    Integer updateBySelective( AssetDetailEntity assetDetailEntity );
+
+    Integer updateTest( Map<String, Object> params );
 
 }

@@ -20,8 +20,7 @@
 
     <!--基本的sql查询字段 公共引用...-->
     <sql id="Base_Column_List">
-        asset_detail_id, asset_id, batch_number, scrap_type, create_user, status, delete_flag, data_version, create_date, update_date,
-        scrap_date
+        asset_detail_id, asset_id, batch_number, scrap_type, create_user, status, delete_flag, data_version, create_date, update_date
     </sql>
 
 
@@ -260,6 +259,39 @@
             asset_detail
         SET
             scrap_type = 1
+        WHERE
+            asset_detail_id = #{assetDetailId, jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByPrimary" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column_List"/>
+        FROM
+            asset_detail
+        WHERE
+            asset_detail_id = #{assetDetailId, jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateBySelective" parameterType="com.equestrianism.api.model.po.AssetDetailEntity">
+        UPDATE
+            asset_detail
+        <set>
+            <if test="batchNumber != null and batchNumber != ''">
+                batch_number = #{batchNumber, jdbcType=VARCHAR},
+            </if>
+            <if test="scrapType != null">
+                scrap_type = #{scrapType, jdbcType=INTEGER}
+            </if>
+        </set>
+        WHERE
+            asset_detail_id = #{assetDetailId, jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateTest" parameterType="java.util.Map">
+        UPDATE
+            asset_detail
+        SET
+            scrap_type = #{scrapType, jdbcType=INTEGER}
         WHERE
             asset_detail_id = #{assetDetailId, jdbcType=VARCHAR}
     </update>

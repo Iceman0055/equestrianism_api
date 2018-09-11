@@ -201,6 +201,12 @@ public class AssetInfoServiceImpl implements AssetInfoService {
             try {
                 assetInfoMapper.inventory(params);
                 assetInventoryDetailMapper.insert(assetInventoryDetailEntity);
+                AssetDetailEntity assetDetailEntity;
+                String batchNumber = new Date().getTime() + "";
+                for ( int i = 0; i < assetInfoInventoryModel.getInventory(); i++ ) {
+                    assetDetailEntity = new AssetDetailEntity( assetInfoInventoryModel.getAssetId(), batchNumber, 0, assetInfoInventoryModel.getAssetId() );
+                    assetDetailMapper.insert( assetDetailEntity );
+                }
             } catch (Exception e) {
                 LOGGER.error("【AssetInfoService】【inventory】", e);
             }
@@ -236,32 +242,49 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                     AssetInfoListModel assetInfoListModel = assetInfoList.get(i);
                     // 第六步，创建单元格，并设置值
                     String barCode = assetInfoListModel.getBarCode();
-                    hssfRow.createCell(0).setCellValue(barCode);
+                    hssfRow.createCell( 0 ).setCellValue( barCode );
                     String typeName = assetInfoListModel.getTypeName();
-                    hssfRow.createCell(1).setCellValue(typeName);
+                    hssfRow.createCell( 1 ).setCellValue( typeName );
                     String typeDetailName = assetInfoListModel.getTypeDetailName();
-                    hssfRow.createCell(2).setCellValue(typeDetailName);
+                    hssfRow.createCell( 2 ).setCellValue( typeDetailName );
                     String assetName = assetInfoListModel.getAssetName();
-                    hssfRow.createCell(3).setCellValue(assetName);
+                    hssfRow.createCell( 3 ).setCellValue( assetName );
                     String price = assetInfoListModel.getPrice();
-                    hssfRow.createCell(4).setCellValue(price);
+                    hssfRow.createCell( 4 ).setCellValue( price );
                     String acreage = assetInfoListModel.getAcreage();
-                    hssfRow.createCell(5).setCellValue(acreage);
+                    hssfRow.createCell( 5 ).setCellValue( acreage );
                     String model = assetInfoListModel.getSpecificationModel();
-                    hssfRow.createCell(6).setCellValue(model);
+                    hssfRow.createCell( 6 ).setCellValue( model );
                     String priceTypeName = assetInfoListModel.getPriceTypeName();
-                    hssfRow.createCell(7).setCellValue(priceTypeName);
+                    hssfRow.createCell( 7 ).setCellValue( priceTypeName );
                     String acquireWayName = assetInfoListModel.getAcquireWayName();
-                    hssfRow.createCell(8).setCellValue(acquireWayName);
+                    hssfRow.createCell( 8 ).setCellValue( acquireWayName );
                     String financeAccountsDate = assetInfoListModel.getFinanceAccountsDate();
-                    hssfRow.createCell(9).setCellValue(financeAccountsDate);
+                    hssfRow.createCell( 9 ).setCellValue( financeAccountsDate );
                     String tabDate = assetInfoListModel.getTabDate();
-                    hssfRow.createCell(10).setCellValue(tabDate);
-
+                    hssfRow.createCell( 10 ).setCellValue( tabDate );
                     String guaranteeDate = assetInfoListModel.getGuaranteeDate();
-                    hssfRow.createCell(11).setCellValue(guaranteeDate);
-
-
+                    hssfRow.createCell( 11 ).setCellValue( guaranteeDate );
+                    String departmentName = assetInfoListModel.getDepartmentName();
+                    hssfRow.createCell( 12 ).setCellValue( departmentName );
+                    String realName = assetInfoListModel.getRealname();
+                    hssfRow.createCell( 13 ).setCellValue( realName );
+                    String remark = assetInfoListModel.getRemark();
+                    hssfRow.createCell( 14 ).setCellValue( remark );
+                    String purpose = assetInfoListModel.getPurpose();
+                    hssfRow.createCell( 15 ).setCellValue( purpose );
+                    String specificationModel = assetInfoListModel.getSpecificationModel();
+                    hssfRow.createCell( 16 ).setCellValue( specificationModel );
+                    String brand = assetInfoListModel.getBrand();
+                    hssfRow.createCell( 17 ).setCellValue( brand );
+                    String voucherNumber = assetInfoListModel.getVoucherNumber();
+                    hssfRow.createCell( 18 ).setCellValue( voucherNumber );
+                    String purchaseOrganize = assetInfoListModel.getPurchaseOrganize();
+                    hssfRow.createCell( 19 ).setCellValue( purchaseOrganize );
+                    String inventory = assetInfoListModel.getInventory().toString();
+                    hssfRow.createCell( 20 ).setCellValue( inventory );
+                    String scrapDate = assetInfoListModel.getScrapDate();
+                    hssfRow.createCell( 21 ).setCellValue( scrapDate );
                 }
             }
             // 第七步，将文件输出到客户端浏览器

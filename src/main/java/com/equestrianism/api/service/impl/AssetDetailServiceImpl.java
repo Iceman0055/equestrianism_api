@@ -58,10 +58,19 @@ public class AssetDetailServiceImpl implements AssetDetailService {
     @Override
     public Boolean scrap( String assetDetailId ) {
         // update asset_detail.scrap_type
+//        AssetDetailEntity assetDetailEntity = assetDetailMapper.selectByPrimary( assetDetailId );
+//        assetDetailEntity.setScrapType( 1 );
+//        assetDetailMapper.updateBySelective( assetDetailEntity );
+        System.out.println( "----------------" + assetDetailId );
         Integer updateCount = assetDetailMapper.updateScrapType( assetDetailId );
         System.out.println( updateCount );
+        Map<String, Object> params = new HashMap<>();
+        params.put( "assetDetailId", assetDetailId );
+        params.put( "scrapType", 1 );
+        updateCount = assetDetailMapper.updateTest( params );
+        System.out.println( updateCount );
         // update asset_info.inventory
-        assetInfoMapper.scrap( assetDetailId );
+//        assetInfoMapper.scrap( assetDetailId );
         return true;
     }
 
@@ -86,7 +95,7 @@ public class AssetDetailServiceImpl implements AssetDetailService {
                 hssfCell.setCellStyle( hssfCellStyle );//列居中显示
             }
             // 第五步，写入实体数据
-            List< AssetDetailListModel > assetInfoList = assetDetailMapper.selectAssetDetailList(assetDetailListVo);
+            List< AssetDetailListModel > assetInfoList = assetDetailMapper.selectAssetDetailList( assetDetailListVo);
             if ( assetInfoList != null && ! assetInfoList.isEmpty() ) {
                 for ( int i = 0; i < assetInfoList.size(); i++ ) {
                     hssfRow = hssfSheet.createRow( i + 1 );
