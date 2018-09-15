@@ -31,6 +31,9 @@ public class AssetInfoDetailBO extends BaseObject {
     private String voucherNumber;
     private String purchaseOrganize;
     private String scrapDate;
+    private Integer inventory;
+    private String useStatus;
+    private String financeSource;
 
     public AssetInfoDetailBO() {
     }
@@ -39,7 +42,8 @@ public class AssetInfoDetailBO extends BaseObject {
                             String assetName, String price, String acreage, Integer priceType, Integer acquireWay,
                             String financeAccountsDate, String tabDate, String guaranteeDate, String manageDepartment,
                             String manageUser, String remark, String purpose, String specificationModel, String brand,
-                            String voucherNumber, String purchaseOrganize, String barCode, String scrapDate ) {
+                            String voucherNumber, String purchaseOrganize, String barCode, String scrapDate, Integer inventory,
+                              String useStatus, String financeSource ) {
         this.setAssetId(assetId);
         this.setTypeId(typeId);
         this.setTypeDetailId(typeDetailId);
@@ -63,6 +67,9 @@ public class AssetInfoDetailBO extends BaseObject {
         this.setPurchaseOrganize(purchaseOrganize);
         this.barCode = barCode;
         this.scrapDate = scrapDate;
+        this.inventory = inventory;
+        this.useStatus = useStatus;
+        this.financeSource = financeSource;
     }
 
     public String getAssetId() {
@@ -247,5 +254,29 @@ public class AssetInfoDetailBO extends BaseObject {
 
     public void setScrapDate(String scrapDate) {
         this.scrapDate = scrapDate;
+    }
+
+    public Integer getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Integer inventory) {
+        this.inventory = inventory;
+    }
+
+    public String getUseStatus() {
+        return useStatus;
+    }
+
+    public void setUseStatus(String useStatus) {
+        this.useStatus = useStatus;
+    }
+
+    public String getFinanceSource() {
+        return financeSource;
+    }
+
+    public void setFinanceSource(String financeSource) {
+        this.financeSource = financeSource;
     }
 }

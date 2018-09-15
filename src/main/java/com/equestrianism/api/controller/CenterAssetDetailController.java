@@ -77,9 +77,13 @@ public class CenterAssetDetailController extends BaseController {
 
     @RequestMapping( value = "/exportExcel", method = RequestMethod.GET )
     @ResponseBody
-    public Map< String, Object > exportExcel( HttpServletResponse response, AssetDetailListVO assetDetailListVo ) {
+    public Map< String, Object > exportExcel( HttpServletResponse response, AssetDetailListVO assetDetailListVo ) throws UnsupportedEncodingException {
         assetDetailListVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
         response.setContentType("application/binary;charset=UTF-8");
+        if ( assetDetailListVo.getAssetName() != null && !"".equals( assetDetailListVo.getAssetName() ) ) {
+            assetDetailListVo.setAssetName(new String(assetDetailListVo.getAssetName().getBytes("ISO-8859-1"), "UTF-8"));
+        }
+        LOGGER.info("【CenterAssetInfoController】【exportExcel】【inputs】" + assetDetailListVo.toJsonString());
         try {
             ServletOutputStream out = response.getOutputStream();
             String fileName = new String( ( "固定资产明细_" + new SimpleDateFormat( "yyyy-MM-dd" ).format( new Date() ) ).getBytes(), "UTF-8" );

@@ -31,15 +31,18 @@ public class AssetInfoImportModel extends BaseObject {
     private String voucherNumber;
     private String purchaseOrganize;
     private String scrapDate;
+    private String useStatus;
+    private String financeSource;
 
     public AssetInfoImportModel() {
     }
 
-    public AssetInfoImportModel( String typeId, String typeDetailId, Integer assetType, String assetNumber,
-                            String assetName, String price, String acreage, String priceType, String acquireWay,
-                            String financeAccountsDate, String tabDate, String guaranteeDate, String manageDepartment,
-                            String manageUser, String remark, String purpose, String specificationModel, String brand,
-                            String voucherNumber, String purchaseOrganize, String barCode, Integer inventory, String scrapDate ) {
+    public AssetInfoImportModel(String typeId, String typeDetailId, Integer assetType, String assetNumber,
+                                String assetName, String price, String acreage, String priceType, String acquireWay,
+                                String financeAccountsDate, String tabDate, String guaranteeDate, String manageDepartment,
+                                String manageUser, String remark, String purpose, String specificationModel, String brand,
+                                String voucherNumber, String purchaseOrganize, String barCode, Integer inventory,
+                                String scrapDate, String useStatus, String financeSource ) {
         this.typeId = typeId;
         this.typeDetailId = typeDetailId;
         this.assetType = assetType;
@@ -63,14 +66,16 @@ public class AssetInfoImportModel extends BaseObject {
         this.barCode = barCode;
         this.inventory = inventory;
         this.scrapDate = scrapDate;
+        this.useStatus = useStatus;
+        this.financeSource = financeSource;
     }
 
-    public AssetInfoEntity transToAssetInfo( Integer typeId, Integer typeDetailId, Integer priceType, Integer acquireWay,
-                                             String manageDepartment, String manageUser ) {
-        return new AssetInfoEntity( typeId, typeDetailId, this.assetType, this.assetNumber, this.assetName, this.price,
+    public AssetInfoEntity transToAssetInfo(Integer typeId, Integer typeDetailId, Integer priceType, Integer acquireWay,
+                                            String manageDepartment, String manageUser) {
+        return new AssetInfoEntity(typeId, typeDetailId, this.assetType, this.assetNumber, this.assetName, this.price,
                 this.acreage, priceType, acquireWay, this.financeAccountsDate, this.tabDate, this.guaranteeDate, manageDepartment,
                 manageUser, this.remark, this.purpose, this.specificationModel, this.brand, this.voucherNumber, this.purchaseOrganize,
-                this.barCode, this.inventory, this.scrapDate );
+                this.barCode, this.inventory, this.scrapDate, this.useStatus, this.financeSource );
     }
 
     public String getTypeId() {
@@ -257,4 +262,19 @@ public class AssetInfoImportModel extends BaseObject {
         this.scrapDate = scrapDate;
     }
 
+    public String getFinanceSource() {
+        return financeSource;
+    }
+
+    public void setFinanceSource(String financeSource) {
+        this.financeSource = financeSource;
+    }
+
+    public String getUseStatus() {
+        return useStatus;
+    }
+
+    public void setUseStatus(String useStatus) {
+        this.useStatus = useStatus;
+    }
 }

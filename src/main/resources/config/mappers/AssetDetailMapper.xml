@@ -65,7 +65,7 @@
             a.tab_date              tabDate,
             a.guarantee_date        guaranteeDate,
             f.department_name       departmentName,
-            g.realname              realname,
+            a.manage_user              realname,
             a.purpose               purpose,
             a.remark                remark,
             a.specification_model   specificationModel,
@@ -75,7 +75,9 @@
             a.inventory             inventory,
             a.bar_code              barCode,
             detail.scrap_type       scrapType,
-            a.scrap_date            scrapDate
+            a.scrap_date            scrapDate,
+            a.use_status            useStatus,
+            a.finance_source        financeSource
         FROM
             asset_detail detail
         INNER JOIN
@@ -145,13 +147,13 @@
         a.asset_name            assetName,
         a.price                 price,
         a.acreage               acreage,
-        d.dictionary_detail_id            priceTypeName,
-        e.dictionary_detail_id            acquireWayName,
+        d.item_value            priceTypeName,
+        e.item_value            acquireWayName,
         a.finance_accounts_date   financeAccountsDate,
         a.tab_date              tabDate,
         a.guarantee_date        guaranteeDate,
         f.department_name       departmentName,
-        g.realname              realname,
+        a.manage_user              realname,
         a.purpose               purpose,
         a.remark                remark,
         a.specification_model   specificationModel,
@@ -161,7 +163,9 @@
         a.inventory             inventory,
         a.bar_code              barCode,
         detail.scrap_type       scrapType,
-        a.scrap_date            scrapDate
+        a.scrap_date            scrapDate,
+        a.use_status            useStatus,
+        a.finance_source        financeSource
         FROM
         asset_detail detail
         INNER JOIN

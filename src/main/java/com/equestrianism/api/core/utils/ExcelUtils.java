@@ -31,10 +31,11 @@ public class ExcelUtils {
         // 获取值
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
             Row row = sheet.getRow(rowIndex);
-//            logger.debug("第--" + rowIndex);
-            System.out.println("第--" + rowIndex);
             Cell cell = row.getCell(0);
-            String barCode = cell.getStringCellValue();
+            String barCode = "";
+            if ( cell != null ) {
+                barCode = cell.getStringCellValue();
+            }
             cell = row.getCell(1);
             String typeName = cell.getStringCellValue();
             cell = row.getCell(2);
@@ -48,40 +49,49 @@ public class ExcelUtils {
             cell = row.getCell(6);
             String acreage = cell.getStringCellValue();
             cell = row.getCell(7);
-            String model = cell.getStringCellValue();
-            cell = row.getCell(8);
             String priceType = cell.getStringCellValue();
-            cell = row.getCell(9);
+            cell = row.getCell(8);
             String acqyureWay = cell.getStringCellValue();
-            cell = row.getCell(10);
+            cell = row.getCell(9);
             String financeDate = cell.getStringCellValue();
-            cell = row.getCell(11);
+            cell = row.getCell(10);
             String tabDate = cell.getStringCellValue();
-            cell = row.getCell(12);
+            cell = row.getCell(11);
             String guaranteeDate = cell.getStringCellValue();
-            cell = row.getCell(13);
+            cell = row.getCell(12);
             String manageDepartment = cell.getStringCellValue();
-            cell = row.getCell(14);
+            cell = row.getCell(13);
             String managerUser = cell.getStringCellValue();
+            cell = row.getCell(14);
+            String useStatus = cell.getStringCellValue();
             cell = row.getCell(15);
-            String purpose = cell.getStringCellValue();
+            String financeSource = cell.getStringCellValue();
             cell = row.getCell(16);
-            String brand = cell.getStringCellValue();
-            cell = row.getCell(17);
-            String voucherNumber = cell.getStringCellValue();
-            cell = row.getCell(18);
-            String purchaseOrganize = cell.getStringCellValue();
-            cell = row.getCell(19);
             String remark = cell.getStringCellValue();
+            cell = row.getCell(17);
+            String purpose = cell.getStringCellValue();
+            cell = row.getCell(18);
+            String model = cell.getStringCellValue();
+            cell = row.getCell(19);
+            String brand = cell.getStringCellValue();
             cell = row.getCell(20);
-            String count = cell.getStringCellValue();
+            String voucherNumber = cell.getStringCellValue();
             cell = row.getCell(21);
-            String scrapDate = cell.getStringCellValue();
+            String purchaseOrganize = cell.getStringCellValue();
+            cell = row.getCell(22);
+            String count = "0";
+            if ( cell != null ) {
+                count = cell.getStringCellValue();
+            }
+            cell = row.getCell(23);
+            String scrapDate = "";
+            if ( cell != null ) {
+                scrapDate = cell.getStringCellValue();
+            }
             assetInfoImportModel = new AssetInfoImportModel(typeName, typeDetailName, AssetTypeEnum.CENTER_ASSET_TYPE.type,
                     assetNumber, assetName, price, acreage, priceType, acqyureWay, financeDate, tabDate, guaranteeDate,
                     manageDepartment, managerUser, remark, purpose, model, brand, voucherNumber, purchaseOrganize,
-                    barCode, Integer.parseInt(count), scrapDate);
-            System.out.println(assetInfoImportModel);
+                    barCode, Integer.parseInt(count), scrapDate, useStatus, financeSource );
             assetList.add(assetInfoImportModel);
         }
         excelFile.delete();

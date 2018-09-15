@@ -83,7 +83,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 assetInfoAddVo.getManageDepartment(), assetInfoAddVo.getManageUser(), assetInfoAddVo.getRemark(),
                 assetInfoAddVo.getPurpose(), assetInfoAddVo.getSpecificationModel(), assetInfoAddVo.getBrand(),
                 assetInfoAddVo.getVoucherNumber(), assetInfoAddVo.getPurchaseOrganize(), assetInfoAddVo.getBarCode(),
-                assetInfoAddVo.getInventory(), assetInfoAddVo.getScrapDate());
+                assetInfoAddVo.getInventory(), assetInfoAddVo.getScrapDate(), assetInfoAddVo.getUseStatus(), assetInfoAddVo.getFinanceSource() );
         Integer insertCount;
         try {
             insertCount = assetInfoMapper.insert(assetInfoEntity);
@@ -109,7 +109,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 assetInfoUpdateVo.getGuaranteeDate(), assetInfoUpdateVo.getManageDepartment(), assetInfoUpdateVo.getManageUser(),
                 assetInfoUpdateVo.getRemark(), assetInfoUpdateVo.getPurpose(), assetInfoUpdateVo.getSpecificationModel(),
                 assetInfoUpdateVo.getBrand(), assetInfoUpdateVo.getVoucherNumber(), assetInfoUpdateVo.getPurchaseOrganize(),
-                assetInfoUpdateVo.getBarCode(), null, assetInfoUpdateVo.getScrapDate());
+                assetInfoUpdateVo.getBarCode(), null, assetInfoUpdateVo.getScrapDate(), assetInfoUpdateVo.getUseStatus(), assetInfoUpdateVo.getFinanceSource() );
         Integer updateCount;
         try {
             updateCount = assetInfoMapper.updateBySelective(assetInfoEntity);
@@ -166,7 +166,8 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 assetInfoEntity.getTabDate(), assetInfoEntity.getGuaranteeDate(), assetInfoEntity.getManageDepartment(), assetInfoEntity.getManageUser(),
                 assetInfoEntity.getRemark(), assetInfoEntity.getPurpose(), assetInfoEntity.getSpecificationModel(),
                 assetInfoEntity.getBrand(), assetInfoEntity.getVoucherNumber(), assetInfoEntity.getPurchaseOrganize(),
-                assetInfoEntity.getBarCode(), assetInfoEntity.getScrapDate());
+                assetInfoEntity.getBarCode(), assetInfoEntity.getScrapDate(), assetInfoEntity.getInventory(), assetInfoEntity.getUseStatus(),
+                assetInfoEntity.getFinanceSource() );
     }
 
     @Override
@@ -216,7 +217,6 @@ public class AssetInfoServiceImpl implements AssetInfoService {
 
     @Override
     public void exportExcel(String[] assetExcelTitle, ServletOutputStream out, AssetInfoListVO assetInfoListVo) {
-        assetInfoListVo.calculateBeginIndex();
         try {
             // 第一步，创建一个workbook，对应一个Excel文件
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -235,7 +235,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                 hssfCell.setCellStyle(hssfCellStyle);//列居中显示
             }
             // 第五步，写入实体数据
-            List<AssetInfoListModel> assetInfoList = assetInfoMapper.selectAssetInfoListByPage(assetInfoListVo);
+            List<AssetInfoListModel> assetInfoList = assetInfoMapper.selectAssetInfoList(assetInfoListVo);
             if (assetInfoList != null && !assetInfoList.isEmpty()) {
                 for (int i = 0; i < assetInfoList.size(); i++) {
                     hssfRow = hssfSheet.createRow(i + 1);
@@ -247,14 +247,14 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                     hssfRow.createCell( 1 ).setCellValue( typeName );
                     String typeDetailName = assetInfoListModel.getTypeDetailName();
                     hssfRow.createCell( 2 ).setCellValue( typeDetailName );
+                    String assetNumber = assetInfoListModel.getAssetNumber();
+                    hssfRow.createCell( 3 ).setCellValue( assetNumber );
                     String assetName = assetInfoListModel.getAssetName();
-                    hssfRow.createCell( 3 ).setCellValue( assetName );
+                    hssfRow.createCell( 4 ).setCellValue( assetName );
                     String price = assetInfoListModel.getPrice();
-                    hssfRow.createCell( 4 ).setCellValue( price );
+                    hssfRow.createCell( 5 ).setCellValue( price );
                     String acreage = assetInfoListModel.getAcreage();
-                    hssfRow.createCell( 5 ).setCellValue( acreage );
-                    String model = assetInfoListModel.getSpecificationModel();
-                    hssfRow.createCell( 6 ).setCellValue( model );
+                    hssfRow.createCell( 6 ).setCellValue( acreage );
                     String priceTypeName = assetInfoListModel.getPriceTypeName();
                     hssfRow.createCell( 7 ).setCellValue( priceTypeName );
                     String acquireWayName = assetInfoListModel.getAcquireWayName();
@@ -269,22 +269,26 @@ public class AssetInfoServiceImpl implements AssetInfoService {
                     hssfRow.createCell( 12 ).setCellValue( departmentName );
                     String realName = assetInfoListModel.getRealname();
                     hssfRow.createCell( 13 ).setCellValue( realName );
+                    String useStatus = assetInfoListModel.getUseStatus();
+                    hssfRow.createCell( 14 ).setCellValue( useStatus );
+                    String financeSource = assetInfoListModel.getFinanceSource();
+                    hssfRow.createCell( 15 ).setCellValue( financeSource );
                     String remark = assetInfoListModel.getRemark();
-                    hssfRow.createCell( 14 ).setCellValue( remark );
+                    hssfRow.createCell( 16 ).setCellValue( remark );
                     String purpose = assetInfoListModel.getPurpose();
-                    hssfRow.createCell( 15 ).setCellValue( purpose );
+                    hssfRow.createCell( 17 ).setCellValue(purpose);
                     String specificationModel = assetInfoListModel.getSpecificationModel();
-                    hssfRow.createCell( 16 ).setCellValue( specificationModel );
+                    hssfRow.createCell( 18 ).setCellValue( specificationModel );
                     String brand = assetInfoListModel.getBrand();
-                    hssfRow.createCell( 17 ).setCellValue( brand );
+                    hssfRow.createCell( 19 ).setCellValue( brand );
                     String voucherNumber = assetInfoListModel.getVoucherNumber();
-                    hssfRow.createCell( 18 ).setCellValue( voucherNumber );
+                    hssfRow.createCell( 20 ).setCellValue( voucherNumber );
                     String purchaseOrganize = assetInfoListModel.getPurchaseOrganize();
-                    hssfRow.createCell( 19 ).setCellValue( purchaseOrganize );
-                    String inventory = assetInfoListModel.getInventory().toString();
-                    hssfRow.createCell( 20 ).setCellValue( inventory );
+                    hssfRow.createCell( 21 ).setCellValue( purchaseOrganize );
+                    String count = assetInfoListModel.getInventory().toString();
+                    hssfRow.createCell( 22 ).setCellValue( count );
                     String scrapDate = assetInfoListModel.getScrapDate();
-                    hssfRow.createCell( 21 ).setCellValue( scrapDate );
+                    hssfRow.createCell( 23 ).setCellValue( scrapDate );
                 }
             }
             // 第七步，将文件输出到客户端浏览器
@@ -361,12 +365,7 @@ public class AssetInfoServiceImpl implements AssetInfoService {
             String departmentId = departmentInfoEntity.getDepartmentId();
             // manage user
             String realName = assetInfoImportModel.getManageUser();
-            UserInfoDetailBO userInfoEntity = userInfoMapper.selectByRealName(realName);
-            String userId = "-1";
-            if ( userInfoEntity != null ) {
-                userId = userInfoEntity.getUserId();
-            }
-            AssetInfoEntity assetInfoEntity = assetInfoImportModel.transToAssetInfo(typeId, typeDetailId, priceType, acquireWay, departmentId, userId);
+            AssetInfoEntity assetInfoEntity = assetInfoImportModel.transToAssetInfo(typeId, typeDetailId, priceType, acquireWay, departmentId, realName);
             assetInfoMapper.insert(assetInfoEntity);
             AssetDetailEntity assetDetailEntity;
             for ( int i = 0; i < assetInfoImportModel.getInventory(); i ++ ) {

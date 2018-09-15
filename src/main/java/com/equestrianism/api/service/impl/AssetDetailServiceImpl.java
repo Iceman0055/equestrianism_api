@@ -36,9 +36,6 @@ public class AssetDetailServiceImpl implements AssetDetailService {
     @Autowired
     private AssetDetailMapper assetDetailMapper;
 
-    @Autowired
-    private AssetInfoMapper assetInfoMapper;
-
     @Override
     public AssetDetailListBO assetDetailList( AssetDetailListVO assetDetailListVo ) {
         assetDetailListVo.calculateBeginIndex();
@@ -57,26 +54,16 @@ public class AssetDetailServiceImpl implements AssetDetailService {
 
     @Override
     public Boolean scrap( String assetDetailId ) {
-        // update asset_detail.scrap_type
-//        AssetDetailEntity assetDetailEntity = assetDetailMapper.selectByPrimary( assetDetailId );
-//        assetDetailEntity.setScrapType( 1 );
-//        assetDetailMapper.updateBySelective( assetDetailEntity );
-        System.out.println( "----------------" + assetDetailId );
-        Integer updateCount = assetDetailMapper.updateScrapType( assetDetailId );
-        System.out.println( updateCount );
+        assetDetailMapper.updateScrapType( assetDetailId );
         Map<String, Object> params = new HashMap<>();
         params.put( "assetDetailId", assetDetailId );
         params.put( "scrapType", 1 );
-        updateCount = assetDetailMapper.updateTest( params );
-        System.out.println( updateCount );
-        // update asset_info.inventory
-//        assetInfoMapper.scrap( assetDetailId );
+        assetDetailMapper.updateTest( params );
         return true;
     }
 
     @Override
     public void exportExcel( String[] assetExcelTitle, ServletOutputStream out, AssetDetailListVO assetDetailListVo ) {
-        assetDetailListVo.calculateBeginIndex();
         try {
             // 第一步，创建一个workbook，对应一个Excel文件
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -107,14 +94,14 @@ public class AssetDetailServiceImpl implements AssetDetailService {
                     hssfRow.createCell( 1 ).setCellValue( typeName );
                     String typeDetailName = assetDetailListModel.getTypeDetailName();
                     hssfRow.createCell( 2 ).setCellValue( typeDetailName );
+                    String assetNumber = assetDetailListModel.getAssetNumber();
+                    hssfRow.createCell( 3 ).setCellValue( assetNumber );
                     String assetName = assetDetailListModel.getAssetName();
-                    hssfRow.createCell( 3 ).setCellValue( assetName );
+                    hssfRow.createCell( 4 ).setCellValue( assetName );
                     String price = assetDetailListModel.getPrice();
-                    hssfRow.createCell( 4 ).setCellValue( price );
+                    hssfRow.createCell( 5 ).setCellValue( price );
                     String acreage = assetDetailListModel.getAcreage();
-                    hssfRow.createCell( 5 ).setCellValue( acreage );
-                    String model = assetDetailListModel.getSpecificationModel();
-                    hssfRow.createCell( 6 ).setCellValue( model );
+                    hssfRow.createCell( 6 ).setCellValue( acreage );
                     String priceTypeName = assetDetailListModel.getPriceTypeName();
                     hssfRow.createCell( 7 ).setCellValue( priceTypeName );
                     String acquireWayName = assetDetailListModel.getAcquireWayName();
@@ -129,21 +116,25 @@ public class AssetDetailServiceImpl implements AssetDetailService {
                     hssfRow.createCell( 12 ).setCellValue( departmentName );
                     String realName = assetDetailListModel.getRealname();
                     hssfRow.createCell( 13 ).setCellValue( realName );
+                    String useStatus = assetDetailListModel.getUseStatus();
+                    hssfRow.createCell( 14 ).setCellValue( useStatus );
+                    String financeSource = assetDetailListModel.getFinanceSource();
+                    hssfRow.createCell( 15 ).setCellValue( financeSource );
                     String remark = assetDetailListModel.getRemark();
-                    hssfRow.createCell( 14 ).setCellValue( remark );
+                    hssfRow.createCell( 16 ).setCellValue( remark );
                     String purpose = assetDetailListModel.getPurpose();
-                    hssfRow.createCell( 15 ).setCellValue( purpose );
+                    hssfRow.createCell( 17 ).setCellValue( purpose );
                     String specificationModel = assetDetailListModel.getSpecificationModel();
-                    hssfRow.createCell( 16 ).setCellValue( specificationModel );
+                    hssfRow.createCell( 18 ).setCellValue( specificationModel );
                     String brand = assetDetailListModel.getBrand();
-                    hssfRow.createCell( 17 ).setCellValue( brand );
+                    hssfRow.createCell( 19 ).setCellValue( brand );
                     String voucherNumber = assetDetailListModel.getVoucherNumber();
-                    hssfRow.createCell( 18 ).setCellValue( voucherNumber );
+                    hssfRow.createCell( 20 ).setCellValue( voucherNumber );
                     String purchaseOrganize = assetDetailListModel.getPurchaseOrganize();
-                    hssfRow.createCell( 19 ).setCellValue( purchaseOrganize );
-                    hssfRow.createCell( 20 ).setCellValue( "1" );
+                    hssfRow.createCell( 21 ).setCellValue( purchaseOrganize );
+                    hssfRow.createCell( 22 ).setCellValue( "1" );
                     String scrapDate = assetDetailListModel.getScrapDate();
-                    hssfRow.createCell( 21 ).setCellValue( scrapDate );
+                    hssfRow.createCell( 23 ).setCellValue( scrapDate );
                 }
             }
             // 第七步，将文件输出到客户端浏览器

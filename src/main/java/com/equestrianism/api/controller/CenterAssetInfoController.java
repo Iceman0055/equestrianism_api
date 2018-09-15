@@ -129,7 +129,7 @@ public class CenterAssetInfoController extends BaseController {
         LOGGER.info("【CenterAssetInfoController】【assetName】inputs : " + barCode);
         try {
             AssetInfoNameBO response = assetInfoService.assetName(barCode, AssetTypeEnum.CENTER_ASSET_TYPE.type);
-            LOGGER.info("【CenterAssetInfoController】【assetName】result : " + response.toJsonString());
+//            LOGGER.info("【CenterAssetInfoController】【assetName】result : " + response.toJsonString());
             return ContainerUtils.buildResSuccessMap(response);
         } catch (BaseException e) {
             LOGGER.error("【CenterAssetInfoController】【assetName】【exception】", e);
@@ -141,7 +141,7 @@ public class CenterAssetInfoController extends BaseController {
     @ResponseBody
     public Map<String, Object> inventory(@RequestBody AssetInfoInventoryVO assetInfoInventoryVo) {
         assetInfoInventoryVo.setAccessId(getAccessId());
-        assetInfoInventoryVo.setAssetType(AssetTypeEnum.CONSUMABLE_ASSET_TYPE.type);
+        assetInfoInventoryVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
         LOGGER.info("【CenterAssetInfoController】【inventory】【inputs】" + assetInfoInventoryVo.toJsonString());
         try {
             if (assetInfoService.inventory(assetInfoInventoryVo)) {
@@ -158,9 +158,13 @@ public class CenterAssetInfoController extends BaseController {
 
     @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> exportExcel(HttpServletResponse response, AssetInfoListVO assetInfoListVo) {
+    public Map<String, Object> exportExcel(HttpServletResponse response, AssetInfoListVO assetInfoListVo) throws UnsupportedEncodingException {
         assetInfoListVo.setAssetType(AssetTypeEnum.CENTER_ASSET_TYPE.type);
         response.setContentType("application/binary;charset=UTF-8");
+        if ( assetInfoListVo.getAssetName() != null && !"".equals( assetInfoListVo.getAssetName() ) ) {
+            assetInfoListVo.setAssetName(new String(assetInfoListVo.getAssetName().getBytes("ISO-8859-1"), "UTF-8"));
+        }
+        LOGGER.info("【CenterAssetInfoController】【exportExcel】【inputs】" + assetInfoListVo.toJsonString());
         try {
             ServletOutputStream out = response.getOutputStream();
             String fileName = new String(("固定资产类品_" + new SimpleDateFormat("yyyy-MM-dd").format(new Date())).getBytes(), "UTF-8");

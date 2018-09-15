@@ -32,6 +32,8 @@ public class AssetDetailListModel extends BaseObject {
     private Integer inventory;
     private Integer scrapType;
     private String scrapDate;
+    private String useStatus;
+    private String financeSource;
 
     public String getAssetDetailId() {
         return assetDetailId;
@@ -223,5 +225,21 @@ public class AssetDetailListModel extends BaseObject {
 
     public void setScrapDate(String scrapDate) {
         this.scrapDate = scrapDate;
+    }
+
+    public String getFinanceSource() {
+        return financeSource;
+    }
+
+    public void setFinanceSource(String financeSource) {
+        this.financeSource = financeSource;
+    }
+
+    public String getUseStatus() {
+        return useStatus;
+    }
+
+    public void setUseStatus(String useStatus) {
+        this.useStatus = useStatus;
     }
 }

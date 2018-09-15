@@ -28,4 +28,5 @@ public interface AssetInfoMapper {
 
     Integer scrap(String assetDetailId);
 
+    List<AssetInfoListModel> selectAssetInfoList(AssetInfoListVO assetInfoListVo);
 }

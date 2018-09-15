@@ -32,6 +32,8 @@ public class AssetInfoAddVO extends BaseViewModel {
     private String purchaseOrganize;
     private Integer inventory;
     private String scrapDate;
+    private String useStatus;
+    private String financeSource;
 
     public Integer getTypeId() {
         return typeId;
@@ -215,5 +217,21 @@ public class AssetInfoAddVO extends BaseViewModel {
 
     public void setScrapDate(String scrapDate) {
         this.scrapDate = scrapDate;
+    }
+
+    public String getFinanceSource() {
+        return financeSource;
+    }
+
+    public void setFinanceSource(String financeSource) {
+        this.financeSource = financeSource;
+    }
+
+    public String getUseStatus() {
+        return useStatus;
+    }
+
+    public void setUseStatus(String useStatus) {
+        this.useStatus = useStatus;
     }
 }
